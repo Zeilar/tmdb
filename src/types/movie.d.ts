@@ -15,9 +15,9 @@ export interface IMovieThumbnail {
 	vote_average: number;
 }
 
-export interface ILatestMoviesQuery {
+export interface IMovieQuery {
 	page: number;
-	results: LatestMovie[];
+	results: IMovieThumbnail[];
 	dates: Record<"minimum" | "maximum", string>;
 	total_pages: number;
 	total_results: number;

@@ -1,25 +1,33 @@
 import { Flex, Heading } from "@chakra-ui/react";
-import { useState } from "react";
 import { useQuery } from "react-query";
-import { getLatestMovies } from "../../services";
-import { IMovieThumbnail } from "../../types/movie";
-import MovieGallery from "../MovieGallery";
-import MovieThumbnail from "../MovieThumbnail";
+import { getLatestMovies, getMostPopularMovies, getTopRatedMovies } from "../../services";
+import { MovieGallery } from "../movie/MovieGallery";
 
 export function Home() {
-	const [page, setPage] = useState(1);
-	const latestMovieQuery = useQuery(["movies-latest", page], getLatestMovies);
-
-	console.log(latestMovieQuery.data, latestMovieQuery.isError);
+	const latestMovieQuery = useQuery(["movies-latest", 1], getLatestMovies);
+	const popularMoviesQuery = useQuery(["movies-popular", 1], getMostPopularMovies);
+	const topRatedMoviesQuery = useQuery(["movies-top", 1], getTopRatedMovies);
 
 	return (
-		<Flex direction="column">
+		<Flex flexDirection="column">
 			<Heading>TMDB</Heading>
+			{/* <Grid> */}
 			<MovieGallery
 				loading={latestMovieQuery.isLoading}
-				header="Latest movies"
+				header="Latest"
 				movies={latestMovieQuery.data?.results ?? []}
 			/>
+			<MovieGallery
+				loading={popularMoviesQuery.isLoading}
+				header="Most popular"
+				movies={popularMoviesQuery.data?.results ?? []}
+			/>
+			<MovieGallery
+				loading={topRatedMoviesQuery.isLoading}
+				header="Top rated"
+				movies={topRatedMoviesQuery.data?.results ?? []}
+			/>
+			{/* </Grid> */}
 		</Flex>
 	);
 }

@@ -1,4 +1,4 @@
-import { ILatestMoviesQuery } from "./../types/movie";
+import { IMovieQuery } from "./../types/movie";
 import axios from "axios";
 
 const API_KEY = process.env.REACT_APP_API_KEY;
@@ -15,10 +15,30 @@ axios.defaults.params["api_key"] = API_KEY;
 
 export async function getLatestMovies() {
 	try {
-		const { data } = await axios.get<ILatestMoviesQuery>("/movie/now_playing");
+		const { data } = await axios.get<IMovieQuery>("/movie/now_playing");
 		return data;
 	} catch (error) {
 		console.error("Failed fetching latest movies.");
+		return null;
+	}
+}
+
+export async function getMostPopularMovies() {
+	try {
+		const { data } = await axios.get<IMovieQuery>("/movie/popular");
+		return data;
+	} catch (error) {
+		console.error("Failed fetching most popular movies.");
+		return null;
+	}
+}
+
+export async function getTopRatedMovies() {
+	try {
+		const { data } = await axios.get<IMovieQuery>("/movie/top_rated");
+		return data;
+	} catch (error) {
+		console.error("Failed fetching top rated movies.");
 		return null;
 	}
 }

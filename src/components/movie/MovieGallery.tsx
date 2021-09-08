@@ -1,8 +1,7 @@
 import { Flex, Grid, Heading } from "@chakra-ui/react";
-import { useState, useEffect, ReactNode } from "react";
-import { IMovieThumbnail } from "../types/movie";
-import MovieThumbnail from "./MovieThumbnail";
-import PostThumbnailSkeleton from "./skeleton/PostThumbnailSkeleton";
+import { IMovieThumbnail } from "../../types/movie";
+import { MovieThumbnail } from "./";
+import PostThumbnailSkeleton from "../skeleton/PostThumbnailSkeleton";
 
 interface Props {
 	movies: IMovieThumbnail[];
@@ -10,7 +9,7 @@ interface Props {
 	loading: boolean;
 }
 
-export default function MovieGallery({ movies, header, loading }: Props) {
+export function MovieGallery({ movies, header, loading }: Props) {
 	function renderMovies() {
 		if (loading)
 			return Array(20)
@@ -21,12 +20,14 @@ export default function MovieGallery({ movies, header, loading }: Props) {
 
 	return (
 		<Flex flexDirection="column">
-			<Heading color="accent">{header}</Heading>
+			<Heading marginBottom="0.5rem" color="accent">
+				{header}
+			</Heading>
 			<Grid
 				overflowX="auto"
-				height="10rem"
+				height="20rem"
 				gridGap="0.5rem"
-				templateColumns="repeat(20, 17rem)"
+				templateColumns="repeat(20, 12rem)"
 				paddingY="0.5rem"
 			>
 				{renderMovies()}

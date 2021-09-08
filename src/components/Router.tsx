@@ -1,10 +1,15 @@
 import { Container, Flex } from "@chakra-ui/react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
+import { usePosterViewerContext } from "../contexts";
+import { MoviePosterViewer } from "./movie/MoviePosterViewer";
 import { Home } from "./views";
 
 export default function Router() {
+	const { activePosterPath } = usePosterViewerContext();
+
 	return (
 		<Flex height="100vh" bgColor="gray.800">
+			{activePosterPath != null && <MoviePosterViewer path={activePosterPath} />}
 			<Container maxWidth="full" width="container.xl" color="white">
 				<BrowserRouter>
 					<Switch>
