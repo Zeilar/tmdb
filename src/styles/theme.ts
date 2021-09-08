@@ -5,6 +5,13 @@ import { extendTheme } from "@chakra-ui/react";
 const accentColor = "#47daff";
 
 export const theme = extendTheme({
+	components: {
+		Link: {
+			baseStyle: {
+				boxShadow: "none !important",
+			},
+		},
+	},
 	styles: {
 		global: {
 			body: {

@@ -37,6 +37,7 @@ export function MovieGallery({ movies, header, loading, viewMorePath }: Props) {
 			<Link
 				as={RouterLink}
 				to={viewMorePath}
+				marginTop="0.5rem"
 				_hover={{ textDecoration: "none", color: "accent" }}
 			>
 				View more
