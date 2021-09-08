@@ -21,6 +21,9 @@ export const theme = extendTheme({
 					border: "4px solid transparent",
 				},
 			},
+			button: {
+				outline: 0,
+			},
 			"::-webkit-scrollbar": {
 				width: "0.9rem",
 				height: "0.35rem",

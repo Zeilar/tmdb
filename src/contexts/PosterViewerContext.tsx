@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { createContext, useContext, useState, ReactNode, Dispatch } from "react";
 
 interface IPosterViewerContext {
@@ -22,6 +23,19 @@ export function PosterViewerContextProvider({ children }: Props) {
 	function closeViewer() {
 		setActivePosterPath(null);
 	}
+
+	useEffect(() => {
+		function keyHandler(e: KeyboardEvent) {
+			console.log(e.key);
+			if (e.key === "Escape") {
+				closeViewer();
+			}
+		}
+		document.addEventListener("keydown", keyHandler);
+		return () => {
+			document.removeEventListener("keydown", keyHandler);
+		};
+	}, []);
 
 	const values: IPosterViewerContext = {
 		activePosterPath,
