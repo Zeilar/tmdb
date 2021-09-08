@@ -37,7 +37,7 @@ export function MoviePosterViewer({ path }: Props) {
 				/>
 				{status === "loading" && (
 					<AbsoluteCenter>
-						<Spinner color="accent" />
+						<Spinner color="accent" size="xl" />
 					</AbsoluteCenter>
 				)}
 				<Image src={path} height="100%" />
