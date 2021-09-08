@@ -1,4 +1,4 @@
-import { LatestMoviesQuery } from "./../types/movie";
+import { ILatestMoviesQuery } from "./../types/movie";
 import axios from "axios";
 
 const API_KEY = process.env.REACT_APP_API_KEY;
@@ -14,5 +14,11 @@ axios.defaults.baseURL = "https://api.themoviedb.org/3";
 axios.defaults.params["api_key"] = API_KEY;
 
 export async function getLatestMovies() {
-	return await axios.get<LatestMoviesQuery>("/movie/now_playing");
+	try {
+		const { data } = await axios.get<ILatestMoviesQuery>("/movie/now_playing");
+		return data;
+	} catch (error) {
+		console.error("Failed fetching latest movies.");
+		return null;
+	}
 }

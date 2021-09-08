@@ -9,6 +9,9 @@ export default function Router() {
 				<BrowserRouter>
 					<Switch>
 						<Route exact path="/" component={Home} />
+						<Route exact path="/movie/:id/:title?" component={Home} />
+						<Route exact path="/latest/:page?" component={Home} />
+						<Route>404</Route>
 					</Switch>
 				</BrowserRouter>
 			</Container>

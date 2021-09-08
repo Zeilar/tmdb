@@ -1,4 +1,4 @@
-export interface LatestMovie {
+export interface IMovieThumbnail {
 	poster_path?: string;
 	adult: boolean;
 	overview: string;
@@ -15,7 +15,7 @@ export interface LatestMovie {
 	vote_average: number;
 }
 
-export interface LatestMoviesQuery {
+export interface ILatestMoviesQuery {
 	page: number;
 	results: LatestMovie[];
 	dates: Record<"minimum" | "maximum", string>;
