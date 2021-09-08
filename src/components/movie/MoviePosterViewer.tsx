@@ -29,8 +29,8 @@ export function MoviePosterViewer({ path }: Props) {
 					position="absolute"
 					width="1.25rem"
 					height="1.25rem"
-					right="1rem"
-					top="1rem"
+					right="1.5rem"
+					top="1.5rem"
 					color="gray.100"
 					_hover={{ color: "accent" }}
 					onClick={closeViewer}
