@@ -1,6 +1,5 @@
-import { AbsoluteCenter, Box, Spinner, useImage } from "@chakra-ui/react";
+import { AbsoluteCenter, Box, Spinner, useImage, Link } from "@chakra-ui/react";
 import { useMemo } from "react";
-import { Link } from "react-router-dom";
 import { usePosterViewerContext } from "../../contexts";
 import { getImageUrl } from "../../services";
 import { IMovieThumbnail } from "../../types/movie";
@@ -28,7 +27,12 @@ export function MovieThumbnail({ movie }: Props) {
 	}
 
 	return (
-		<Link to={`/movie/${movie.id}/${prettifyURL(movie.title)}`}>
+		<Link
+			to={`/movie/${movie.id}/${prettifyURL(movie.title)}`}
+			boxShadow="md"
+			transitionDuration="0.25s"
+			_hover={{ transform: "scale(1.05)" }}
+		>
 			<Box
 				position="relative"
 				backgroundColor="gray.700"

@@ -22,7 +22,7 @@ export function FullscreenIcon({ onClick }: Props) {
 			title="Fullscreen"
 			zIndex={10}
 			transition="transform 0.1s linear"
-			_hover={{ transform: "scale(1.02)" }}
+			_hover={{ transform: "scale(1.05)" }}
 			onClick={onClick}
 		>
 			<Icon viewBox="0 0 122.88 122.87" fill="gray.100">
