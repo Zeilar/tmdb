@@ -26,7 +26,6 @@ export function PosterViewerContextProvider({ children }: Props) {
 
 	useEffect(() => {
 		function keyHandler(e: KeyboardEvent) {
-			console.log(e.key);
 			if (e.key === "Escape") {
 				closeViewer();
 			}
