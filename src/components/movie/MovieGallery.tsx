@@ -25,9 +25,7 @@ export function MovieGallery({ movies, header, loading, viewMorePath }: Props) {
 
 	return (
 		<Flex flexDirection="column">
-			<Heading marginBottom="0.5rem" color="accent">
-				{header}
-			</Heading>
+			<Heading color="accent">{header}</Heading>
 			<Grid
 				ref={ref}
 				overflowX="auto"
