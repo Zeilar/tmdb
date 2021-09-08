@@ -8,7 +8,7 @@ export default function Router() {
 	const { activePosterPath } = usePosterViewerContext();
 
 	return (
-		<Flex height="100vh" bgColor="gray.800">
+		<Flex minHeight="100vh" bgColor="gray.800">
 			{activePosterPath != null && <MoviePosterViewer path={activePosterPath} />}
 			<Container maxWidth="full" width="container.xl" color="white">
 				<BrowserRouter>
