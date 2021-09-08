@@ -1,15 +1,17 @@
-import { Flex, Grid, Heading } from "@chakra-ui/react";
+import { Flex, Grid, Heading, Link } from "@chakra-ui/react";
 import { IMovieThumbnail } from "../../types/movie";
 import { MovieThumbnail } from "./";
 import PostThumbnailSkeleton from "../skeleton/PostThumbnailSkeleton";
+import { Link as RouterLink } from "react-router-dom";
 
 interface Props {
 	movies: IMovieThumbnail[];
 	header: string;
 	loading: boolean;
+	viewMorePath: string;
 }
 
-export function MovieGallery({ movies, header, loading }: Props) {
+export function MovieGallery({ movies, header, loading, viewMorePath }: Props) {
 	function renderMovies() {
 		if (loading)
 			return Array(20)
@@ -32,6 +34,13 @@ export function MovieGallery({ movies, header, loading }: Props) {
 			>
 				{renderMovies()}
 			</Grid>
+			<Link
+				as={RouterLink}
+				to={viewMorePath}
+				_hover={{ textDecoration: "none", color: "accent" }}
+			>
+				View more
+			</Link>
 		</Flex>
 	);
 }

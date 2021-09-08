@@ -15,7 +15,9 @@ export default function Router() {
 					<Switch>
 						<Route exact path="/" component={Home} />
 						<Route exact path="/movie/:id/:title?" component={Home} />
-						<Route exact path="/latest/:page?" component={Home} />
+						<Route exact path="/latest" component={Home} />
+						<Route exact path="/top" component={Home} />
+						<Route exact path="/popular" component={Home} />
 						<Route>404</Route>
 					</Switch>
 				</BrowserRouter>
