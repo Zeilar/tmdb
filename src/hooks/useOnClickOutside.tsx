@@ -1,5 +1,5 @@
 import { isEqual } from "lodash";
-import { RefObject, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 interface Args {
 	condition?: boolean;
@@ -12,7 +12,7 @@ export function useOnClickOutside<T extends HTMLElement>(
 	args?: Args
 ) {
 	const [memoArgs, setMemoArgs] = useState<Args>();
-	const ref: RefObject<T> = useRef<T>(null);
+	const ref = useRef<T>(null);
 
 	// This is to avoid infinite loops in the useEffect as args contains non-primitive data
 	useEffect(() => {

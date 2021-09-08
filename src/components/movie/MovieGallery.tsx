@@ -3,6 +3,7 @@ import { IMovieThumbnail } from "../../types/movie";
 import { MovieThumbnail } from "./";
 import PostThumbnailSkeleton from "../skeleton/PostThumbnailSkeleton";
 import { Link as RouterLink } from "react-router-dom";
+import { useSwipeScroll } from "../../hooks";
 
 interface Props {
 	movies: IMovieThumbnail[];
@@ -12,6 +13,8 @@ interface Props {
 }
 
 export function MovieGallery({ movies, header, loading, viewMorePath }: Props) {
+	const ref = useSwipeScroll<HTMLDivElement>();
+
 	function renderMovies() {
 		if (loading)
 			return Array(20)
@@ -26,6 +29,7 @@ export function MovieGallery({ movies, header, loading, viewMorePath }: Props) {
 				{header}
 			</Heading>
 			<Grid
+				ref={ref}
 				overflowX="auto"
 				height="20rem"
 				gridGap="0.5rem"
