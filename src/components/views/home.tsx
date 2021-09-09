@@ -11,26 +11,26 @@ export function Home() {
 	return (
 		<Flex flexDirection="column">
 			<Heading>TMDB</Heading>
-			{/* <Grid> */}
-			<MovieGallery
-				viewMorePath="/latest"
-				loading={latestMovieQuery.isLoading}
-				header="Latest"
-				movies={latestMovieQuery.data?.results ?? []}
-			/>
-			<MovieGallery
-				viewMorePath="/popular"
-				loading={popularMoviesQuery.isLoading}
-				header="Most popular"
-				movies={popularMoviesQuery.data?.results ?? []}
-			/>
-			<MovieGallery
-				viewMorePath="/top"
-				loading={topRatedMoviesQuery.isLoading}
-				header="Top rated"
-				movies={topRatedMoviesQuery.data?.results ?? []}
-			/>
-			{/* </Grid> */}
+			<Flex flexDirection="column" gridGap="1rem">
+				<MovieGallery
+					viewMorePath="/latest"
+					loading={latestMovieQuery.isLoading}
+					header="Latest"
+					movies={latestMovieQuery.data?.results ?? []}
+				/>
+				<MovieGallery
+					viewMorePath="/popular"
+					loading={popularMoviesQuery.isLoading}
+					header="Most popular"
+					movies={popularMoviesQuery.data?.results ?? []}
+				/>
+				<MovieGallery
+					viewMorePath="/top"
+					loading={topRatedMoviesQuery.isLoading}
+					header="Top rated"
+					movies={topRatedMoviesQuery.data?.results ?? []}
+				/>
+			</Flex>
 		</Flex>
 	);
 }

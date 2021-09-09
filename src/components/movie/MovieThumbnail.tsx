@@ -4,6 +4,7 @@ import { usePosterViewerContext } from "../../contexts";
 import { getImageUrl } from "../../services";
 import { IMovieThumbnail } from "../../types/movie";
 import { FullscreenIcon } from "../icons";
+import { Link as RouterLink } from "react-router-dom";
 
 interface Props {
 	movie: IMovieThumbnail;
@@ -28,12 +29,13 @@ export function MovieThumbnail({ movie }: Props) {
 
 	return (
 		<Link
+			as={RouterLink}
 			to={`/movie/${movie.id}/${prettifyURL(movie.title)}`}
-			boxShadow="md"
 			transitionDuration="0.25s"
 			_hover={{ transform: "scale(1.05)" }}
 		>
 			<Box
+				boxShadow="md"
 				position="relative"
 				backgroundColor="gray.700"
 				backgroundImage={poster_path}
