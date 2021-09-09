@@ -10,35 +10,27 @@ if (typeof API_KEY !== "string") {
 if (typeof axios.defaults.params !== "object") {
 	axios.defaults.params = {};
 }
-axios.defaults.baseURL = "https://api.themoviedb.org/3";
+axios.defaults.baseURL = "https://api.themoviedb.org/3/movie";
 axios.defaults.params["api_key"] = API_KEY;
 
-export async function getLatestMovies() {
+async function getManyMovies(path: string, errorMsg: string) {
 	try {
-		const { data } = await axios.get<IMovieQuery>("/movie/now_playing");
+		const { data } = await axios.get<IMovieQuery>(path);
 		return data;
 	} catch (error) {
-		console.error("Failed fetching latest movies.");
+		console.error(errorMsg);
 		return null;
 	}
+}
+
+export async function getLatestMovies() {
+	return await getManyMovies("now_playing", "Failed fetching latest movies.");
 }
 
 export async function getMostPopularMovies() {
-	try {
-		const { data } = await axios.get<IMovieQuery>("/movie/popular");
-		return data;
-	} catch (error) {
-		console.error("Failed fetching most popular movies.");
-		return null;
-	}
+	return await getManyMovies("/popular", "Failed fetching most popular movies.");
 }
 
 export async function getTopRatedMovies() {
-	try {
-		const { data } = await axios.get<IMovieQuery>("/movie/top_rated");
-		return data;
-	} catch (error) {
-		console.error("Failed fetching top rated movies.");
-		return null;
-	}
+	return await getManyMovies("/top_rated", "Failed fetching top rated movies.");
 }
