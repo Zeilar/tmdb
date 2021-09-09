@@ -32,7 +32,7 @@ export function MovieThumbnail({ movie }: Props) {
 			as={RouterLink}
 			to={`/movie/${movie.id}/${prettifyURL(movie.title)}`}
 			transitionDuration="0.25s"
-			_hover={{ transform: "scale(1.05)", zIndex: 100 }}
+			_hover={{ transform: "scale(1.05)", zIndex: 20 }}
 		>
 			<Box
 				boxShadow="md"
