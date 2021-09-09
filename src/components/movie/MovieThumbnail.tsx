@@ -46,7 +46,6 @@ export function MovieThumbnail({ movie }: Props) {
 				height="100%"
 				overflow="hidden"
 				title={movie.title}
-				// _hover={{ boxShadow: "2xl" }}
 			>
 				<Box
 					backgroundColor="blackAlpha.800"

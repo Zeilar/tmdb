@@ -32,7 +32,7 @@ export function MovieGallery({ movies, header, loading, viewMorePath }: Props) {
 				height="20rem"
 				gridGap="0.25rem"
 				templateColumns="repeat(20, 12rem)"
-				paddingY="1rem"
+				paddingY="0.75rem"
 			>
 				{renderMovies()}
 			</Grid>
