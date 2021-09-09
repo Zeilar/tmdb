@@ -30,7 +30,7 @@ export function MovieGallery({ movies, header, loading, viewMorePath }: Props) {
 				ref={ref}
 				overflowX="auto"
 				height="20rem"
-				gridGap="0.5rem"
+				gridGap="0.25rem"
 				templateColumns="repeat(20, 12rem)"
 				paddingY="1rem"
 			>

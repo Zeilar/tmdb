@@ -32,7 +32,7 @@ export function MovieThumbnail({ movie }: Props) {
 			as={RouterLink}
 			to={`/movie/${movie.id}/${prettifyURL(movie.title)}`}
 			transitionDuration="0.25s"
-			_hover={{ transform: "scale(1.05)" }}
+			_hover={{ transform: "scale(1.05)", zIndex: 100 }}
 		>
 			<Box
 				boxShadow="md"
@@ -42,9 +42,21 @@ export function MovieThumbnail({ movie }: Props) {
 				backgroundSize="cover"
 				backgroundPosition="center"
 				backgroundRepeat="no-repeat"
+				rounded="md"
 				height="100%"
+				overflow="hidden"
 				title={movie.title}
+				// _hover={{ boxShadow: "2xl" }}
 			>
+				<Box
+					backgroundColor="blackAlpha.800"
+					position="absolute"
+					right="-3rem"
+					top="-3rem"
+					width="6rem"
+					height="6rem"
+					borderRadius="50%"
+				/>
 				{posterStatus === "loaded" && <FullscreenIcon onClick={fullscreenHandler} />}
 				{posterStatus === "loading" && (
 					<AbsoluteCenter>
