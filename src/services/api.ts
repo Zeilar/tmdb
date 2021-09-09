@@ -1,4 +1,4 @@
-import { IMovieQuery } from "./../types/movie";
+import { IManyMoviesQuery } from "./../types/movie";
 import axios from "axios";
 
 const API_KEY = process.env.REACT_APP_API_KEY;
@@ -15,7 +15,7 @@ axios.defaults.params["api_key"] = API_KEY;
 
 async function getManyMovies(path: string, errorMsg: string) {
 	try {
-		const { data } = await axios.get<IMovieQuery>(path);
+		const { data } = await axios.get<IManyMoviesQuery>(path);
 		return data;
 	} catch (error) {
 		console.error(errorMsg);
@@ -24,7 +24,7 @@ async function getManyMovies(path: string, errorMsg: string) {
 }
 
 export async function getLatestMovies() {
-	return await getManyMovies("now_playing", "Failed fetching latest movies.");
+	return await getManyMovies("/now_playing", "Failed fetching latest movies.");
 }
 
 export async function getMostPopularMovies() {
