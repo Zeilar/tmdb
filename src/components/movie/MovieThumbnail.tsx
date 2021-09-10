@@ -5,6 +5,7 @@ import { getImageUrl } from "../../services";
 import { IMovieThumbnail } from "../../types/movie";
 import { FullscreenIcon } from "../icons";
 import { Link as RouterLink } from "react-router-dom";
+import placeholder from "../../assets/images/placeholder.png";
 
 interface Props {
 	movie: IMovieThumbnail;
@@ -40,7 +41,7 @@ export function MovieThumbnail({ movie }: Props) {
 				boxShadow="md"
 				position="relative"
 				backgroundColor="gray.700"
-				backgroundImage={poster_path}
+				backgroundImage={poster_path ?? placeholder}
 				backgroundSize="cover"
 				backgroundPosition="center"
 				backgroundRepeat="no-repeat"
