@@ -31,10 +31,11 @@ export function MovieThumbnail({ movie }: Props) {
 
 	return (
 		<Link
+			width={200}
+			height={300}
 			as={RouterLink}
 			to={`/movie/${movie.id}/${prettifyURL(movie.title)}`}
 			transitionDuration="0.25s"
-			maxWidth="15rem"
 			flexShrink={0}
 			_hover={{ transform: "scale(1.05)", zIndex: 20 }}
 		>

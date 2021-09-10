@@ -2,14 +2,14 @@ import { Box } from "@chakra-ui/react";
 import styled from "styled-components";
 
 export default function PostThumbnailSkeleton() {
-	return <Wrapper backgroundColor="gray.700" />;
+	return <Box as={Wrapper} width={300} height={200} backgroundColor="gray.700" flexShrink={0} />;
 }
 
-const Wrapper = styled(Box)`
+const Wrapper = styled.div`
 	animation: pulse 1s ease-out infinite alternate;
 	@keyframes pulse {
 		to {
-			opacity: 0.5;
+			opacity: 0.25;
 		}
 	}
 `;
