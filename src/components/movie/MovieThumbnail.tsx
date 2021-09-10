@@ -1,5 +1,5 @@
-import { AbsoluteCenter, Box, Spinner, useImage, Link, Heading } from "@chakra-ui/react";
-import { MouseEventHandler, useMemo } from "react";
+import { AbsoluteCenter, Box, Spinner, useImage, Link, Heading, Img } from "@chakra-ui/react";
+import { MouseEvent, useMemo } from "react";
 import { usePosterViewerContext } from "../../contexts";
 import { getImageUrl } from "../../services";
 import { IMovieThumbnail } from "../../types/movie";
@@ -23,8 +23,8 @@ export function MovieThumbnail({ movie }: Props) {
 	const posterStatus = useImage({ src: poster_path });
 	const { setActivePosterPath } = usePosterViewerContext();
 
-	function fullscreenHandler(e: MouseEventHandler<HTMLDivElement> | undefined) {
-		// e.preventDefault();
+	function fullscreenHandler(e: MouseEvent) {
+		e.preventDefault();
 		if (!movie.poster_path) return;
 		setActivePosterPath(getImageUrl(movie.poster_path, "original"));
 	}
@@ -34,9 +34,7 @@ export function MovieThumbnail({ movie }: Props) {
 			as={RouterLink}
 			to={`/movie/${movie.id}/${prettifyURL(movie.title)}`}
 			transitionDuration="0.25s"
-			height="20rem"
-			width="12rem"
-			flexGrow={1}
+			maxWidth="15rem"
 			flexShrink={0}
 			_hover={{ transform: "scale(1.05)", zIndex: 20 }}
 		>
@@ -44,19 +42,15 @@ export function MovieThumbnail({ movie }: Props) {
 				boxShadow="md"
 				position="relative"
 				backgroundColor="gray.700"
-				backgroundImage={poster_path ?? placeholder}
-				backgroundSize="cover"
-				backgroundPosition="center"
-				backgroundRepeat="no-repeat"
 				rounded="md"
 				height="100%"
 				overflow="hidden"
-				padding="0.5rem"
 				title={movie.title}
 			>
+				<Img src={poster_path ?? placeholder} />
 				{!movie.poster_path && (
 					<AbsoluteCenter>
-						<Heading size="md" textAlign="center" as="h3">
+						<Heading padding="0.5rem" size="md" textAlign="center" as="h3">
 							{movie.title}
 						</Heading>
 					</AbsoluteCenter>
@@ -71,9 +65,9 @@ export function MovieThumbnail({ movie }: Props) {
 							width="6rem"
 							height="6rem"
 							borderRadius="50%"
-							// onClick={fullscreenHandler}
+							onClick={fullscreenHandler}
 						/>
-						<FullscreenIcon />
+						<FullscreenIcon pointerEvents="none" />
 					</>
 				)}
 				{posterStatus === "loading" && (

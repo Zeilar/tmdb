@@ -2,9 +2,13 @@ import "@fontsource/raleway/400.css";
 import "@fontsource/open-sans/700.css";
 import { extendTheme } from "@chakra-ui/react";
 
-const accentColor = "#47daff";
+const colors = {
+	accentColor: "#47daff",
+};
 
 export const theme = extendTheme({
+	initialColorMode: "dark",
+	useSystemColorMode: false,
 	components: {
 		Link: {
 			baseStyle: {
@@ -29,14 +33,12 @@ export const theme = extendTheme({
 				height: "0.35rem",
 			},
 			"::-webkit-scrollbar-thumb": {
-				backgroundColor: accentColor,
+				backgroundColor: colors.accentColor,
 				borderRadius: 100,
 			},
 		},
 	},
-	colors: {
-		accent: accentColor,
-	},
+	colors,
 	fonts: {
 		heading: "Open Sans",
 		body: "Raleway",

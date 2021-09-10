@@ -1,13 +1,14 @@
-import { Flex, Icon } from "@chakra-ui/react";
+import { Flex, FlexProps, Icon } from "@chakra-ui/react";
 import { MouseEventHandler } from "react";
 
-interface Props {
+interface Props extends FlexProps {
 	onClick?: MouseEventHandler<HTMLDivElement>;
 }
 
-export function FullscreenIcon({ onClick }: Props) {
+export function FullscreenIcon({ onClick, ...props }: Props) {
 	return (
 		<Flex
+			{...props}
 			as="button"
 			right="0.35rem"
 			top="0.35rem"
