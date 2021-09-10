@@ -8,10 +8,10 @@ export function useScrollEvent(callback: () => void, offset: number = 0.9) {
 			// Hide scroll-to-top button if scrolled past 1500 pixels
 			// setScrollToTopVisible(window.scrollY >= 1500 ? true : false);
 
-			const scrollPosition = window.innerHeight + window.scrollY,
-				bottomPosition = document.body.offsetHeight;
+			const scrollPosition = window.innerHeight + window.scrollY;
+			const bottomPosition = document.body.offsetHeight;
 
-			// Load more if scolled past <offset * 100>% of the document height and if scroll has gone down
+			// Fire callback if screen is scrolled past <offset * 100>% of the document height and if scroll direction was downwards
 			if (window.scrollY > scrollY && scrollPosition >= bottomPosition * offset) {
 				callback();
 			}

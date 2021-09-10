@@ -1,7 +1,7 @@
 import { Flex } from "@chakra-ui/react";
 import { useQuery } from "react-query";
 import { getLatestMovies, getMostPopularMovies, getTopRatedMovies } from "../../services";
-import { MovieGallery } from "../movie/MovieGallery";
+import { MovieGallery } from "../movie";
 
 export function Home() {
 	const latestMovieQuery = useQuery(["movies-latest", 1], () => getLatestMovies());
