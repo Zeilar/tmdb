@@ -19,7 +19,7 @@ export function LatestMovies() {
 		}
 	}
 
-	// useScrollEvent(nextPage);
+	useScrollEvent(nextPage);
 
 	useEffect(() => {
 		fetchNextPage();
