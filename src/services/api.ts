@@ -13,9 +13,11 @@ if (typeof axios.defaults.params !== "object") {
 axios.defaults.baseURL = "https://api.themoviedb.org/3/movie";
 axios.defaults.params["api_key"] = API_KEY;
 
-async function getManyMovies(path: string, errorMsg: string) {
+async function getManyMovies(path: string, errorMsg: string, page?: number) {
+	const params: any = {};
+	if (page) params.page = page;
 	try {
-		const { data } = await axios.get<IManyMoviesQuery>(path);
+		const { data } = await axios.get<IManyMoviesQuery>(path, { params });
 		return data;
 	} catch (error) {
 		console.error(errorMsg);
@@ -23,14 +25,14 @@ async function getManyMovies(path: string, errorMsg: string) {
 	}
 }
 
-export async function getLatestMovies() {
-	return await getManyMovies("/now_playing", "Failed fetching latest movies.");
+export async function getLatestMovies(page?: number) {
+	return await getManyMovies("/now_playing", "Failed fetching latest movies.", page);
 }
 
-export async function getMostPopularMovies() {
-	return await getManyMovies("/popular", "Failed fetching most popular movies.");
+export async function getMostPopularMovies(page?: number) {
+	return await getManyMovies("/popular", "Failed fetching most popular movies.", page);
 }
 
-export async function getTopRatedMovies() {
-	return await getManyMovies("/top_rated", "Failed fetching top rated movies.");
+export async function getTopRatedMovies(page?: number) {
+	return await getManyMovies("/top_rated", "Failed fetching top rated movies.", page);
 }

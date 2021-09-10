@@ -1,4 +1,4 @@
-import { Flex, Grid, Heading, Link } from "@chakra-ui/react";
+import { Flex, Grid, Heading, Link, Text } from "@chakra-ui/react";
 import { IMovieThumbnail } from "../../types/movie";
 import { MovieThumbnail } from "./";
 import PostThumbnailSkeleton from "../skeleton/PostThumbnailSkeleton";
@@ -23,9 +23,21 @@ export function MovieGallery({ movies, header, loading, viewMorePath }: Props) {
 		return movies.map(movie => <MovieThumbnail key={movie.id} movie={movie} />);
 	}
 
+	if (!loading && movies.length === 0) {
+		return <Text>No movies for this category were found.</Text>;
+	}
+
 	return (
 		<Flex flexDirection="column">
 			<Heading color="accent">{header}</Heading>
+			<Link
+				as={RouterLink}
+				to={viewMorePath}
+				marginTop="0.5rem"
+				_hover={{ textDecoration: "none", color: "accent" }}
+			>
+				View more
+			</Link>
 			<Grid
 				ref={ref}
 				overflowX="auto"
@@ -36,14 +48,6 @@ export function MovieGallery({ movies, header, loading, viewMorePath }: Props) {
 			>
 				{renderMovies()}
 			</Grid>
-			<Link
-				as={RouterLink}
-				to={viewMorePath}
-				marginTop="0.5rem"
-				_hover={{ textDecoration: "none", color: "accent" }}
-			>
-				View more
-			</Link>
 		</Flex>
 	);
 }

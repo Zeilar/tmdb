@@ -4,14 +4,14 @@ import { getLatestMovies, getMostPopularMovies, getTopRatedMovies } from "../../
 import { MovieGallery } from "../movie/MovieGallery";
 
 export function Home() {
-	const latestMovieQuery = useQuery(["movies-latest", 1], getLatestMovies);
-	const popularMoviesQuery = useQuery(["movies-popular", 1], getMostPopularMovies);
-	const topRatedMoviesQuery = useQuery(["movies-top", 1], getTopRatedMovies);
+	const latestMovieQuery = useQuery(["movies-latest", 1], () => getLatestMovies());
+	const popularMoviesQuery = useQuery(["movies-popular", 1], () => getMostPopularMovies());
+	const topRatedMoviesQuery = useQuery(["movies-top", 1], () => getTopRatedMovies());
 
 	return (
 		<Flex flexDirection="column">
 			<Heading>TMDB</Heading>
-			<Flex flexDirection="column" gridGap="1rem">
+			<Flex flexDirection="column" gridGap="5rem">
 				<MovieGallery
 					viewMorePath="/latest"
 					loading={latestMovieQuery.isLoading}

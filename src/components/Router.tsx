@@ -2,7 +2,7 @@ import { Container, Flex } from "@chakra-ui/react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import { usePosterViewerContext } from "../contexts";
 import { MoviePosterViewer } from "./movie/MoviePosterViewer";
-import { Home } from "./views";
+import { Home, LatestMovies } from "./views";
 
 export default function Router() {
 	const { activePosterPath } = usePosterViewerContext();
@@ -15,7 +15,7 @@ export default function Router() {
 					<Switch>
 						<Route exact path="/" component={Home} />
 						<Route exact path="/movie/:id/:title?" component={Home} />
-						<Route exact path="/latest" component={Home} />
+						<Route exact path="/latest" component={LatestMovies} />
 						<Route exact path="/top" component={Home} />
 						<Route exact path="/popular" component={Home} />
 						<Route>404</Route>
