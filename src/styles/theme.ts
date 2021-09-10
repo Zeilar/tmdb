@@ -30,7 +30,7 @@ export const theme = extendTheme({
 			},
 			"::-webkit-scrollbar": {
 				width: "0.9rem",
-				height: "0.35rem",
+				height: "0.5rem",
 			},
 			"::-webkit-scrollbar-thumb": {
 				backgroundColor: colors.accent,

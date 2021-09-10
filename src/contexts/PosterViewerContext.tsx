@@ -5,6 +5,7 @@ interface IPosterViewerContext {
 	activePosterPath: string | null | undefined;
 	setActivePosterPath: Dispatch<React.SetStateAction<string | null | undefined>>;
 	closeViewer(): void;
+	active: boolean;
 }
 
 export const PosterViewerContext = createContext({} as IPosterViewerContext);
@@ -37,6 +38,7 @@ export function PosterViewerContextProvider({ children }: Props) {
 	}, []);
 
 	const values: IPosterViewerContext = {
+		active: activePosterPath !== null,
 		activePosterPath,
 		setActivePosterPath,
 		closeViewer,

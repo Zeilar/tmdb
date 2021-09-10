@@ -2,6 +2,7 @@ import { useImage, Image, AbsoluteCenter, Spinner, Flex, Box } from "@chakra-ui/
 import { usePosterViewerContext } from "../../contexts";
 import { useOnClickOutside } from "../../hooks";
 import { CloseIcon } from "@chakra-ui/icons";
+import useRemoveScroll from "../../hooks/useRemoveScroll";
 
 interface Props {
 	path: string;
@@ -9,7 +10,8 @@ interface Props {
 
 export function MoviePosterViewer({ path }: Props) {
 	const status = useImage({ src: path });
-	const { closeViewer } = usePosterViewerContext();
+	const { closeViewer, active } = usePosterViewerContext();
+	useRemoveScroll(active);
 
 	const container = useOnClickOutside<HTMLDivElement>(closeViewer);
 

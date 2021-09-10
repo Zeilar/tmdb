@@ -1,18 +1,16 @@
-import { Flex, Heading, Link, Text } from "@chakra-ui/react";
+import { Flex, Heading, Text } from "@chakra-ui/react";
 import { IMovieThumbnail } from "../../types/movie";
 import { MovieThumbnail } from "./";
 import PostThumbnailSkeleton from "../skeleton/PostThumbnailSkeleton";
-import { Link as RouterLink } from "react-router-dom";
 import { useSwipeScroll } from "../../hooks";
 
 interface Props {
 	movies: IMovieThumbnail[];
 	header: string;
 	loading: boolean;
-	viewMorePath: string;
 }
 
-export function MovieGallery({ movies, header, loading, viewMorePath }: Props) {
+export function MovieGallery({ movies, header, loading }: Props) {
 	const ref = useSwipeScroll<HTMLDivElement>();
 
 	function renderMovies() {
@@ -30,14 +28,6 @@ export function MovieGallery({ movies, header, loading, viewMorePath }: Props) {
 	return (
 		<Flex flexDirection="column">
 			<Heading color="accent">{header}</Heading>
-			<Link
-				as={RouterLink}
-				to={viewMorePath}
-				marginTop="0.5rem"
-				_hover={{ textDecoration: "none", color: "accent" }}
-			>
-				View more
-			</Link>
 			<Flex ref={ref} overflowX="auto" gridGap="0.25rem" paddingY="0.75rem">
 				{renderMovies()}
 			</Flex>
