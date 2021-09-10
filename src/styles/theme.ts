@@ -3,7 +3,7 @@ import "@fontsource/open-sans/700.css";
 import { extendTheme } from "@chakra-ui/react";
 
 const colors = {
-	accentColor: "#47daff",
+	accent: "#47daff",
 };
 
 export const theme = extendTheme({
@@ -33,7 +33,7 @@ export const theme = extendTheme({
 				height: "0.35rem",
 			},
 			"::-webkit-scrollbar-thumb": {
-				backgroundColor: colors.accentColor,
+				backgroundColor: colors.accent,
 				borderRadius: 100,
 			},
 		},
