@@ -47,7 +47,7 @@ export function MovieThumbnail({ movie }: Props) {
 				overflow="hidden"
 				title={movie.title}
 			>
-				<Img src={poster_path ?? placeholder} />
+				<Img height="100%" src={poster_path ?? placeholder} />
 				{!movie.poster_path && (
 					<AbsoluteCenter>
 						<Heading padding="0.5rem" size="md" textAlign="center" as="h3">
