@@ -8,7 +8,7 @@ import { MovieThumbnail } from "../movie";
 export function LatestMovies() {
 	const [page, setPage] = useState(1);
 	const { fetchNextPage, data, hasNextPage } = useInfiniteQuery(
-		["latest-movies"],
+		"latest-movies",
 		() => getLatestMovies(page),
 		{ getNextPageParam: query => (query ? query.page + 1 : 1) }
 	);
