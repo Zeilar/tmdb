@@ -1,5 +1,5 @@
-import { AbsoluteCenter, Box, Spinner, useImage, Link } from "@chakra-ui/react";
-import { useMemo } from "react";
+import { AbsoluteCenter, Box, Spinner, useImage, Link, Heading } from "@chakra-ui/react";
+import { MouseEventHandler, useMemo } from "react";
 import { usePosterViewerContext } from "../../contexts";
 import { getImageUrl } from "../../services";
 import { IMovieThumbnail } from "../../types/movie";
@@ -23,7 +23,8 @@ export function MovieThumbnail({ movie }: Props) {
 	const posterStatus = useImage({ src: poster_path });
 	const { setActivePosterPath } = usePosterViewerContext();
 
-	function fullscreenHandler() {
+	function fullscreenHandler(e: MouseEventHandler<HTMLDivElement> | undefined) {
+		// e.preventDefault();
 		if (!movie.poster_path) return;
 		setActivePosterPath(getImageUrl(movie.poster_path, "original"));
 	}
@@ -35,6 +36,8 @@ export function MovieThumbnail({ movie }: Props) {
 			transitionDuration="0.25s"
 			height="20rem"
 			width="12rem"
+			flexGrow={1}
+			flexShrink={0}
 			_hover={{ transform: "scale(1.05)", zIndex: 20 }}
 		>
 			<Box
@@ -48,8 +51,16 @@ export function MovieThumbnail({ movie }: Props) {
 				rounded="md"
 				height="100%"
 				overflow="hidden"
+				padding="0.5rem"
 				title={movie.title}
 			>
+				{!movie.poster_path && (
+					<AbsoluteCenter>
+						<Heading size="md" textAlign="center" as="h3">
+							{movie.title}
+						</Heading>
+					</AbsoluteCenter>
+				)}
 				{posterStatus === "loaded" && (
 					<>
 						<Box
@@ -60,8 +71,9 @@ export function MovieThumbnail({ movie }: Props) {
 							width="6rem"
 							height="6rem"
 							borderRadius="50%"
+							// onClick={fullscreenHandler}
 						/>
-						<FullscreenIcon onClick={fullscreenHandler} />
+						<FullscreenIcon />
 					</>
 				)}
 				{posterStatus === "loading" && (

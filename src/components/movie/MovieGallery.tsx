@@ -38,16 +38,9 @@ export function MovieGallery({ movies, header, loading, viewMorePath }: Props) {
 			>
 				View more
 			</Link>
-			<Grid
-				ref={ref}
-				overflowX="auto"
-				height="20rem"
-				gridGap="0.25rem"
-				templateColumns="repeat(20, 12rem)"
-				paddingY="0.75rem"
-			>
+			<Flex ref={ref} overflowX="auto" gridGap="0.25rem" paddingY="0.75rem">
 				{renderMovies()}
-			</Grid>
+			</Flex>
 		</Flex>
 	);
 }
