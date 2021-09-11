@@ -1,32 +1,24 @@
 import { Button, Flex, Grid, Spinner } from "@chakra-ui/react";
 import { useState, useEffect } from "react";
-import { useInfiniteQuery, useQuery } from "react-query";
+import { useInfiniteQuery } from "react-query";
 import { useScrollEvent } from "../../hooks";
-import { getAllGenres, getLatestMovies, getMoviesByGenres } from "../../services";
+import { getLatestMovies } from "../../services";
 import { MovieThumbnail } from "../movie";
 
 export function LatestMovies() {
 	const [page, setPage] = useState(1);
-	const [genre, setGenre] = useState();
-	const latestMoviesQuery = useInfiniteQuery("latest-movies", () => getLatestMovies(page), {
-		getNextPageParam: query => (query ? query.page + 1 : 1),
-	});
-	const genresQuery = useQuery("genres", getAllGenres);
-
-	async function s() {
-		const genres = await getAllGenres();
-		if (!genres) return;
-		const movies = await getMoviesByGenres([genres[0]]);
-		// console.log(movies);
-	}
-	s();
+	const { data, isLoading, isFetching, hasNextPage, fetchNextPage } = useInfiniteQuery(
+		"latest-movies",
+		() => getLatestMovies(page),
+		{ getNextPageParam: query => (query ? query.page + 1 : 1) }
+	);
 
 	function addPage() {
 		setPage(page => page + 1);
 	}
 
 	function nextPage() {
-		if (latestMoviesQuery.hasNextPage) {
+		if (hasNextPage) {
 			addPage();
 		}
 	}
@@ -34,10 +26,8 @@ export function LatestMovies() {
 	useScrollEvent(nextPage);
 
 	useEffect(() => {
-		latestMoviesQuery.fetchNextPage();
+		fetchNextPage();
 	}, [page]);
-
-	console.log("render");
 
 	return (
 		<Flex flexDirection="column">
@@ -50,13 +40,13 @@ export function LatestMovies() {
 				]}
 				gridGap="0.5rem"
 			>
-				{latestMoviesQuery.data?.pages.map(page =>
+				{data?.pages.map(page =>
 					page?.results.map(movie => <MovieThumbnail key={movie.id} movie={movie} />)
 				)}
 			</Grid>
-			{page === 1 && (
+			{!isLoading && page === 1 && (
 				<Button
-					isLoading={latestMoviesQuery.isLoading}
+					isLoading={isLoading}
 					loadingText="Loading"
 					variant="outline"
 					spinnerPlacement="start"
@@ -69,7 +59,7 @@ export function LatestMovies() {
 					Load More
 				</Button>
 			)}
-			{latestMoviesQuery.isFetching && (
+			{(isLoading || isFetching) && (
 				<Spinner color="accent" size="xl" marginX="auto" marginY="5rem" />
 			)}
 		</Flex>

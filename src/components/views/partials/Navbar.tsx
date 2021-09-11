@@ -25,6 +25,11 @@ export function Navbar() {
 						<Heading size="md">Popular</Heading>
 					</Navlink>
 				</Navitem>
+				<Navitem>
+					<Navlink to="/search" exact>
+						<Heading size="md">Search</Heading>
+					</Navlink>
+				</Navitem>
 			</Flex>
 		</nav>
 	);
