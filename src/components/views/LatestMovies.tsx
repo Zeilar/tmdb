@@ -1,5 +1,4 @@
 import { Flex, Grid, Spinner } from "@chakra-ui/react";
-import { useCallback } from "react";
 import { useState, useEffect } from "react";
 import { useInfiniteQuery } from "react-query";
 import { useScrollEvent } from "../../hooks";
@@ -14,22 +13,34 @@ export function LatestMovies() {
 		{ getNextPageParam: query => (query ? query.page + 1 : 1) }
 	);
 
-	const nextPage = useCallback(() => {
-		if (hasNextPage) {
-			setPage(page => page + 1);
-		}
-	}, [hasNextPage]);
+	function addPage() {
+		setPage(page => page + 1);
+	}
+
+	function nextPage() {
+		if (hasNextPage) addPage();
+	}
 
 	useScrollEvent(nextPage);
 
+	/**
+	 * Since the load-more-scroll depends on being able to scroll,
+	 * load 2 pages at first render to make sure the user can scroll to start the process
+	 */
 	useEffect(() => {
-		fetchNextPage();
-	}, [page, fetchNextPage]);
-
-	// Since the load-more-scroll depends on being able to scroll, load 2 pages at first to make sure the user can scroll to start the process
-	useEffect(() => {
-		nextPage();
+		addPage();
 	}, []);
+
+	useEffect(() => {
+		// Without the timeout, React Query won't refetch on that first render to get 2 pages *shrug*
+		const timeout = setTimeout(() => {
+			fetchNextPage();
+		}, 1);
+
+		return () => {
+			clearTimeout(timeout);
+		};
+	}, [page, fetchNextPage]);
 
 	return (
 		<Flex flexDirection="column">

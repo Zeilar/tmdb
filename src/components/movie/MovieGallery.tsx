@@ -14,10 +14,11 @@ export function MovieGallery({ movies, header, loading }: Props) {
 	const ref = useSwipeScroll<HTMLDivElement>();
 
 	function renderMovies() {
-		if (loading)
+		if (loading) {
 			return Array(20)
 				.fill(null)
 				.map((_, i) => <PostThumbnailSkeleton key={i} />);
+		}
 		return movies.map(movie => <MovieThumbnail key={movie.id} movie={movie} />);
 	}
 
