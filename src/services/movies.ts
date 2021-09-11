@@ -25,10 +25,10 @@ export async function getLatestMovies(page?: number) {
 	return await getManyMovies("/movie/now_playing", "Failed fetching latest movies.", page);
 }
 
-export async function getMostPopularMovies(page?: number) {
+export async function getPopularMovies(page?: number) {
 	return await getManyMovies("/movie/popular", "Failed fetching most popular movies.", page);
 }
 
-export async function getTopRatedMovies(page?: number) {
+export async function getTopMovies(page?: number) {
 	return await getManyMovies("/movie/top_rated", "Failed fetching top rated movies.", page);
 }

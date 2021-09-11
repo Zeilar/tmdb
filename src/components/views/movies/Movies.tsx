@@ -1,15 +1,20 @@
-import { Button, Flex, Grid, Spinner } from "@chakra-ui/react";
+import { Button, Flex, Grid, Heading, Spinner } from "@chakra-ui/react";
 import { useState, useEffect } from "react";
 import { useInfiniteQuery } from "react-query";
-import { useScrollEvent } from "../../hooks";
-import { getLatestMovies } from "../../services";
-import { MovieThumbnail } from "../movie";
+import { useScrollEvent } from "../../../hooks";
+import { MovieThumbnail } from "../../movie";
+import { IManyMoviesQuery } from "../../../types/movie";
 
-export function LatestMovies() {
+interface Props {
+	queryID: string;
+	callback: (page?: number | undefined) => Promise<IManyMoviesQuery | null>;
+}
+
+export function Movies({ queryID, callback }: Props) {
 	const [page, setPage] = useState(1);
-	const { data, isLoading, isFetching, hasNextPage, fetchNextPage } = useInfiniteQuery(
-		"latest-movies",
-		() => getLatestMovies(page),
+	const { data, isLoading, isFetching, hasNextPage, fetchNextPage, isError } = useInfiniteQuery(
+		queryID,
+		() => callback(page),
 		{ getNextPageParam: query => (query ? query.page + 1 : null) }
 	);
 
@@ -28,6 +33,10 @@ export function LatestMovies() {
 	useEffect(() => {
 		fetchNextPage(); // Please React Query don't re-create this function
 	}, [page, fetchNextPage]);
+
+	if (isError) {
+		return <Heading>Something went wrong!</Heading>;
+	}
 
 	return (
 		<Flex flexDirection="column">
