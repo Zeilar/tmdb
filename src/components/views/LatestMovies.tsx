@@ -10,7 +10,7 @@ export function LatestMovies() {
 	const { data, isLoading, isFetching, hasNextPage, fetchNextPage } = useInfiniteQuery(
 		"latest-movies",
 		() => getLatestMovies(page),
-		{ getNextPageParam: query => (query ? query.page + 1 : 1) }
+		{ getNextPageParam: query => (query ? query.page + 1 : null) }
 	);
 
 	function addPage() {
@@ -26,8 +26,8 @@ export function LatestMovies() {
 	useScrollEvent(nextPage);
 
 	useEffect(() => {
-		fetchNextPage();
-	}, [page]);
+		fetchNextPage(); // Please React Query don't re-create this function
+	}, [page, fetchNextPage]);
 
 	return (
 		<Flex flexDirection="column">
