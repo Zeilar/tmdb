@@ -31,10 +31,10 @@ export function MovieThumbnail({ movie }: Props) {
 
 	return (
 		<Link
-			width={200}
-			height={300}
 			as={RouterLink}
 			to={`/movie/${movie.id}/${prettifyURL(movie.title)}`}
+			width={200}
+			height={300}
 			transitionDuration="0.25s"
 			flexShrink={0}
 			_hover={{ transform: "scale(1.05)", zIndex: 20 }}
@@ -47,11 +47,20 @@ export function MovieThumbnail({ movie }: Props) {
 				height="100%"
 				overflow="hidden"
 				title={movie.title}
+				_after={{
+					content: movie.poster_path ? undefined : `""`,
+					position: "absolute",
+					top: 0,
+					left: 0,
+					width: 200,
+					height: 300,
+					backgroundColor: "blackAlpha.400",
+				}}
 			>
-				<Img height="100%" src={poster_path ?? placeholder} />
+				<Img height="100%" src={poster_path ?? placeholder} objectFit="cover" />
 				{!movie.poster_path && (
-					<AbsoluteCenter>
-						<Heading padding="0.5rem" size="md" textAlign="center" as="h3">
+					<AbsoluteCenter zIndex={10} padding="0.5rem" width="100%">
+						<Heading size="md" textAlign="center" as="h2">
 							{movie.title}
 						</Heading>
 					</AbsoluteCenter>
