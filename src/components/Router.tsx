@@ -12,17 +12,19 @@ export default function Router() {
 			{activePosterPath != null && <MoviePosterViewer path={activePosterPath} />}
 			<Container maxWidth="full" width="container.xl" color="white">
 				<BrowserRouter>
-					<Views.Navbar />
-					<Views.ScrollToTop />
-					<Switch>
-						<Route exact path="/" component={Views.Home} />
-						<Route exact path="/movie/:id/:title?" component={Views.Home} />
-						<Route exact path="/latest" component={Views.LatestMovies} />
-						<Route exact path="/top" component={Views.TopMovies} />
-						<Route exact path="/popular" component={Views.PopularMovies} />
-						<Route exact path="/search" component={Views.Movies} />
-						<Route>404</Route>
-					</Switch>
+					<Flex flexDirection="column" paddingY="5rem">
+						<Views.Navbar />
+						<Views.ScrollToTop />
+						<Switch>
+							<Route exact path="/" component={Views.Home} />
+							<Route exact path="/movie/:id/:title?" component={Views.Home} />
+							<Route exact path="/latest" component={Views.LatestMovies} />
+							<Route exact path="/top" component={Views.TopMovies} />
+							<Route exact path="/popular" component={Views.PopularMovies} />
+							<Route exact path="/search" component={Views.Movies} />
+							<Route>404</Route>
+						</Switch>
+					</Flex>
 				</BrowserRouter>
 			</Container>
 		</Flex>

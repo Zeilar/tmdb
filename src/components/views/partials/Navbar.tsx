@@ -6,7 +6,7 @@ import { theme } from "../../../styles/theme";
 export function Navbar() {
 	return (
 		<nav>
-			<Flex as="ul" alignItems="flex-end" marginY="3rem">
+			<Flex as="ul" alignItems="flex-end" marginBottom="3rem">
 				<Heading color="accent" size="2xl" marginRight="2rem" as={NavLink} to="/" exact>
 					TMDB
 				</Heading>
