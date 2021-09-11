@@ -17,10 +17,10 @@ export default function Router() {
 					<Switch>
 						<Route exact path="/" component={Views.Home} />
 						<Route exact path="/movie/:id/:title?" component={Views.Home} />
-						<Route exact path="/search" component={Views.Movies} />
 						<Route exact path="/latest" component={Views.LatestMovies} />
 						<Route exact path="/top" component={Views.TopMovies} />
 						<Route exact path="/popular" component={Views.PopularMovies} />
+						<Route exact path="/search" component={Views.Movies} />
 						<Route>404</Route>
 					</Switch>
 				</BrowserRouter>

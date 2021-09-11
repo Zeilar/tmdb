@@ -1,4 +1,4 @@
-import { IManyMoviesQuery, IMovie } from "../types/movie";
+import { IManyMoviesQuery } from "../types/movie";
 import { IGenre } from "../types/genre";
 import axios from "axios";
 
@@ -15,7 +15,7 @@ async function getManyMovies(path: string, errorMsg: string, page?: number) {
 }
 
 export async function getMoviesByGenres(genres: IGenre[]) {
-	const { data } = await axios.get<IMovie[]>("/discover/movie", {
+	const { data } = await axios.get<IManyMoviesQuery>("/discover/movie", {
 		params: { with_genres: genres.map(genre => String(genre.id)).join(",") },
 	});
 	return data;

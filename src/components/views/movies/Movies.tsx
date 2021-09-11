@@ -31,7 +31,7 @@ export function Movies({ queryID, callback }: Props) {
 	useScrollEvent(nextPage);
 
 	useEffect(() => {
-		fetchNextPage(); // Please React Query don't re-create this function
+		fetchNextPage();
 	}, [page, fetchNextPage]);
 
 	if (isError) {
