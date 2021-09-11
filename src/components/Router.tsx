@@ -1,4 +1,4 @@
-import { Container, Flex } from "@chakra-ui/react";
+import { Container, Flex, Heading } from "@chakra-ui/react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import { usePosterViewerContext } from "../contexts";
 import { MoviePosterViewer } from "./movie";
@@ -22,7 +22,9 @@ export default function Router() {
 							<Route exact path="/top" component={Views.TopMovies} />
 							<Route exact path="/popular" component={Views.PopularMovies} />
 							<Route exact path="/search" component={Views.Movies} />
-							<Route>404</Route>
+							<Route>
+								<Heading>That page could not be found.</Heading>
+							</Route>
 						</Switch>
 					</Flex>
 				</BrowserRouter>
