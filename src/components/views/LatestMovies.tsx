@@ -1,4 +1,5 @@
-import { Button, Flex, Grid } from "@chakra-ui/react";
+import { Flex, Grid, Spinner } from "@chakra-ui/react";
+import { useCallback } from "react";
 import { useState, useEffect } from "react";
 import { useInfiniteQuery } from "react-query";
 import { useScrollEvent } from "../../hooks";
@@ -7,17 +8,17 @@ import { MovieThumbnail } from "../movie";
 
 export function LatestMovies() {
 	const [page, setPage] = useState(1);
-	const { fetchNextPage, data, hasNextPage } = useInfiniteQuery(
+	const { fetchNextPage, data, hasNextPage, isFetching } = useInfiniteQuery(
 		"latest-movies",
 		() => getLatestMovies(page),
 		{ getNextPageParam: query => (query ? query.page + 1 : 1) }
 	);
 
-	function nextPage() {
+	const nextPage = useCallback(() => {
 		if (hasNextPage) {
 			setPage(page => page + 1);
 		}
-	}
+	}, [hasNextPage]);
 
 	useScrollEvent(nextPage);
 
@@ -25,8 +26,13 @@ export function LatestMovies() {
 		fetchNextPage();
 	}, [page, fetchNextPage]);
 
+	// Since the load-more-scroll depends on being able to scroll, load 2 pages at first to make sure the user can scroll to start the process
+	useEffect(() => {
+		nextPage();
+	}, []);
+
 	return (
-		<Flex>
+		<Flex flexDirection="column">
 			<Grid
 				gridTemplateColumns={[
 					"repeat(3, 1fr)",
@@ -40,9 +46,7 @@ export function LatestMovies() {
 					page?.results.map(movie => <MovieThumbnail key={movie.id} movie={movie} />)
 				)}
 			</Grid>
-			<Button colorScheme="cyan" variant="ghost" onClick={nextPage}>
-				Go next
-			</Button>
+			{isFetching && <Spinner color="accent" size="xl" marginX="auto" marginY="5rem" />}
 		</Flex>
 	);
 }
