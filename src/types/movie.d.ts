@@ -1,4 +1,4 @@
-export interface IMovieThumbnail {
+export interface IMovie {
 	poster_path?: string;
 	adult: boolean;
 	overview: string;
@@ -17,7 +17,7 @@ export interface IMovieThumbnail {
 
 export interface IManyMoviesQuery {
 	page: number;
-	results: IMovieThumbnail[];
+	results: IMovie[];
 	dates: Record<"minimum" | "maximum", string>;
 	total_pages: number;
 	total_results: number;

@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 
-export function useScrollEvent(callback: () => void, offset: number = 0.9) {
+export function useScrollEvent(callback: () => void, offset: number = 0.8) {
 	useEffect(() => {
 		let scrollY = window.scrollY; // Keep previous value to detect if user scrolled up or down
 

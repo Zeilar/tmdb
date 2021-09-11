@@ -2,13 +2,13 @@ import { AbsoluteCenter, Box, Spinner, useImage, Link, Heading, Img } from "@cha
 import { MouseEvent, useMemo } from "react";
 import { usePosterViewerContext } from "../../contexts";
 import { getImageUrl } from "../../services";
-import { IMovieThumbnail } from "../../types/movie";
+import { IMovie } from "../../types/movie";
 import { FullscreenIcon } from "../icons";
 import { Link as RouterLink } from "react-router-dom";
 import placeholder from "../../assets/images/placeholder.png";
 
 interface Props {
-	movie: IMovieThumbnail;
+	movie: IMovie;
 }
 
 function prettifyURL(url: string) {

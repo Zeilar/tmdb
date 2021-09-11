@@ -1,2 +1,3 @@
-export * from "./api";
+export * from "./movies";
 export * from "./images";
+export * from "./genres";
