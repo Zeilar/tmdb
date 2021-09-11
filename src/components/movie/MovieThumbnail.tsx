@@ -12,7 +12,8 @@ interface Props {
 }
 
 function prettifyURL(url: string) {
-	return url.replaceAll(" ", "-");
+	// I don't know Regex okay? Also had to get rid of the percent sign due to React router error
+	return url.replaceAll(" ", "-").replaceAll("%", "");
 }
 
 export function MovieThumbnail({ movie }: Props) {

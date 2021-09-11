@@ -1,5 +1,4 @@
 import { Button, Flex, Grid, Heading, Spinner } from "@chakra-ui/react";
-import { useState, useEffect } from "react";
 import { useInfiniteQuery } from "react-query";
 import { useScrollEvent } from "../../../hooks";
 import { MovieThumbnail } from "../../movie";
@@ -11,28 +10,17 @@ interface Props {
 }
 
 export function Movies({ queryID, callback }: Props) {
-	const [page, setPage] = useState(1);
 	const { data, isLoading, isFetching, hasNextPage, fetchNextPage, isError } = useInfiniteQuery(
 		queryID,
-		() => callback(page),
+		args => callback(args.pageParam ?? 1),
 		{ getNextPageParam: query => (query ? query.page + 1 : null) }
 	);
 
-	function addPage() {
-		setPage(page => page + 1);
-	}
-
 	function nextPage() {
-		if (hasNextPage) {
-			addPage();
-		}
+		fetchNextPage();
 	}
 
 	useScrollEvent(nextPage);
-
-	useEffect(() => {
-		fetchNextPage();
-	}, [page, fetchNextPage]);
 
 	if (isError) {
 		return <Heading>Something went wrong!</Heading>;
@@ -53,7 +41,7 @@ export function Movies({ queryID, callback }: Props) {
 					page?.results.map(movie => <MovieThumbnail key={movie.id} movie={movie} />)
 				)}
 			</Grid>
-			{!isLoading && page === 1 && (
+			{!isLoading && !isFetching && hasNextPage && (
 				<Button
 					isLoading={isLoading}
 					loadingText="Loading"
@@ -63,7 +51,7 @@ export function Movies({ queryID, callback }: Props) {
 					color="accent"
 					marginY="5rem"
 					marginX="auto"
-					onClick={addPage}
+					onClick={nextPage}
 				>
 					Load More
 				</Button>
