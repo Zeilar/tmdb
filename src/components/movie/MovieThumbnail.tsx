@@ -21,7 +21,9 @@ export function MovieThumbnail({ movie }: Props) {
 
 	function fullscreenHandler(e: MouseEvent) {
 		e.preventDefault();
-		if (!movie.poster_path) return;
+		if (!movie.poster_path) {
+			return;
+		}
 		setActivePosterPath(getImageUrl(movie.poster_path, "original"));
 	}
 

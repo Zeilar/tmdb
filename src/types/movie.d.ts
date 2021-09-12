@@ -22,3 +22,14 @@ export interface IManyMoviesQuery {
 	total_pages: number;
 	total_results: number;
 }
+
+export interface IManyMoviesArgs {
+	path: string;
+	errorMsg?: string;
+	params: IParams;
+}
+
+export interface IParams {
+	page?: number;
+	[key: string]: any;
+}

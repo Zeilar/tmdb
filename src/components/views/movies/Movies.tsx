@@ -1,18 +1,20 @@
-import { Button, Flex, Grid, Heading, Spinner } from "@chakra-ui/react";
+import { Button, Flex, Heading, Spinner } from "@chakra-ui/react";
 import { useInfiniteQuery } from "react-query";
+import { flattenMoviesQuery } from "../../../helpers";
 import { useScrollEvent } from "../../../hooks";
-import { MovieThumbnail } from "../../movie";
-import { IManyMoviesQuery } from "../../../types/movie";
+import { IManyMoviesQuery, IParams } from "../../../types/movie";
+import { MovieList } from "../partials";
 
 interface Props {
-	queryID: string;
-	callback: (page?: number | undefined) => Promise<IManyMoviesQuery | null>;
+	queryID: any;
+	callback: (params: IParams) => Promise<IManyMoviesQuery | null>;
+	params?: IParams;
 }
 
-export function Movies({ queryID, callback }: Props) {
+export function Movies({ queryID, callback, params }: Props) {
 	const { data, isLoading, isFetching, hasNextPage, fetchNextPage, isError } = useInfiniteQuery(
 		queryID,
-		args => callback(args.pageParam ?? 1),
+		args => callback({ page: args.pageParam ?? 1, ...params }),
 		{ getNextPageParam: query => (query ? query.page + 1 : null) }
 	);
 
@@ -28,19 +30,7 @@ export function Movies({ queryID, callback }: Props) {
 
 	return (
 		<Flex flexDirection="column">
-			<Grid
-				gridTemplateColumns={[
-					"repeat(3, 1fr)",
-					"repeat(4, 1fr)",
-					"repeat(5, 1fr)",
-					"repeat(6, 1fr)",
-				]}
-				gridGap="0.5rem"
-			>
-				{data?.pages.map(page =>
-					page?.results.map(movie => <MovieThumbnail key={movie.id} movie={movie} />)
-				)}
-			</Grid>
+			<MovieList movies={flattenMoviesQuery(data)} />
 			{!isLoading && !isFetching && hasNextPage && (
 				<Button
 					isLoading={isLoading}

@@ -1,8 +1,9 @@
 import { getTopMovies } from "../../../services";
+import { IParams } from "../../../types/movie";
 import { Movies } from "./Movies";
 
 export function TopMovies() {
-	function callback(page?: number) {
+	function callback({ page }: IParams) {
 		return getTopMovies(page);
 	}
 

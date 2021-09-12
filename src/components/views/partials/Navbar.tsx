@@ -26,6 +26,11 @@ export function Navbar() {
 					</Navlink>
 				</Navitem>
 				<Navitem>
+					<Navlink to="/genres" exact>
+						<Heading size="md">Genres</Heading>
+					</Navlink>
+				</Navitem>
+				<Navitem>
 					<Navlink to="/search" exact>
 						<Heading size="md">Search</Heading>
 					</Navlink>

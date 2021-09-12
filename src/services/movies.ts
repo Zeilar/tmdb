@@ -1,10 +1,8 @@
-import { IManyMoviesQuery } from "../types/movie";
+import { IManyMoviesQuery, IManyMoviesArgs, IParams } from "../types/movie";
 import { IGenre } from "../types/genre";
 import axios from "axios";
 
-async function getManyMovies(path: string, errorMsg: string, page?: number) {
-	const params: any = {};
-	if (page) params.page = page;
+async function getManyMovies({ path, errorMsg, params }: IManyMoviesArgs) {
 	try {
 		const { data } = await axios.get<IManyMoviesQuery>(path, { params });
 		return data;
@@ -14,21 +12,37 @@ async function getManyMovies(path: string, errorMsg: string, page?: number) {
 	}
 }
 
-export async function getMoviesByGenres(genres: IGenre[]) {
-	const { data } = await axios.get<IManyMoviesQuery>("/discover/movie", {
-		params: { with_genres: genres.map(genre => String(genre.id)).join(",") },
+export async function getMoviesByDiscover({ with_genres, page }: IParams) {
+	return await getManyMovies({
+		path: "/discover/movie",
+		errorMsg: "Failed fetching movies.",
+		params: {
+			with_genres,
+			page,
+		},
 	});
-	return data;
 }
 
 export async function getLatestMovies(page?: number) {
-	return await getManyMovies("/movie/now_playing", "Failed fetching latest movies.", page);
+	return await getManyMovies({
+		path: "/movie/now_playing",
+		errorMsg: "Failed fetching latest movies.",
+		params: { page },
+	});
 }
 
 export async function getPopularMovies(page?: number) {
-	return await getManyMovies("/movie/popular", "Failed fetching most popular movies.", page);
+	return await getManyMovies({
+		path: "/movie/popular",
+		errorMsg: "Failed fetching most popular movies.",
+		params: { page },
+	});
 }
 
 export async function getTopMovies(page?: number) {
-	return await getManyMovies("/movie/top_rated", "Failed fetching top rated movies.", page);
+	return await getManyMovies({
+		path: "/movie/top_rated",
+		errorMsg: "Failed fetching top rated movies.",
+		params: { page },
+	});
 }

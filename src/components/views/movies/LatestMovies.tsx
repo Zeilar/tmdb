@@ -1,8 +1,9 @@
 import { getLatestMovies } from "../../../services";
+import { IParams } from "../../../types/movie";
 import { Movies } from "./Movies";
 
 export function LatestMovies() {
-	function callback(page?: number) {
+	function callback({ page }: IParams) {
 		return getLatestMovies(page);
 	}
 

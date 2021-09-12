@@ -21,7 +21,8 @@ export default function Router() {
 							<Route exact path="/latest" component={Views.LatestMovies} />
 							<Route exact path="/top" component={Views.TopMovies} />
 							<Route exact path="/popular" component={Views.PopularMovies} />
-							<Route exact path="/search" component={Views.Movies} />
+							<Route exact path="/genres" component={Views.Genres} />
+							<Route exact path="/search" component={Views.Search} />
 							<Route>
 								<Heading>That page could not be found.</Heading>
 							</Route>
