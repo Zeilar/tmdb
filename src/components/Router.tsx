@@ -17,7 +17,7 @@ export default function Router() {
 						<Views.ScrollToTop />
 						<Switch>
 							<Route exact path="/" component={Views.Home} />
-							<Route exact path="/movie/:id/:title?" component={Views.Home} />
+							<Route exact path="/movie/:id" component={Views.Home} />
 							<Route exact path="/latest" component={Views.LatestMovies} />
 							<Route exact path="/top" component={Views.TopMovies} />
 							<Route exact path="/popular" component={Views.PopularMovies} />

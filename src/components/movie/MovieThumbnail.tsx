@@ -11,11 +11,6 @@ interface Props {
 	movie: IMovie;
 }
 
-function prettifyURL(url: string) {
-	// I don't know Regex okay? Also had to get rid of the percent sign due to React router error
-	return url.replaceAll(" ", "-").replaceAll("%", "");
-}
-
 export function MovieThumbnail({ movie }: Props) {
 	const poster_path = useMemo(
 		() => (movie.poster_path ? getImageUrl(movie.poster_path) : undefined),
@@ -33,7 +28,7 @@ export function MovieThumbnail({ movie }: Props) {
 	return (
 		<Link
 			as={RouterLink}
-			to={`/movie/${movie.id}/${prettifyURL(movie.title)}`}
+			to={`/movie/${movie.id}`}
 			width={200}
 			height={300}
 			transitionDuration="0.25s"
