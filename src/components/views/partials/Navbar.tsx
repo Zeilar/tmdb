@@ -1,5 +1,12 @@
-import { Flex, Heading, InputLeftElement, InputGroup, Input } from "@chakra-ui/react";
-import { SearchIcon } from "@chakra-ui/icons";
+import {
+	Flex,
+	Heading,
+	InputLeftElement,
+	InputGroup,
+	Input,
+	InputRightElement,
+} from "@chakra-ui/react";
+import { SearchIcon, SmallCloseIcon } from "@chakra-ui/icons";
 import { NavLink, useHistory } from "react-router-dom";
 import styled from "styled-components";
 import { theme } from "../../../styles/theme";
@@ -12,6 +19,10 @@ export function Navbar() {
 	function search(e: FormEvent) {
 		e.preventDefault();
 		push(`/search?query=${encodeURI(searchInput)}`);
+	}
+
+	function clearSearch() {
+		setSearchInput("");
 	}
 
 	return (
@@ -40,7 +51,7 @@ export function Navbar() {
 						<Heading size="md">Genres</Heading>
 					</Navlink>
 				</Navitem>
-				<Navitem style={{ marginLeft: "auto" }}>
+				<Navitem className="search">
 					<InputGroup as="form" onSubmit={search}>
 						<InputLeftElement
 							pointerEvents="none"
@@ -52,6 +63,13 @@ export function Navbar() {
 							value={searchInput}
 							onChange={e => setSearchInput(e.target.value)}
 						/>
+						<InputRightElement
+							as="button"
+							type="button"
+							visibility={searchInput !== "" ? "visible" : "hidden"}
+							children={<SmallCloseIcon cursor="pointer" color="gray.100" />}
+							onClick={clearSearch}
+						/>
 					</InputGroup>
 				</Navitem>
 			</Flex>
@@ -61,7 +79,11 @@ export function Navbar() {
 
 const Navitem = styled.div.attrs({ as: "li" })`
 	list-style-type: none;
-	margin: 0 1rem;
+	margin-right: 2rem;
+	&.search {
+		margin-left: auto;
+		margin-right: 0;
+	}
 `;
 
 const Navlink = styled(NavLink)`
