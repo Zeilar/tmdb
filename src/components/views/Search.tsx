@@ -3,7 +3,7 @@ import { useInfiniteQuery } from "react-query";
 import { RouteComponentProps } from "../../types/props";
 import { getMoviesBySearch } from "../../services";
 import { MovieList } from "./partials";
-import { flattenMoviesQuery } from "../../helpers";
+import { flattenMoviesQuery, isLastPage } from "../../helpers";
 import { useScrollEvent } from "../../hooks";
 import { MovieListLoadMoreButton, MovieListSpinner } from "../styles";
 
@@ -17,13 +17,19 @@ export function Search({ location }: RouteComponentProps<IParams>) {
 		["movies-search", query],
 		queryParams => getMoviesBySearch({ query, page: queryParams.pageParam ?? 1 }),
 		{
-			getNextPageParam: query => (query ? query.page + 1 : null),
+			getNextPageParam: query => {
+				if (!query) return null;
+				return isLastPage(query) ? null : query.page + 1;
+			},
 			enabled: query != null,
 		}
 	);
 
 	function nextPage() {
-		fetchNextPage();
+		console.log({ hasNextPage });
+		if (hasNextPage) {
+			fetchNextPage();
+		}
 	}
 
 	useScrollEvent(nextPage);

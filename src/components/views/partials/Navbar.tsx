@@ -44,7 +44,7 @@ export function Navbar() {
 					<InputGroup as="form" onSubmit={search}>
 						<InputLeftElement
 							pointerEvents="none"
-							children={<SearchIcon color="gray.300" />}
+							children={<SearchIcon color="gray.100" />}
 						/>
 						<Input
 							type="text"

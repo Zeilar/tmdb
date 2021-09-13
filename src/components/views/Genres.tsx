@@ -1,7 +1,7 @@
 import { Flex, Heading } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { useInfiniteQuery } from "react-query";
-import { flattenMoviesQuery } from "../../helpers";
+import { flattenMoviesQuery, isLastPage } from "../../helpers";
 import { useScrollEvent } from "../../hooks";
 import { getMoviesByGenres } from "../../services";
 import { IGenre } from "../../types/genre";
@@ -15,7 +15,12 @@ export function Genres() {
 			["movies-genres", genres],
 			queryParams =>
 				getMoviesByGenres({ with_genres: genresToString(), page: queryParams.pageParam }),
-			{ getNextPageParam: query => (query ? query.page + 1 : null) }
+			{
+				getNextPageParam: query => {
+					if (!query) return null;
+					return isLastPage(query) ? null : query.page + 1;
+				},
+			}
 		);
 
 	function genresToString() {
@@ -26,7 +31,9 @@ export function Genres() {
 	}
 
 	function nextPage() {
-		fetchNextPage();
+		if (hasNextPage) {
+			fetchNextPage();
+		}
 	}
 
 	useEffect(() => {

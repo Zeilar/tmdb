@@ -1,6 +1,6 @@
-import { Button, Flex, Heading, Spinner } from "@chakra-ui/react";
+import { Flex, Heading } from "@chakra-ui/react";
 import { useInfiniteQuery } from "react-query";
-import { flattenMoviesQuery } from "../../../helpers";
+import { flattenMoviesQuery, isLastPage } from "../../../helpers";
 import { useScrollEvent } from "../../../hooks";
 import { IManyMoviesQuery, IParams } from "../../../types/movie";
 import { MovieListLoadMoreButton, MovieListSpinner } from "../../styles";
@@ -16,11 +16,18 @@ export function Movies({ queryID, callback, params }: Props) {
 	const { data, isLoading, isFetching, hasNextPage, fetchNextPage, isError } = useInfiniteQuery(
 		queryID,
 		args => callback({ page: args.pageParam ?? 1, ...params }),
-		{ getNextPageParam: query => (query ? query.page + 1 : null) }
+		{
+			getNextPageParam: query => {
+				if (!query) return null;
+				return isLastPage(query) ? null : query.page + 1;
+			},
+		}
 	);
 
 	function nextPage() {
-		fetchNextPage();
+		if (hasNextPage) {
+			fetchNextPage();
+		}
 	}
 
 	useScrollEvent(nextPage);
