@@ -1,4 +1,4 @@
 export * from "./Navbar";
 export * from "./ScrollToTop";
-export * from "./GenresList";
+export * from "./GenreList";
 export * from "./MovieList";

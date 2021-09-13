@@ -1,4 +1,3 @@
-import { useState, useEffect, ReactNode } from "react";
 import { useQuery } from "react-query";
 import { useParams } from "react-router-dom";
 import { getMovieById } from "../../../services";

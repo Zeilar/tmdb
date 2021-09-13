@@ -6,7 +6,7 @@ import { useScrollEvent } from "../../hooks";
 import { getMoviesByGenres } from "../../services";
 import { IGenre } from "../../types/genre";
 import { MovieListLoadMoreButton, MovieListSpinner } from "../styles";
-import { GenresList, MovieList } from "./partials";
+import { GenreList, MovieList } from "./partials";
 
 export function Genres() {
 	const [genres, setGenres] = useState<IGenre[]>([]);
@@ -45,7 +45,7 @@ export function Genres() {
 
 	return (
 		<Flex flexDirection="column">
-			<GenresList onChange={genres => setGenres(genres)} />
+			<GenreList onChange={genres => setGenres(genres)} />
 			<MovieList movies={flattenMoviesQuery(data)} />
 			{!isLoading && !isFetching && hasNextPage && (
 				<MovieListLoadMoreButton isLoading={isLoading} onClick={nextPage} />
