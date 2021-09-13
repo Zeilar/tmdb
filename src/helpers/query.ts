@@ -1,5 +1,7 @@
 import { IManyMoviesQuery } from "../types/movie";
 
-export function isLastPage(query: IManyMoviesQuery | null) {
-	return query ? query.page >= query.total_pages : false;
+export function getNextPage(query: IManyMoviesQuery | null) {
+	if (!query) return null;
+	const isLastPage = query.page >= query.total_pages;
+	return isLastPage ? null : query.page + 1;
 }
