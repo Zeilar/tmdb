@@ -2,13 +2,13 @@ import { AbsoluteCenter, Box, Spinner, useImage, Link, Heading, Img } from "@cha
 import { MouseEvent, useMemo } from "react";
 import { usePosterViewerContext } from "../../contexts";
 import { getImageUrl } from "../../services";
-import { IMovie } from "../../types/movie";
+import { IMovieThumbnail } from "../../types/movie";
 import { FullscreenIcon } from "../icons";
 import { Link as RouterLink } from "react-router-dom";
 import placeholder from "../../assets/images/placeholder.png";
 
 interface Props {
-	movie: IMovie;
+	movie: IMovieThumbnail;
 }
 
 export function MovieThumbnail({ movie }: Props) {

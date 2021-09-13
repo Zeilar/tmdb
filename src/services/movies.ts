@@ -1,4 +1,10 @@
-import { IManyMoviesQuery, IManyMoviesArgs, IParams } from "../types/movie";
+import {
+	IManyMoviesQuery,
+	IManyMoviesArgs,
+	IParams,
+	ISingleMovie,
+	IMovieCredits,
+} from "../types/movie";
 import axios from "axios";
 
 async function getManyMovies({
@@ -59,4 +65,17 @@ export async function getTopMovies(page?: number) {
 		errorMsg: "Failed fetching top rated movies.",
 		params: { page },
 	});
+}
+
+export async function getMovieById(id: number) {
+	try {
+		const movieQuery = await axios.get<ISingleMovie>(`/movie/${id}`);
+		const creditsQuery = await axios.get<IMovieCredits>(`/movie/${id}/credits`);
+		return {
+			movie: movieQuery.data,
+			credits: creditsQuery.data,
+		};
+	} catch (error) {
+		console.error(`Failed fetching movie with id ${id}.`);
+	}
 }

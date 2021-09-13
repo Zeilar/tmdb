@@ -1,9 +1,9 @@
 import { Grid } from "@chakra-ui/react";
-import { IMovie } from "../../../types/movie";
+import { IMovieThumbnail } from "../../../types/movie";
 import { MovieThumbnail } from "../../movie";
 
 interface Props {
-	movies: IMovie[];
+	movies: IMovieThumbnail[];
 }
 
 export function MovieList({ movies }: Props) {
