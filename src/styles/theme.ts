@@ -22,6 +22,10 @@ export const theme = extendTheme({
 	},
 	styles: {
 		global: {
+			"::selection": {
+				backgroundColor: "blackAlpha.500",
+				color: colors.accent,
+			},
 			body: {
 				overflow: "overlay",
 				"::-webkit-scrollbar-thumb": {
@@ -31,6 +35,9 @@ export const theme = extendTheme({
 			},
 			button: {
 				outline: 0,
+			},
+			"img, svg, ::placeholder": {
+				userSelect: "none",
 			},
 			"::-webkit-scrollbar": {
 				width: "0.9rem",

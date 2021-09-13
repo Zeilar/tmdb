@@ -1,3 +1,5 @@
+import { Flex } from "@chakra-ui/react";
+
 export function Search() {
-	return null;
+	return <Flex>Search page</Flex>;
 }

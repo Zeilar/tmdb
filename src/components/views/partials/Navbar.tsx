@@ -1,9 +1,19 @@
-import { Box, Flex, Heading } from "@chakra-ui/react";
-import { NavLink } from "react-router-dom";
+import { Box, Flex, Heading, InputLeftElement, InputGroup, Input } from "@chakra-ui/react";
+import { SearchIcon } from "@chakra-ui/icons";
+import { NavLink, useHistory } from "react-router-dom";
 import styled from "styled-components";
 import { theme } from "../../../styles/theme";
+import { FormEvent, useState } from "react";
 
 export function Navbar() {
+	const [searchInput, setSearchInput] = useState("");
+	const { push } = useHistory();
+
+	function search(e: FormEvent) {
+		e.preventDefault();
+		push(`/search?query=${encodeURI(searchInput)}`);
+	}
+
 	return (
 		<nav>
 			<Flex as="ul" alignItems="flex-end" marginBottom="3rem">
@@ -30,17 +40,26 @@ export function Navbar() {
 						<Heading size="md">Genres</Heading>
 					</Navlink>
 				</Navitem>
-				<Navitem>
-					<Navlink to="/search" exact>
-						<Heading size="md">Search</Heading>
-					</Navlink>
+				<Navitem style={{ marginLeft: "auto" }}>
+					<InputGroup as="form" onSubmit={search}>
+						<InputLeftElement
+							pointerEvents="none"
+							children={<SearchIcon color="gray.300" />}
+						/>
+						<Input
+							type="text"
+							placeholder="Search..."
+							value={searchInput}
+							onChange={e => setSearchInput(e.target.value)}
+						/>
+					</InputGroup>
 				</Navitem>
 			</Flex>
 		</nav>
 	);
 }
 
-const Navitem = styled(Box).attrs({ as: "li" })`
+const Navitem = styled.div.attrs({ as: "li" })`
 	list-style-type: none;
 	margin: 0 1rem;
 `;
