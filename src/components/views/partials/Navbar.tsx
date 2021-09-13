@@ -1,4 +1,4 @@
-import { Box, Flex, Heading, InputLeftElement, InputGroup, Input } from "@chakra-ui/react";
+import { Flex, Heading, InputLeftElement, InputGroup, Input } from "@chakra-ui/react";
 import { SearchIcon } from "@chakra-ui/icons";
 import { NavLink, useHistory } from "react-router-dom";
 import styled from "styled-components";

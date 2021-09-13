@@ -31,5 +31,7 @@ export interface IManyMoviesArgs {
 
 export interface IParams {
 	page?: number;
+	with_genre?: string;
+	query?: string | null | undefined;
 	[key: string]: any;
 }

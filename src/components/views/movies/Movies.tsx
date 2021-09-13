@@ -3,6 +3,7 @@ import { useInfiniteQuery } from "react-query";
 import { flattenMoviesQuery } from "../../../helpers";
 import { useScrollEvent } from "../../../hooks";
 import { IManyMoviesQuery, IParams } from "../../../types/movie";
+import { MovieListLoadMoreButton, MovieListSpinner } from "../../styles";
 import { MovieList } from "../partials";
 
 interface Props {
@@ -32,23 +33,9 @@ export function Movies({ queryID, callback, params }: Props) {
 		<Flex flexDirection="column">
 			<MovieList movies={flattenMoviesQuery(data)} />
 			{!isLoading && !isFetching && hasNextPage && (
-				<Button
-					isLoading={isLoading}
-					loadingText="Loading"
-					variant="outline"
-					spinnerPlacement="start"
-					borderColor="accent"
-					color="accent"
-					marginY="5rem"
-					marginX="auto"
-					onClick={nextPage}
-				>
-					Load More
-				</Button>
+				<MovieListLoadMoreButton isLoading={isLoading} onClick={nextPage} />
 			)}
-			{(isLoading || isFetching) && (
-				<Spinner color="accent" size="xl" marginX="auto" marginY="5rem" />
-			)}
+			{(isLoading || isFetching) && <MovieListSpinner />}
 		</Flex>
 	);
 }

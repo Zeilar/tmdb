@@ -1,8 +1,11 @@
 import { IManyMoviesQuery, IManyMoviesArgs, IParams } from "../types/movie";
-import { IGenre } from "../types/genre";
 import axios from "axios";
 
-async function getManyMovies({ path, errorMsg, params }: IManyMoviesArgs) {
+async function getManyMovies({
+	path,
+	errorMsg = "Failed fetching movies.",
+	params,
+}: IManyMoviesArgs) {
 	try {
 		const { data } = await axios.get<IManyMoviesQuery>(path, { params });
 		return data;
@@ -12,10 +15,21 @@ async function getManyMovies({ path, errorMsg, params }: IManyMoviesArgs) {
 	}
 }
 
-export async function getMoviesByDiscover({ with_genres, page }: IParams) {
+export async function getMoviesBySearch({ query, page }: IParams) {
+	return await getManyMovies({
+		path: "/search/movie",
+		errorMsg: "Failed fetching movies by search query.",
+		params: {
+			query,
+			page,
+		},
+	});
+}
+
+export async function getMoviesByGenres({ with_genres, page }: IParams) {
 	return await getManyMovies({
 		path: "/discover/movie",
-		errorMsg: "Failed fetching movies.",
+		errorMsg: "Failed fetching movies by genres.",
 		params: {
 			with_genres,
 			page,
