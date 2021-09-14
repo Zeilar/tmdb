@@ -1,5 +1,5 @@
 import { Flex, Heading } from "@chakra-ui/react";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { useInfiniteQuery } from "react-query";
 import { flattenMoviesQuery, getNextPage } from "../../helpers";
 import { useScrollEvent } from "../../hooks";
@@ -38,6 +38,20 @@ export function Genres() {
 	}, [genres, refetch]);
 
 	useScrollEvent(nextPage);
+
+	const fetchNextOnMount = useRef(true);
+
+	useEffect(() => {
+		// Get first 2 pages on mount to make the grid more full to start with
+		if (!fetchNextOnMount.current || !data?.pages) {
+			return;
+		}
+		const nextPage = getNextPage(data.pages[data.pages.length - 1]);
+		if (nextPage) {
+			fetchNextPage();
+			fetchNextOnMount.current = false;
+		}
+	}, [fetchNextPage, data]);
 
 	if (isError) {
 		return <Heading>Something went wrong!</Heading>;

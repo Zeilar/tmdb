@@ -6,6 +6,8 @@ import { MovieList } from "./partials";
 import { flattenMoviesQuery, getNextPage } from "../../helpers";
 import { useScrollEvent } from "../../hooks";
 import { MovieListLoadMoreButton, MovieListSpinner } from "../styles";
+import { useEffect } from "react";
+import { useRef } from "react";
 
 interface IParams {
 	query?: string;
@@ -21,6 +23,20 @@ export function Search({ location }: RouteComponentProps<IParams>) {
 			enabled: query != null,
 		}
 	);
+
+	const fetchNextOnMount = useRef(true);
+
+	useEffect(() => {
+		// Get first 2 pages on mount to make the grid more full to start with
+		if (!fetchNextOnMount.current || !data?.pages) {
+			return;
+		}
+		const nextPage = getNextPage(data.pages[data.pages.length - 1]);
+		if (nextPage) {
+			fetchNextPage();
+			fetchNextOnMount.current = false;
+		}
+	}, [fetchNextPage, data]);
 
 	function nextPage() {
 		if (hasNextPage) {
