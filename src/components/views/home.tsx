@@ -11,18 +11,18 @@ export function Home() {
 	return (
 		<Flex flexDirection="column" gridGap="5rem">
 			<MovieGallery
-				loading={latestMovieQuery.isLoading}
 				header="Latest"
+				loading={latestMovieQuery.isLoading}
 				movies={latestMovieQuery.data?.results ?? []}
 			/>
 			<MovieGallery
-				loading={popularMoviesQuery.isLoading}
 				header="Most popular"
+				loading={popularMoviesQuery.isLoading}
 				movies={popularMoviesQuery.data?.results ?? []}
 			/>
 			<MovieGallery
-				loading={topRatedMoviesQuery.isLoading}
 				header="Top rated"
+				loading={topRatedMoviesQuery.isLoading}
 				movies={topRatedMoviesQuery.data?.results ?? []}
 			/>
 		</Flex>
