@@ -60,6 +60,7 @@ export function Navbar() {
 						<Input
 							type="text"
 							placeholder="Search..."
+							variant="flushed"
 							value={searchInput}
 							onChange={e => setSearchInput(e.target.value)}
 						/>

@@ -6,8 +6,7 @@ import { MovieList } from "./partials";
 import { flattenMoviesQuery, getNextPage } from "../../helpers";
 import { useScrollEvent } from "../../hooks";
 import { MovieListLoadMoreButton, MovieListSpinner } from "../styles";
-import { useEffect } from "react";
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 
 interface IParams {
 	query?: string;
