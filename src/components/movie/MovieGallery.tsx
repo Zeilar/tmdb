@@ -16,10 +16,10 @@ export function MovieGallery({ movies, header, loading, isError }: Props) {
 
 	function renderMovies() {
 		return loading
-			? movies.map(movie => <MovieThumbnail key={movie.id} movie={movie} />)
-			: Array(20)
+			? Array(20)
 					.fill(null)
-					.map((_, i) => <PostThumbnailSkeleton key={i} />);
+					.map((_, i) => <PostThumbnailSkeleton key={i} />)
+			: movies.map(movie => <MovieThumbnail key={movie.id} movie={movie} />);
 	}
 
 	if (isError) {
