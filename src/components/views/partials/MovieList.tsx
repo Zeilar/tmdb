@@ -17,8 +17,8 @@ export function MovieList({ movies }: Props) {
 			]}
 			gridGap="0.5rem"
 		>
-			{movies.map(movie => (
-				<MovieThumbnail key={movie.id} movie={movie} />
+			{movies.map((movie, i) => (
+				<MovieThumbnail key={i} movie={movie} />
 			))}
 		</Grid>
 	);

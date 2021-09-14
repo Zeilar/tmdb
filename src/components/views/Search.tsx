@@ -36,6 +36,7 @@ export function Search({ location }: RouteComponentProps<IParams>) {
 
 	return (
 		<Flex flexDirection="column">
+			{query && <Heading marginBottom="1rem">Search results for "{query}"</Heading>}
 			<MovieList movies={flattenMoviesQuery(data)} />
 			{!isLoading && !isFetching && hasNextPage && (
 				<MovieListLoadMoreButton isLoading={isLoading} onClick={nextPage} />
