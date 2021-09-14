@@ -12,16 +12,19 @@ export function Home() {
 		<Flex flexDirection="column" gridGap="5rem">
 			<MovieGallery
 				header="Latest"
+				isError={latestMovieQuery.isError}
 				loading={latestMovieQuery.isLoading}
 				movies={latestMovieQuery.data?.results ?? []}
 			/>
 			<MovieGallery
 				header="Most popular"
+				isError={popularMoviesQuery.isError}
 				loading={popularMoviesQuery.isLoading}
 				movies={popularMoviesQuery.data?.results ?? []}
 			/>
 			<MovieGallery
 				header="Top rated"
+				isError={topRatedMoviesQuery.isError}
 				loading={topRatedMoviesQuery.isLoading}
 				movies={topRatedMoviesQuery.data?.results ?? []}
 			/>

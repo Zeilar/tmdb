@@ -34,10 +34,9 @@ export function useSwipeScroll<T extends HTMLElement>() {
 			if (!isDown) return;
 			e.preventDefault();
 			const x = e.pageX - slider.offsetLeft;
-			const walk = (x - startX) * 1.5; //scroll-fast
-			let prevScrollLeft = slider.scrollLeft;
+			const walk = (x - startX) * 2;
+			const prevScrollLeft = slider.scrollLeft;
 			slider.scrollLeft = scrollLeft - walk;
-			velX = slider.scrollLeft - prevScrollLeft;
 			if (slider.scrollLeft - prevScrollLeft && !hasSwiped) {
 				setHasSwiped(true);
 			}
