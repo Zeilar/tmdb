@@ -15,9 +15,7 @@ export function Genres() {
 			["movies-genres", genres],
 			queryParams =>
 				getMoviesByGenres({ with_genres: genresToString(), page: queryParams.pageParam }),
-			{
-				getNextPageParam: query => getNextPage(query),
-			}
+			{ getNextPageParam: query => getNextPage(query) }
 		);
 
 	function genresToString() {
@@ -60,6 +58,12 @@ export function Genres() {
 	return (
 		<Flex flexDirection="column">
 			<GenreList onChange={genres => setGenres(genres)} />
+			<Heading marginBottom="1rem">
+				{genres.length > 0 ? "Showing movies with genres:" : "Showing all movies."}
+			</Heading>
+			<Heading marginBottom="1.5rem" fontSize="md">
+				{genres.map(genre => genre.name).join(", ")}
+			</Heading>
 			<MovieList movies={flattenMoviesQuery(data)} />
 			{!isLoading && !isFetching && hasNextPage && (
 				<MovieListLoadMoreButton isLoading={isLoading} onClick={nextPage} />

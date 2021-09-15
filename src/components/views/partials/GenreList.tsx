@@ -13,7 +13,7 @@ export function GenreList({ onChange }: Props) {
 	const genresQuery = useQuery("genres", getAllGenres);
 	const [pickedGenres, setPickedGenres] = useState<IGenre[]>([]);
 
-	function clearAll() {
+	function reset() {
 		if (pickedGenres.length > 0) {
 			setPickedGenres([]);
 		}
@@ -48,12 +48,13 @@ export function GenreList({ onChange }: Props) {
 			{genresQuery.isLoading && <Spinner color="accent" />}
 			{!genresQuery.isLoading && (
 				<Flex flexWrap="wrap" gridGap="0.5rem">
-					<Button type="button" variant="outline" onClick={clearAll}>
-						Clear all
+					<Button type="button" variant="outline" onClick={reset}>
+						Reset
 					</Button>
 					{genresQuery.data?.map(genre => (
 						<Box
 							backgroundColor={isGenrePicked(genre) ? "gray.700" : "gray.900"}
+							color={isGenrePicked(genre) ? "accent" : undefined}
 							paddingX="1rem"
 							paddingY="0.5rem"
 							rounded="3xl"
@@ -61,6 +62,7 @@ export function GenreList({ onChange }: Props) {
 							boxShadow="sm"
 							key={genre.id}
 							onClick={() => toggleGenre(genre)}
+							_hover={{ color: "accent" }}
 						>
 							{genre.name}
 						</Box>
