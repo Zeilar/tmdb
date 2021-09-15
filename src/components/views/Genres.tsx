@@ -59,7 +59,7 @@ export function Genres() {
 		<Flex flexDirection="column">
 			<GenreList onChange={genres => setGenres(genres)} />
 			<Heading marginBottom="1rem">
-				{genres.length > 0 ? "Showing movies with genres:" : "Showing all movies."}
+				{genres.length > 0 ? "Showing movies with genres" : "Showing all movies"}
 			</Heading>
 			<Heading marginBottom="1.5rem" fontSize="md">
 				{genres.map(genre => genre.name).join(", ")}
