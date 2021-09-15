@@ -1,4 +1,4 @@
-import "@fontsource/raleway/400.css";
+import "@fontsource/roboto/400.css";
 import "@fontsource/open-sans/700.css";
 import { extendTheme, ThemeConfig } from "@chakra-ui/react";
 
@@ -16,7 +16,9 @@ export const theme = extendTheme({
 	components: {
 		Link: {
 			baseStyle: {
-				boxShadow: "none !important",
+				":focus": {
+					boxShadow: "none",
+				},
 			},
 		},
 	},
@@ -52,6 +54,6 @@ export const theme = extendTheme({
 	colors,
 	fonts: {
 		heading: "Open Sans",
-		body: "Raleway",
+		body: "Roboto",
 	},
 });
