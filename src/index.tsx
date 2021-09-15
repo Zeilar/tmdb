@@ -6,6 +6,7 @@ import { QueryClient, QueryClientProvider } from "react-query";
 import { theme } from "./styles/theme";
 import { PosterViewerContextProvider } from "./contexts";
 import axios from "axios";
+import { ThemeProvider } from "styled-components";
 
 const API_KEY = process.env.REACT_APP_API_KEY;
 
@@ -32,9 +33,11 @@ ReactDOM.render(
 	<React.StrictMode>
 		<ChakraProvider theme={theme}>
 			<QueryClientProvider client={queryClient}>
-				<PosterViewerContextProvider>
-					<App />
-				</PosterViewerContextProvider>
+				<ThemeProvider theme={theme}>
+					<PosterViewerContextProvider>
+						<App />
+					</PosterViewerContextProvider>
+				</ThemeProvider>
 			</QueryClientProvider>
 		</ChakraProvider>
 	</React.StrictMode>,

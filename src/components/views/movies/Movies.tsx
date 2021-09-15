@@ -18,9 +18,7 @@ export function Movies({ queryID, callback, params }: Props) {
 	const { data, isLoading, isFetching, hasNextPage, fetchNextPage, isError } = useInfiniteQuery(
 		queryID,
 		args => callback({ page: args.pageParam ?? 1, ...params }),
-		{
-			getNextPageParam: query => getNextPage(query),
-		}
+		{ getNextPageParam: query => getNextPage(query) }
 	);
 
 	function nextPage() {

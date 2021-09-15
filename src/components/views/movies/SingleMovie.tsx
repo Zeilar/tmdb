@@ -5,7 +5,7 @@ import { getImageUrl, getMovieById } from "../../../services";
 import PostThumbnailSkeleton from "../../skeleton/PostThumbnailSkeleton";
 
 interface IParams {
-	id: string | undefined;
+	id?: string | undefined;
 }
 
 export function SingleMovie() {
@@ -47,11 +47,10 @@ export function SingleMovie() {
 		>
 			<Box height={450} backgroundColor="gray.700">
 				{(posterStatus === "loading" || posterStatus === "pending") && (
-					<PostThumbnailSkeleton width="100%" />
+					<PostThumbnailSkeleton width="100%" height="100%" />
 				)}
 				{posterStatus === "loaded" && <Img src={posterUrl} objectFit="cover" />}
 			</Box>
-
 			<Flex flexDirection="column" paddingX="1rem">
 				<Heading>{data?.movie.title}</Heading>
 				<Text marginTop="auto" fontSize="xl">

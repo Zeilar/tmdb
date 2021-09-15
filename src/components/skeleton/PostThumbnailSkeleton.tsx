@@ -1,11 +1,10 @@
-import { Box, BoxProps } from "@chakra-ui/react";
-import styled from "styled-components";
+import { Box, BoxProps, keyframes } from "@chakra-ui/react";
 import { theme } from "../../styles/theme";
 
 export default function PostThumbnailSkeleton({ ...props }: BoxProps) {
 	return (
 		<Box
-			as={Wrapper}
+			animation={`${pulse} 1s ease-out infinite alternate`}
 			width={200}
 			height={300}
 			backgroundColor="gray.700"
@@ -14,12 +13,9 @@ export default function PostThumbnailSkeleton({ ...props }: BoxProps) {
 		/>
 	);
 }
-console.log(theme);
-const Wrapper = styled.div`
-	animation: pulse 1s ease-out infinite alternate;
-	@keyframes pulse {
-		to {
-			background-color: ${theme.colors.gray["900"]};
-		}
-	}
+
+const pulse = keyframes`
+    to {
+        background-color: ${theme.colors.gray["900"]};
+    }
 `;
