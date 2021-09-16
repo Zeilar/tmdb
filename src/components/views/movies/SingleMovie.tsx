@@ -93,7 +93,7 @@ export function SingleMovie() {
 				{posterStatus === "loaded" && (
 					<Img src={posterUrl} objectFit="cover" height="100%" />
 				)}
-				{data?.movie.status !== "Released" && (
+				{data?.movie && data.movie.status !== "Released" && (
 					<Box
 						top="0"
 						left="0"
