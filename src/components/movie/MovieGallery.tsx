@@ -1,17 +1,17 @@
-import { Flex, Heading } from "@chakra-ui/react";
+import { Flex, FlexProps, Heading } from "@chakra-ui/react";
 import { IMovieThumbnail, ISingleMovie } from "../../types";
 import { MovieThumbnail } from "./";
 import PostThumbnailSkeleton from "../skeleton/PostThumbnailSkeleton";
 import { useSwipeScroll } from "../../hooks";
 
-interface Props {
+interface Props extends FlexProps {
 	movies: IMovieThumbnail[] | ISingleMovie[];
 	header: string;
 	loading?: boolean;
 	isError?: boolean;
 }
 
-export function MovieGallery({ movies, header, loading, isError }: Props) {
+export function MovieGallery({ movies, header, loading, isError, ...props }: Props) {
 	const ref = useSwipeScroll<HTMLDivElement>();
 
 	function renderMovies() {
@@ -31,7 +31,7 @@ export function MovieGallery({ movies, header, loading, isError }: Props) {
 	}
 
 	return (
-		<Flex flexDirection="column">
+		<Flex flexDirection="column" {...props}>
 			<Heading color="accent">{header}</Heading>
 			<Flex ref={ref} overflowX="auto" gridGap="0.25rem" paddingY="0.75rem">
 				{renderMovies()}

@@ -6,6 +6,7 @@ import { useLastVisitedMovies } from "../../../hooks";
 import { getImageUrl, getMovieById } from "../../../services";
 import PostThumbnailSkeleton from "../../skeleton/PostThumbnailSkeleton";
 import { abbreviateNumber } from "js-abbreviation-number";
+import { MovieGallery } from "../../movie";
 
 interface IParams {
 	id?: string | undefined;
@@ -13,7 +14,7 @@ interface IParams {
 
 export function SingleMovie() {
 	const { id } = useParams<IParams>();
-	const { addMovie } = useLastVisitedMovies();
+	const { data: lastVisitedMovies, addMovie } = useLastVisitedMovies();
 	const { data, isError, isLoading } = useQuery(["movie", Number(id)], () =>
 		getMovieById(Number(id))
 	);
@@ -62,92 +63,108 @@ export function SingleMovie() {
 	}
 
 	return (
-		<Grid
-			gridTemplateColumns="300px 1fr"
-			zIndex={1}
-			position="relative"
-			padding="2rem"
-			backgroundColor="gray.900"
-			backgroundImage={backdropUrl}
-			backgroundSize="cover"
-			backgroundPosition="center"
-			_after={
-				backdropUrl
-					? {
-							content: `""`,
-							position: "absolute",
-							top: 0,
-							left: 0,
-							width: "100%",
-							height: "100%",
-							backgroundColor: "blackAlpha.900",
-							zIndex: -1,
-					  }
-					: undefined
-			}
-		>
-			<Box height={450} backgroundColor="gray.700" position="relative">
-				{(posterStatus === "loading" || posterStatus === "pending") && (
-					<PostThumbnailSkeleton width="100%" height="100%" />
-				)}
-				{posterStatus === "loaded" && (
-					<Img src={posterUrl} objectFit="cover" height="100%" />
-				)}
-				{data?.movie && data.movie.status !== "Released" && (
-					<Box
-						top="0"
-						left="0"
-						position="absolute"
-						width={115}
-						height={115}
-						overflow="hidden"
-					>
-						<Text
-							paddingY="0.25rem"
-							fontSize="sm"
-							backgroundColor="gray.900"
+		<Flex flexDirection="column">
+			<Grid
+				gridTemplateColumns="300px 1fr"
+				zIndex={1}
+				position="relative"
+				padding="2rem"
+				backgroundColor="gray.900"
+				backgroundImage={backdropUrl}
+				backgroundSize="cover"
+				backgroundPosition="center"
+				_after={
+					backdropUrl
+						? {
+								content: `""`,
+								position: "absolute",
+								top: 0,
+								left: 0,
+								width: "100%",
+								height: "100%",
+								backgroundColor: "blackAlpha.900",
+								zIndex: -1,
+						  }
+						: undefined
+				}
+			>
+				<Box height={450} backgroundColor="gray.700" position="relative">
+					{(posterStatus === "loading" || posterStatus === "pending") && (
+						<PostThumbnailSkeleton width="100%" height="100%" />
+					)}
+					{posterStatus === "loaded" && (
+						<Img src={posterUrl} objectFit="cover" height="100%" />
+					)}
+					{data?.movie && data.movie.status !== "Released" && (
+						<Box
+							top="0"
+							left="0"
 							position="absolute"
-							width={210}
-							top="30px"
-							right="-35px"
-							textAlign="center"
-							userSelect="none"
-							transform="rotate(-45deg)"
+							width={115}
+							height={115}
+							overflow="hidden"
 						>
-							Post Production
-						</Text>
-					</Box>
-				)}
-			</Box>
-			<Flex flexDirection="column" paddingX="1rem">
-				<Heading>
-					{data?.movie.title} ({getMovieYear()})
-				</Heading>
-				<Flex marginTop="1rem" textAlign="center" flexWrap="wrap" gridGap="2rem">
-					<Flex flexDirection="column">
-						<Heading size="md">Runtime</Heading>
-						<Text>{formatMovieRuntime()}</Text>
+							<Text
+								paddingY="0.25rem"
+								fontSize="sm"
+								backgroundColor="gray.900"
+								position="absolute"
+								width={210}
+								top="30px"
+								right="-35px"
+								textAlign="center"
+								userSelect="none"
+								transform="rotate(-45deg)"
+							>
+								Post Production
+							</Text>
+						</Box>
+					)}
+				</Box>
+				<Flex flexDirection="column" paddingX="1rem">
+					<Heading>
+						{data?.movie.title} ({getMovieYear()})
+					</Heading>
+					<Flex marginTop="1rem" textAlign="center" flexWrap="wrap" gridGap="2rem">
+						<Flex flexDirection="column">
+							<Heading size="md">Runtime</Heading>
+							<Text>{formatMovieRuntime()}</Text>
+						</Flex>
+						<Flex flexDirection="column">
+							<Heading size="md">Rating</Heading>
+							<Text>
+								{data?.movie.vote_average && `${data.movie.vote_average} / 10`}
+							</Text>
+						</Flex>
+						<Flex flexDirection="column">
+							<Heading size="md">Revenue</Heading>
+							<Text>
+								{data?.movie && data.movie.revenue > 0
+									? `$${abbreviateNumber(data.movie.revenue, 1, [
+											"",
+											"K",
+											"M",
+											"B",
+									  ])}`
+									: "N/A"}
+							</Text>
+						</Flex>
 					</Flex>
-					<Flex flexDirection="column">
-						<Heading size="md">Rating</Heading>
-						<Text>{data?.movie.vote_average && `${data.movie.vote_average} / 10`}</Text>
-					</Flex>
-					<Flex flexDirection="column">
-						<Heading size="md">Revenue</Heading>
-						<Text>
-							{data?.movie && data.movie.revenue > 0
-								? `$${abbreviateNumber(data.movie.revenue, 1, ["", "K", "M", "B"])}`
-								: "N/A"}
-						</Text>
-					</Flex>
+					<Heading size="md" marginTop="auto">
+						Overview
+					</Heading>
+					<Text marginTop="0.5rem" fontSize="xl">
+						{data?.movie.overview}
+					</Text>
 				</Flex>
-				<Heading size="md" marginTop="auto">
-					Overview
-				</Heading>
-				<Text marginTop="0.5rem" fontSize="xl">
-					{data?.movie.overview}
-				</Text>
-			</Flex>
-		</Grid>
+			</Grid>
+			{lastVisitedMovies && (
+				<MovieGallery
+					marginTop="5rem"
+					movies={lastVisitedMovies}
+					header="Last visited movies"
+				/>
+			)}
+		</Flex>
 	);
 }
