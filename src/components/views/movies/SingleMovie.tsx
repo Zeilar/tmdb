@@ -135,16 +135,16 @@ export function SingleMovie() {
 				<Heading>
 					{data?.movie.title} ({getMovieYear()})
 				</Heading>
-				<List marginTop="1rem" fontSize="xl">
-					<ListItem display="flex" alignItems="center" height="2rem">
-						<ListIcon as={TimeIcon} />
-						{formatMovieRuntime()}
-					</ListItem>
-					<ListItem display="flex" alignItems="center" height="2rem">
-						<ListIcon as={StarIcon} />
-						{data?.movie.vote_average && <Text>{data.movie.vote_average} / 10</Text>}
-					</ListItem>
-				</List>
+				<Flex marginTop="1rem" textAlign="center" flexWrap="wrap" gridGap="1rem">
+					<Flex flexDirection="column">
+						<Heading size="md">Runtime</Heading>
+						<Text>{formatMovieRuntime()}</Text>
+					</Flex>
+					<Flex flexDirection="column">
+						<Heading size="md">Rating</Heading>
+						<Text>{data?.movie.vote_average && `${data.movie.vote_average} / 10`}</Text>
+					</Flex>
+				</Flex>
 				<Text marginTop="auto" fontSize="xl">
 					{data?.movie.overview}
 				</Text>
