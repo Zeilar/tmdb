@@ -145,7 +145,10 @@ export function SingleMovie() {
 						<Text>{data?.movie.vote_average && `${data.movie.vote_average} / 10`}</Text>
 					</Flex>
 				</Flex>
-				<Text marginTop="auto" fontSize="xl">
+				<Heading size="md" marginTop="auto">
+					Overview
+				</Heading>
+				<Text marginTop="0.5rem" fontSize="xl">
 					{data?.movie.overview}
 				</Text>
 			</Flex>
