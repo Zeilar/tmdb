@@ -135,8 +135,9 @@ export function SingleMovie() {
 					<Flex flexDirection="column">
 						<Heading size="md">Revenue</Heading>
 						<Text>
-							{data?.movie &&
-								`$${abbreviateNumber(data.movie.revenue, 1, ["", "K", "M", "B"])}`}
+							{data?.movie && data.movie.revenue > 0
+								? `$${abbreviateNumber(data.movie.revenue, 1, ["", "K", "M", "B"])}`
+								: "N/A"}
 						</Text>
 					</Flex>
 				</Flex>
