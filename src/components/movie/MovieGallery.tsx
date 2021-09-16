@@ -1,11 +1,11 @@
 import { Flex, Heading } from "@chakra-ui/react";
-import { IMovieThumbnail } from "../../types";
+import { IMovieThumbnail, ISingleMovie } from "../../types";
 import { MovieThumbnail } from "./";
 import PostThumbnailSkeleton from "../skeleton/PostThumbnailSkeleton";
 import { useSwipeScroll } from "../../hooks";
 
 interface Props {
-	movies: IMovieThumbnail[];
+	movies: IMovieThumbnail[] | ISingleMovie[];
 	header: string;
 	loading: boolean;
 	isError: boolean;
