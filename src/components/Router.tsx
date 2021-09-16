@@ -20,7 +20,7 @@ export default function Router() {
 							<Route exact path="/movie/:id" component={Views.SingleMovie} />
 							<Route exact path="/latest" component={Views.LatestMovies} />
 							<Route exact path="/top" component={Views.TopMovies} />
-							<Route exact path="/popular" component={Views.PopularMovies} />
+							<Route exact path="/popular/:window?" component={Views.PopularMovies} />
 							<Route exact path="/genres" component={Views.Genres} />
 							<Route exact path="/search" component={Views.Search} />
 							<Route>

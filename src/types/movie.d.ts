@@ -119,3 +119,5 @@ export interface IParams {
 	query?: string | null | undefined;
 	[key: string]: any;
 }
+
+export type ITrendingWindow = "day" | "week";

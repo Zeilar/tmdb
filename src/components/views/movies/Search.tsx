@@ -1,11 +1,11 @@
 import { Flex, Heading } from "@chakra-ui/react";
 import { useInfiniteQuery } from "react-query";
-import { RouteComponentProps } from "../../types/props";
-import { getMoviesBySearch } from "../../services";
-import { MovieList } from "./partials";
-import { flattenMoviesQuery, getNextPage } from "../../helpers";
-import { useScrollEvent } from "../../hooks";
-import { MovieListLoadMoreButton, MovieListSpinner } from "../styles";
+import { RouteComponentProps } from "../../../types/props";
+import { getMoviesBySearch } from "../../../services";
+import { MovieList } from "../partials";
+import { flattenMoviesQuery, getNextPage } from "../../../helpers";
+import { useScrollEvent } from "../../../hooks";
+import { MovieListLoadMoreButton, MovieListSpinner } from "../../styles";
 import { useEffect, useRef } from "react";
 
 interface IParams {

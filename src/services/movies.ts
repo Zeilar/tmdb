@@ -59,6 +59,14 @@ export async function getPopularMovies(page?: number) {
 	});
 }
 
+export async function getTrendingMovies(window: "day" | "week", page?: number) {
+	return await getManyMovies({
+		path: `/trending/movie/${window}`,
+		errorMsg: `Failed fetching trending movies for ${window}.`,
+		params: { page },
+	});
+}
+
 export async function getTopMovies(page?: number) {
 	return await getManyMovies({
 		path: "/movie/top_rated",

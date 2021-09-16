@@ -1,12 +1,12 @@
 import { Flex, Heading } from "@chakra-ui/react";
 import { useEffect, useState, useRef } from "react";
 import { useInfiniteQuery } from "react-query";
-import { flattenMoviesQuery, getNextPage } from "../../helpers";
-import { useScrollEvent } from "../../hooks";
-import { getMoviesByGenres } from "../../services";
-import { IGenre } from "../../types/genre";
-import { MovieListLoadMoreButton, MovieListSpinner } from "../styles";
-import { GenreList, MovieList } from "./partials";
+import { flattenMoviesQuery, getNextPage } from "../../../helpers";
+import { useScrollEvent } from "../../../hooks";
+import { getMoviesByGenres } from "../../../services";
+import { IGenre } from "../../../types/genre";
+import { MovieListLoadMoreButton, MovieListSpinner } from "../../styles";
+import { GenreList, MovieList } from "../partials";
 
 export function Genres() {
 	const [genres, setGenres] = useState<IGenre[]>([]);

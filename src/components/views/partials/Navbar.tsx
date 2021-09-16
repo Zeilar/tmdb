@@ -5,12 +5,11 @@ import {
 	InputGroup,
 	Input,
 	InputRightElement,
-	Box,
-	BoxProps,
 } from "@chakra-ui/react";
 import { SearchIcon, SmallCloseIcon } from "@chakra-ui/icons";
-import { NavLink, useHistory, NavLinkProps } from "react-router-dom";
+import { NavLink, useHistory } from "react-router-dom";
 import { FormEvent, useState } from "react";
+import { Navitem, Navlink } from "../../styles";
 
 export function Navbar() {
 	const [searchInput, setSearchInput] = useState("");
@@ -42,7 +41,7 @@ export function Navbar() {
 					</Navlink>
 				</Navitem>
 				<Navitem>
-					<Navlink to="/popular" exact>
+					<Navlink to="/popular">
 						<Heading size="md">Popular</Heading>
 					</Navlink>
 				</Navitem>
@@ -75,26 +74,5 @@ export function Navbar() {
 				</Navitem>
 			</Flex>
 		</nav>
-	);
-}
-
-function Navitem({ children, ...props }: BoxProps) {
-	return (
-		<Box as="li" listStyleType="none" marginRight="2rem" {...props}>
-			{children}
-		</Box>
-	);
-}
-
-function Navlink({ to, children }: NavLinkProps) {
-	return (
-		<Box
-			as={NavLink}
-			sx={{ "&.active": { color: "accent" } }}
-			_hover={{ color: "gray.300" }}
-			to={to}
-		>
-			{children}
-		</Box>
 	);
 }
