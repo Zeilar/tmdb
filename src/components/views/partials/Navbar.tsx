@@ -88,6 +88,9 @@ const Navitem = styled.div.attrs({ as: "li" })`
 `;
 
 const Navlink = styled(NavLink)`
+	&:hover {
+		color: ${theme.colors.gray["300"]};
+	}
 	&.active {
 		color: ${theme.colors.accent};
 	}
