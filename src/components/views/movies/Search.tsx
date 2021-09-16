@@ -19,7 +19,7 @@ export function Search({ location }: RouteComponentProps<IParams>) {
 		queryParams => getMoviesBySearch({ query, page: queryParams.pageParam ?? 1 }),
 		{
 			getNextPageParam: query => getNextPage(query),
-			enabled: query != null,
+			enabled: query !== null,
 		}
 	);
 

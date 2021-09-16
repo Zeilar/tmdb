@@ -8,7 +8,9 @@ interface IParams {
 
 export function SinglePerson() {
 	const { id } = useParams<IParams>();
-	const { data } = useQuery(["person", Number(id)], () => getPersonById(Number(id)));
+	const { data } = useQuery(["person", Number(id)], () => getPersonById(Number(id)), {
+		enabled: id !== undefined,
+	});
 
 	console.log(data);
 

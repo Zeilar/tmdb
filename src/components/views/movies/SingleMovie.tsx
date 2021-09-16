@@ -18,9 +18,13 @@ interface IParams {
 export function SingleMovie() {
 	const { id } = useParams<IParams>();
 	const { data: lastVisitedMovies, addMovie } = useLastVisitedMovies();
-	const singleMovieQuery = useQuery(["movie", Number(id)], () => getMovieById(Number(id)));
-	const relatedMoviesQuery = useQuery(["related-movies", Number(id)], () =>
-		getRelatedMovies(Number(id))
+	const singleMovieQuery = useQuery(["movie", Number(id)], () => getMovieById(Number(id)), {
+		enabled: id !== undefined,
+	});
+	const relatedMoviesQuery = useQuery(
+		["related-movies", Number(id)],
+		() => getRelatedMovies(Number(id)),
+		{ enabled: id !== undefined }
 	);
 	const posterUrl = singleMovieQuery.data?.movie.poster_path
 		? getImageUrl(singleMovieQuery.data?.movie.poster_path, "w300")
