@@ -5,11 +5,11 @@ import {
 	InputGroup,
 	Input,
 	InputRightElement,
+	Box,
+	BoxProps,
 } from "@chakra-ui/react";
 import { SearchIcon, SmallCloseIcon } from "@chakra-ui/icons";
-import { NavLink, useHistory } from "react-router-dom";
-import styled from "styled-components";
-import { theme } from "../../../styles/theme";
+import { NavLink, useHistory, NavLinkProps } from "react-router-dom";
 import { FormEvent, useState } from "react";
 
 export function Navbar() {
@@ -51,7 +51,7 @@ export function Navbar() {
 						<Heading size="md">Genres</Heading>
 					</Navlink>
 				</Navitem>
-				<Navitem className="search">
+				<Navitem marginLeft="auto" marginRight="0">
 					<InputGroup as="form" onSubmit={search}>
 						<InputLeftElement
 							pointerEvents="none"
@@ -78,20 +78,23 @@ export function Navbar() {
 	);
 }
 
-const Navitem = styled.div.attrs({ as: "li" })`
-	list-style-type: none;
-	margin-right: 2rem;
-	&.search {
-		margin-left: auto;
-		margin-right: 0;
-	}
-`;
+function Navitem({ children, ...props }: BoxProps) {
+	return (
+		<Box as="li" listStyleType="none" marginRight="2rem" {...props}>
+			{children}
+		</Box>
+	);
+}
 
-const Navlink = styled(NavLink)`
-	&:hover {
-		color: ${theme.colors.gray["300"]};
-	}
-	&.active {
-		color: ${theme.colors.accent};
-	}
-`;
+function Navlink({ to, children }: NavLinkProps) {
+	return (
+		<Box
+			as={NavLink}
+			sx={{ "&.active": { color: "accent" } }}
+			_hover={{ color: "gray.300" }}
+			to={to}
+		>
+			{children}
+		</Box>
+	);
+}
