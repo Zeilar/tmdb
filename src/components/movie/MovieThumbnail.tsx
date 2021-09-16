@@ -78,7 +78,7 @@ export function MovieThumbnail({ movie, ...props }: Props) {
 						_hover={{ transform: "scale(1.05)" }}
 					/>
 				)}
-				{!movie.poster_path && (
+				{(!movie.poster_path || posterStatus === "failed") && (
 					<AbsoluteCenter zIndex={10} padding="0.5rem" width="100%">
 						<Heading size="md" textAlign="center" as="h2">
 							{movie.title}
