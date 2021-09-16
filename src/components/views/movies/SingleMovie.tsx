@@ -123,7 +123,7 @@ export function SingleMovie() {
 				<Heading>
 					{data?.movie.title} ({getMovieYear()})
 				</Heading>
-				<Flex marginTop="1rem" textAlign="center" flexWrap="wrap" gridGap="1rem">
+				<Flex marginTop="1rem" textAlign="center" flexWrap="wrap" gridGap="2rem">
 					<Flex flexDirection="column">
 						<Heading size="md">Runtime</Heading>
 						<Text>{formatMovieRuntime()}</Text>
