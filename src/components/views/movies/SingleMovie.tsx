@@ -39,7 +39,6 @@ export function SingleMovie() {
 
 	useEffect(() => {
 		if (data?.movie) {
-			console.log("add movie", data.movie.title);
 			addMovie(data.movie);
 		}
 	}, [data?.movie, addMovie]);

@@ -7,7 +7,6 @@ export function useLocalStorage<T>(key: string) {
 	});
 
 	useEffect(() => {
-		console.log("data updated");
 		localStorage.setItem(key, JSON.stringify(data));
 	}, [data, key]);
 
