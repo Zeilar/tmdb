@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { useQuery } from "react-query";
 import { getAllGenres } from "../../../services";
 import { IGenre } from "../../../types";
+import { GenreButton } from "./GenreButton";
 
 interface Props {
 	onChange(genres: IGenre[]): void;
@@ -47,24 +48,17 @@ export function GenreList({ onChange }: Props) {
 			{genresQuery.isLoading && <Spinner color="accent" />}
 			{!genresQuery.isLoading && (
 				<Flex flexWrap="wrap" gridGap="0.5rem">
-					<Button type="button" variant="outline" onClick={reset}>
+					<GenreButton active={true} onClick={reset}>
 						Reset
-					</Button>
+					</GenreButton>
 					{genresQuery.data?.map(genre => (
-						<Box
-							backgroundColor={isGenrePicked(genre) ? "gray.700" : "gray.900"}
-							color={isGenrePicked(genre) ? "accent" : undefined}
-							paddingX="1rem"
-							paddingY="0.5rem"
-							rounded="3xl"
-							as="button"
-							boxShadow="sm"
+						<GenreButton
+							active={isGenrePicked(genre)}
 							key={genre.id}
 							onClick={() => toggleGenre(genre)}
-							_hover={{ color: "accent" }}
 						>
 							{genre.name}
-						</Box>
+						</GenreButton>
 					))}
 				</Flex>
 			)}

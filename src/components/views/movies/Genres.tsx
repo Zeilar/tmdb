@@ -1,4 +1,4 @@
-import { Flex, Heading } from "@chakra-ui/react";
+import { Box, Flex, Heading } from "@chakra-ui/react";
 import { useEffect, useState, useRef } from "react";
 import { useInfiniteQuery } from "react-query";
 import { flattenMoviesQuery, getNextPage } from "../../../helpers";
@@ -37,20 +37,6 @@ export function Genres() {
 
 	useScrollEvent(nextPage);
 
-	const fetchNextOnMount = useRef(true);
-
-	useEffect(() => {
-		// Get first 2 pages on mount to make the grid more full to start with
-		if (!fetchNextOnMount.current || !data?.pages) {
-			return;
-		}
-		const nextPage = getNextPage(data.pages[data.pages.length - 1]);
-		if (nextPage) {
-			fetchNextPage();
-			fetchNextOnMount.current = false;
-		}
-	}, [fetchNextPage, data]);
-
 	if (isError) {
 		return <Heading>Something went wrong!</Heading>;
 	}
@@ -61,9 +47,20 @@ export function Genres() {
 			<Heading marginBottom="1rem">
 				{genres.length > 0 ? "Showing movies with genres" : "Showing all movies"}
 			</Heading>
-			<Heading marginBottom="1.5rem" fontSize="md">
-				{genres.map(genre => genre.name).join(", ")}
-			</Heading>
+			<Flex marginBottom="1.5rem" gridGap="0.5rem">
+				{genres.map(genre => (
+					<Box
+						key={genre.id}
+						backgroundColor="gray.700"
+						paddingX="1rem"
+						paddingY="0.5rem"
+						rounded="3xl"
+						boxShadow="sm"
+					>
+						{genre.name}
+					</Box>
+				))}
+			</Flex>
 			<MovieList movies={flattenMoviesQuery(data)} />
 			{!isLoading && !isFetching && hasNextPage && (
 				<MovieListLoadMoreButton isLoading={isLoading} onClick={nextPage} />
