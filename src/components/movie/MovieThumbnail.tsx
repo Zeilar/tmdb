@@ -25,6 +25,10 @@ export function MovieThumbnail({ movie, ...props }: Props) {
 	const posterStatus = useImage({ src: poster_path });
 	const { setActivePosterPath } = usePosterViewerContext();
 
+	if (movie.id === 593910) {
+		console.log(posterStatus, poster_path);
+	}
+
 	function fullscreenHandler(e: MouseEvent) {
 		e.preventDefault();
 		if (!movie.poster_path) {
@@ -65,13 +69,15 @@ export function MovieThumbnail({ movie, ...props }: Props) {
 						: undefined
 				}
 			>
-				<Img
-					transitionDuration="0.15s"
-					height="100%"
-					src={poster_path ?? placeholder}
-					objectFit="cover"
-					_hover={{ transform: "scale(1.05)" }}
-				/>
+				{posterStatus !== "failed" && (
+					<Img
+						transitionDuration="0.15s"
+						height="100%"
+						src={poster_path ?? placeholder}
+						objectFit="cover"
+						_hover={{ transform: "scale(1.05)" }}
+					/>
+				)}
 				{!movie.poster_path && (
 					<AbsoluteCenter zIndex={10} padding="0.5rem" width="100%">
 						<Heading size="md" textAlign="center" as="h2">
