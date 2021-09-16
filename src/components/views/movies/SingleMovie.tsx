@@ -1,17 +1,4 @@
-import {
-	Box,
-	Flex,
-	Grid,
-	Heading,
-	Img,
-	Text,
-	useImage,
-	List,
-	ListItem,
-	ListIcon,
-	Spinner,
-} from "@chakra-ui/react";
-import { StarIcon, TimeIcon } from "@chakra-ui/icons";
+import { Box, Flex, Grid, Heading, Img, Text, useImage, Spinner } from "@chakra-ui/react";
 import { useEffect } from "react";
 import { useQuery } from "react-query";
 import { useParams } from "react-router-dom";
