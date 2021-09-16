@@ -90,15 +90,21 @@ export function SingleMovie() {
 					</Heading>
 					<Flex marginTop="1rem" textAlign="center" flexWrap="wrap" gridGap="2rem">
 						<Flex flexDirection="column">
-							<Heading size="md">Runtime</Heading>
+							<Heading marginBottom="0.25rem" size="md">
+								Runtime
+							</Heading>
 							<Text>{formatMovieRuntime(data.movie)}</Text>
 						</Flex>
 						<Flex flexDirection="column">
-							<Heading size="md">Rating</Heading>
+							<Heading marginBottom="0.25rem" size="md">
+								Rating
+							</Heading>
 							<Text>{data.movie.vote_average} / 10</Text>
 						</Flex>
 						<Flex flexDirection="column">
-							<Heading size="md">Revenue</Heading>
+							<Heading marginBottom="0.25rem" size="md">
+								Revenue
+							</Heading>
 							<Text>
 								{data.movie.revenue > 0
 									? `$${abbreviateNumber(data.movie.revenue, 1, [

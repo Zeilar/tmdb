@@ -1,4 +1,4 @@
-import { IGenre } from "./genre";
+import { IGenre, ICast, ICrew } from "./";
 
 export interface IMovieThumbnail {
 	poster_path?: string;
@@ -31,7 +31,7 @@ export interface IManyMoviesArgs {
 	params: IParams;
 }
 
-export interface IPRoductionCompany {
+export interface IProductionCompany {
 	name: string;
 	id: number;
 	logo_path: string | null;
@@ -70,7 +70,7 @@ export interface ISingleMovie {
 	overview: string | null;
 	popularity: number;
 	poster_path: string | null;
-	production_companies: IPRoductionCompany[];
+	production_companies: IProductionCompany[];
 	production_countries: IProductionCountry[];
 	release_date: string;
 	revenue: number;
@@ -82,29 +82,6 @@ export interface ISingleMovie {
 	video: boolean;
 	vote_average: number;
 	vote_count: number;
-}
-
-export interface IPerson {
-	adult: boolean;
-	gender: number | null;
-	id: number;
-	known_for_department: string;
-	name: string;
-	original_name: string;
-	popularity: number;
-	profile_path: string | null;
-	credit_id: string;
-}
-
-export interface ICast extends IPerson {
-	cast_id: number;
-	character: string;
-	order: number;
-}
-
-export interface ICrew extends IPerson {
-	department: string;
-	job: string;
 }
 
 export interface IMovieCredits {

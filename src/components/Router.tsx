@@ -23,6 +23,7 @@ export default function Router() {
 							<Route exact path="/popular/:window?" component={Views.PopularMovies} />
 							<Route exact path="/genres" component={Views.Genres} />
 							<Route exact path="/search" component={Views.Search} />
+							<Route exact path="/person/:id" component={Views.SinglePerson} />
 							<Route>
 								<Heading>That page could not be found.</Heading>
 							</Route>
