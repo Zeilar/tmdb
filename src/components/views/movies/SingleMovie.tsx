@@ -5,6 +5,7 @@ import { useParams } from "react-router-dom";
 import { useLastVisitedMovies } from "../../../hooks";
 import { getImageUrl, getMovieById } from "../../../services";
 import PostThumbnailSkeleton from "../../skeleton/PostThumbnailSkeleton";
+import { abbreviateNumber } from "js-abbreviation-number";
 
 interface IParams {
 	id?: string | undefined;
@@ -130,6 +131,10 @@ export function SingleMovie() {
 					<Flex flexDirection="column">
 						<Heading size="md">Rating</Heading>
 						<Text>{data?.movie.vote_average && `${data.movie.vote_average} / 10`}</Text>
+					</Flex>
+					<Flex flexDirection="column">
+						<Heading size="md">Revenue</Heading>
+						<Text>{data?.movie && `$${abbreviateNumber(data.movie.revenue)}`}</Text>
 					</Flex>
 				</Flex>
 				<Heading size="md" marginTop="auto">
