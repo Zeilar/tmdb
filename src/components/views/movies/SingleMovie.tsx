@@ -8,6 +8,7 @@ import PostThumbnailSkeleton from "../../skeleton/PostThumbnailSkeleton";
 import { abbreviateNumber } from "js-abbreviation-number";
 import { MovieGallery } from "../../movie";
 import placeholder from "../../../assets/images/placeholder.png";
+import { StarCard } from "../partials";
 
 interface IParams {
 	id?: string | undefined;
@@ -163,30 +164,7 @@ export function SingleMovie() {
 				<Heading marginBottom="0.5rem">Stars</Heading>
 				<Grid gridTemplateColumns="repeat(4, 1fr)" gridGap="1rem">
 					{data.credits.cast.slice(0, 16).map(person => (
-						<Grid gridTemplateColumns="100px 1fr" backgroundColor="gray.900">
-							<Flex>
-								<Img
-									width="100%"
-									src={
-										person.profile_path
-											? getImageUrl(person.profile_path)
-											: placeholder
-									}
-									objectFit="cover"
-								/>
-							</Flex>
-							<Flex flexDirection="column" padding="1rem">
-								<Heading
-									as={Link}
-									fontSize="md"
-									to={`/person/${person.id}`}
-									_hover={{ color: "accent" }}
-								>
-									{person.name}
-								</Heading>
-								<Text marginTop="0.5rem">{person.character}</Text>
-							</Flex>
-						</Grid>
+						<StarCard key={person.id} person={person} />
 					))}
 				</Grid>
 			</Flex>
