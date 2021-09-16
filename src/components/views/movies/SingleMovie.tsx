@@ -1,4 +1,3 @@
-import { StarIcon, TimeIcon } from "@chakra-ui/icons";
 import {
 	Box,
 	Flex,
@@ -12,10 +11,11 @@ import {
 	ListIcon,
 	Spinner,
 } from "@chakra-ui/react";
+import { StarIcon, TimeIcon } from "@chakra-ui/icons";
 import { useEffect } from "react";
 import { useQuery } from "react-query";
 import { useParams } from "react-router-dom";
-import { useLastVisitedMovies, useLocalStorage } from "../../../hooks";
+import { useLastVisitedMovies } from "../../../hooks";
 import { getImageUrl, getMovieById } from "../../../services";
 import PostThumbnailSkeleton from "../../skeleton/PostThumbnailSkeleton";
 
@@ -37,11 +37,9 @@ export function SingleMovie() {
 		? getImageUrl(data?.movie.backdrop_path, "original")
 		: undefined;
 
-	console.log(data);
-
 	useEffect(() => {
 		if (data?.movie) {
-			console.log("add movie", data.movie);
+			console.log("add movie", data.movie.title);
 			addMovie(data.movie);
 		}
 	}, [data?.movie, addMovie]);

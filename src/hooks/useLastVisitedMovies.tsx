@@ -7,23 +7,35 @@ export function useLastVisitedMovies() {
 
 	const addMovie = useCallback(
 		(movie: ISingleMovie) => {
-			if (data?.some(element => element.id === movie.id)) {
-				return;
-			}
-			setData(movies => (movies ? [...movies, movie] : [movie]));
+			setData(movies => {
+				if (!movies) return [movie];
+
+				if (movies.some(element => element.id === movie.id)) {
+					return [movie, ...movies.filter(element => element.id !== movie.id)];
+				}
+
+				if (movies.length >= 9) {
+					const firstNine = movies.slice(0, 9);
+					return [movie, ...firstNine];
+				}
+
+				return [movie, ...movies];
+			});
 		},
-		[data, setData]
+		[setData]
 	);
 
 	const removeMovie = useCallback(
 		(movie: ISingleMovie) => {
-			if (!data || !data.some(element => element.id === movie.id)) {
-				return;
-			}
-			setData(movies => movies!.filter(element => element.id !== movie.id));
+			setData(movies => {
+				if (!movies || !movies.some(element => element.id === movie.id)) {
+					return movies;
+				}
+				return movies.filter(element => element.id !== movie.id);
+			});
 		},
-		[data, setData]
+		[setData]
 	);
 
-	return { addMovie, removeMovie };
+	return { data, addMovie, removeMovie };
 }
