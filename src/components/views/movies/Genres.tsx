@@ -1,5 +1,5 @@
 import { Box, Flex, Heading } from "@chakra-ui/react";
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState } from "react";
 import { useInfiniteQuery } from "react-query";
 import { flattenMoviesQuery, getNextPage } from "../../../helpers";
 import { useScrollEvent } from "../../../hooks";
