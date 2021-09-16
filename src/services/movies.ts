@@ -81,3 +81,12 @@ export async function getMovieById(id: number) {
 		console.error(`Failed fetching movie with id ${id}.`);
 	}
 }
+
+export async function getRelatedMovies(id: number) {
+	try {
+		const { data } = await axios.get<IManyMoviesQuery>(`/movie/${id}/similar`);
+		return data.results;
+	} catch (error) {
+		console.error(`Failed fetching related movies to id ${id}.`);
+	}
+}

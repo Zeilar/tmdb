@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import { useQuery } from "react-query";
 import { useParams } from "react-router-dom";
 import { useLastVisitedMovies } from "../../../hooks";
-import { getImageUrl, getMovieById } from "../../../services";
+import { getImageUrl, getMovieById, getRelatedMovies } from "../../../services";
 import PostThumbnailSkeleton from "../../skeleton/PostThumbnailSkeleton";
 import { abbreviateNumber } from "js-abbreviation-number";
 import { MovieGallery } from "../../movie";
@@ -18,32 +18,33 @@ interface IParams {
 export function SingleMovie() {
 	const { id } = useParams<IParams>();
 	const { data: lastVisitedMovies, addMovie } = useLastVisitedMovies();
-	const { data, isError, isLoading } = useQuery(["movie", Number(id)], () =>
-		getMovieById(Number(id))
+	const singleMovieQuery = useQuery(["movie", Number(id)], () => getMovieById(Number(id)));
+	const relatedMoviesQuery = useQuery(["related-movies", Number(id)], () =>
+		getRelatedMovies(Number(id))
 	);
-	const posterUrl = data?.movie.poster_path
-		? getImageUrl(data?.movie.poster_path, "w300")
+	const posterUrl = singleMovieQuery.data?.movie.poster_path
+		? getImageUrl(singleMovieQuery.data?.movie.poster_path, "w300")
 		: undefined;
 	const posterStatus = useImage({ src: posterUrl });
-	const backdropUrl = data?.movie.backdrop_path
-		? getImageUrl(data?.movie.backdrop_path, "original")
+	const backdropUrl = singleMovieQuery.data?.movie.backdrop_path
+		? getImageUrl(singleMovieQuery.data?.movie.backdrop_path, "original")
 		: undefined;
 
 	useEffect(() => {
-		if (data?.movie) {
-			addMovie(data.movie);
+		if (singleMovieQuery.data?.movie) {
+			addMovie(singleMovieQuery.data.movie);
 		}
-	}, [data?.movie, addMovie]);
+	}, [singleMovieQuery.data?.movie, addMovie]);
 
-	if (isError) {
+	if (singleMovieQuery.isError) {
 		return <Heading>Something went wrong!</Heading>;
 	}
 
-	if (!isLoading && !data?.movie) {
+	if (!singleMovieQuery.isLoading && !singleMovieQuery.data?.movie) {
 		return <Heading>That movie could not be found.</Heading>;
 	}
 
-	if (isLoading || !data) {
+	if (singleMovieQuery.isLoading || !singleMovieQuery.data) {
 		return <Spinner color="accent" margin="auto" size="xl" />;
 	}
 
@@ -80,34 +81,35 @@ export function SingleMovie() {
 					{posterStatus === "loaded" && (
 						<Img src={posterUrl} objectFit="cover" height="100%" />
 					)}
-					{data.movie.status !== "Released" && (
-						<SingleMoviePosterRibbon status={data.movie.status} />
+					{singleMovieQuery.data.movie.status !== "Released" && (
+						<SingleMoviePosterRibbon status={singleMovieQuery.data.movie.status} />
 					)}
 				</Box>
 				<Flex flexDirection="column" paddingX="1rem">
 					<Heading>
-						{data.movie.title} ({getMovieYear(data.movie)})
+						{singleMovieQuery.data.movie.title} (
+						{getMovieYear(singleMovieQuery.data.movie)})
 					</Heading>
 					<Flex marginTop="1rem" textAlign="center" flexWrap="wrap" gridGap="2rem">
 						<Flex flexDirection="column">
 							<Heading marginBottom="0.25rem" size="md">
 								Runtime
 							</Heading>
-							<Text>{formatMovieRuntime(data.movie)}</Text>
+							<Text>{formatMovieRuntime(singleMovieQuery.data.movie)}</Text>
 						</Flex>
 						<Flex flexDirection="column">
 							<Heading marginBottom="0.25rem" size="md">
 								Rating
 							</Heading>
-							<Text>{data.movie.vote_average} / 10</Text>
+							<Text>{singleMovieQuery.data.movie.vote_average} / 10</Text>
 						</Flex>
 						<Flex flexDirection="column">
 							<Heading marginBottom="0.25rem" size="md">
 								Revenue
 							</Heading>
 							<Text>
-								{data.movie.revenue > 0
-									? `$${abbreviateNumber(data.movie.revenue, 1, [
+								{singleMovieQuery.data.movie.revenue > 0
+									? `$${abbreviateNumber(singleMovieQuery.data.movie.revenue, 1, [
 											"",
 											"K",
 											"M",
@@ -121,18 +123,27 @@ export function SingleMovie() {
 						Overview
 					</Heading>
 					<Text marginTop="0.5rem" fontSize="xl">
-						{data.movie.overview}
+						{singleMovieQuery.data.movie.overview}
 					</Text>
 				</Flex>
 			</Grid>
 			<Flex flexDirection="column" marginTop="5rem">
 				<Heading marginBottom="0.5rem">Stars</Heading>
 				<Grid gridTemplateColumns="repeat(4, 1fr)" gridGap="1rem">
-					{data.credits.cast.slice(0, 16).map(person => (
+					{singleMovieQuery.data.credits.cast.slice(0, 16).map(person => (
 						<StarCard key={person.id} person={person} />
 					))}
 				</Grid>
 			</Flex>
+
+			<MovieGallery
+				loading={relatedMoviesQuery.isLoading}
+				movies={relatedMoviesQuery.data ?? []}
+				isError={relatedMoviesQuery.isError}
+				marginTop="5rem"
+				header="Related movies"
+			/>
+
 			{lastVisitedMovies && (
 				<MovieGallery
 					marginTop="5rem"
