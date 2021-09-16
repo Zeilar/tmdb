@@ -56,7 +56,9 @@ export function SingleMovie() {
 		}
 		const hours = Math.floor(data.movie.runtime / 60);
 		const minutes = data.movie.runtime % 60;
-		return `${hours}h ${minutes}min`;
+		const hoursString = hours > 0 ? `${hours}h` : "";
+		const minutesString = minutes > 0 ? `${minutes}min` : "";
+		return `${hoursString} ${minutesString}`;
 	}
 
 	formatMovieRuntime();
