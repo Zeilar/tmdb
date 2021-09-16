@@ -134,7 +134,10 @@ export function SingleMovie() {
 					</Flex>
 					<Flex flexDirection="column">
 						<Heading size="md">Revenue</Heading>
-						<Text>{data?.movie && `$${abbreviateNumber(data.movie.revenue)}`}</Text>
+						<Text>
+							{data?.movie &&
+								`$${abbreviateNumber(data.movie.revenue, 1, ["", "K", "M", "B"])}`}
+						</Text>
 					</Flex>
 				</Flex>
 				<Heading size="md" marginTop="auto">
