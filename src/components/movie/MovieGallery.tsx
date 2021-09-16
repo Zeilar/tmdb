@@ -32,7 +32,7 @@ export function MovieGallery({ movies, header, loading, isError, ...props }: Pro
 
 	return (
 		<Flex flexDirection="column" {...props}>
-			<Heading color="accent">{header}</Heading>
+			<Heading>{header}</Heading>
 			<Flex ref={ref} overflowX="auto" gridGap="0.25rem" paddingY="0.75rem">
 				{renderMovies()}
 			</Flex>

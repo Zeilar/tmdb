@@ -1,12 +1,13 @@
 import { Box, Flex, Grid, Heading, Img, Text, useImage, Spinner } from "@chakra-ui/react";
 import { useEffect } from "react";
 import { useQuery } from "react-query";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useLastVisitedMovies } from "../../../hooks";
 import { getImageUrl, getMovieById } from "../../../services";
 import PostThumbnailSkeleton from "../../skeleton/PostThumbnailSkeleton";
 import { abbreviateNumber } from "js-abbreviation-number";
 import { MovieGallery } from "../../movie";
+import placeholder from "../../../assets/images/placeholder.png";
 
 interface IParams {
 	id?: string | undefined;
@@ -26,6 +27,8 @@ export function SingleMovie() {
 		? getImageUrl(data?.movie.backdrop_path, "original")
 		: undefined;
 
+	console.log(data);
+
 	useEffect(() => {
 		if (data?.movie) {
 			addMovie(data.movie);
@@ -40,7 +43,7 @@ export function SingleMovie() {
 		return <Heading>That movie could not be found.</Heading>;
 	}
 
-	if (isLoading) {
+	if (isLoading || !data) {
 		return <Spinner color="accent" margin="auto" size="xl" />;
 	}
 
@@ -95,7 +98,7 @@ export function SingleMovie() {
 					{posterStatus === "loaded" && (
 						<Img src={posterUrl} objectFit="cover" height="100%" />
 					)}
-					{data?.movie && data.movie.status !== "Released" && (
+					{data.movie.status !== "Released" && (
 						<Box
 							top="0"
 							left="0"
@@ -123,7 +126,7 @@ export function SingleMovie() {
 				</Box>
 				<Flex flexDirection="column" paddingX="1rem">
 					<Heading>
-						{data?.movie.title} ({getMovieYear()})
+						{data.movie.title} ({getMovieYear()})
 					</Heading>
 					<Flex marginTop="1rem" textAlign="center" flexWrap="wrap" gridGap="2rem">
 						<Flex flexDirection="column">
@@ -132,14 +135,12 @@ export function SingleMovie() {
 						</Flex>
 						<Flex flexDirection="column">
 							<Heading size="md">Rating</Heading>
-							<Text>
-								{data?.movie.vote_average && `${data.movie.vote_average} / 10`}
-							</Text>
+							<Text>{data.movie.vote_average} / 10</Text>
 						</Flex>
 						<Flex flexDirection="column">
 							<Heading size="md">Revenue</Heading>
 							<Text>
-								{data?.movie && data.movie.revenue > 0
+								{data.movie.revenue > 0
 									? `$${abbreviateNumber(data.movie.revenue, 1, [
 											"",
 											"K",
@@ -154,10 +155,41 @@ export function SingleMovie() {
 						Overview
 					</Heading>
 					<Text marginTop="0.5rem" fontSize="xl">
-						{data?.movie.overview}
+						{data.movie.overview}
 					</Text>
 				</Flex>
 			</Grid>
+			<Flex flexDirection="column" marginTop="5rem">
+				<Heading marginBottom="0.5rem">Stars</Heading>
+				<Grid gridTemplateColumns="repeat(4, 1fr)" gridGap="1rem">
+					{data.credits.cast.slice(0, 16).map(person => (
+						<Grid gridTemplateColumns="100px 1fr" backgroundColor="gray.900">
+							<Flex>
+								<Img
+									width="100%"
+									src={
+										person.profile_path
+											? getImageUrl(person.profile_path)
+											: placeholder
+									}
+									objectFit="cover"
+								/>
+							</Flex>
+							<Flex flexDirection="column" padding="1rem">
+								<Heading
+									as={Link}
+									fontSize="md"
+									to={`/person/${person.id}`}
+									_hover={{ color: "accent" }}
+								>
+									{person.name}
+								</Heading>
+								<Text marginTop="0.5rem">{person.character}</Text>
+							</Flex>
+						</Grid>
+					))}
+				</Grid>
+			</Flex>
 			{lastVisitedMovies && (
 				<MovieGallery
 					marginTop="5rem"
