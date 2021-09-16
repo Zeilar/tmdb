@@ -12,8 +12,10 @@ import {
 	ListIcon,
 	Spinner,
 } from "@chakra-ui/react";
+import { useEffect } from "react";
 import { useQuery } from "react-query";
 import { useParams } from "react-router-dom";
+import { useLastVisitedMovies, useLocalStorage } from "../../../hooks";
 import { getImageUrl, getMovieById } from "../../../services";
 import PostThumbnailSkeleton from "../../skeleton/PostThumbnailSkeleton";
 
@@ -23,6 +25,7 @@ interface IParams {
 
 export function SingleMovie() {
 	const { id } = useParams<IParams>();
+	const { addMovie } = useLastVisitedMovies();
 	const { data, isError, isLoading } = useQuery(["movie", Number(id)], () =>
 		getMovieById(Number(id))
 	);
@@ -35,6 +38,13 @@ export function SingleMovie() {
 		: undefined;
 
 	console.log(data);
+
+	useEffect(() => {
+		if (data?.movie) {
+			console.log("add movie", data.movie);
+			addMovie(data.movie);
+		}
+	}, [data?.movie, addMovie]);
 
 	if (isError) {
 		return <Heading>Something went wrong!</Heading>;
