@@ -25,10 +25,6 @@ export function MovieThumbnail({ movie, ...props }: Props) {
 	const posterStatus = useImage({ src: poster_path });
 	const { setActivePosterPath } = usePosterViewerContext();
 
-	if (movie.id === 593910) {
-		console.log(posterStatus, poster_path);
-	}
-
 	function fullscreenHandler(e: MouseEvent) {
 		e.preventDefault();
 		if (!movie.poster_path) {
