@@ -12,7 +12,7 @@ export default function Router() {
 			{activePosterPath != null && <MoviePosterViewer path={activePosterPath} />}
 			<Container maxWidth="full" width="container.xl" color="white">
 				<BrowserRouter>
-					<Flex flexDirection="column" paddingY="5rem">
+					<Flex height="100%" flexDirection="column" paddingY="5rem">
 						<Views.Navbar />
 						<Views.ScrollToTop />
 						<Switch>

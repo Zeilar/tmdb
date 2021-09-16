@@ -10,6 +10,7 @@ import {
 	List,
 	ListItem,
 	ListIcon,
+	Spinner,
 } from "@chakra-ui/react";
 import { useQuery } from "react-query";
 import { useParams } from "react-router-dom";
@@ -43,6 +44,10 @@ export function SingleMovie() {
 		return <Heading>That movie could not be found.</Heading>;
 	}
 
+	if (isLoading) {
+		return <Spinner color="accent" margin="auto" size="xl" />;
+	}
+
 	function getMovieYear() {
 		if (!data?.movie) {
 			return null;
@@ -60,8 +65,6 @@ export function SingleMovie() {
 		const minutesString = minutes > 0 ? `${minutes}min` : "";
 		return `${hoursString} ${minutesString}`;
 	}
-
-	formatMovieRuntime();
 
 	return (
 		<Grid
