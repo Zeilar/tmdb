@@ -1,9 +1,8 @@
 import { Flex, Heading } from "@chakra-ui/react";
-import { useEffect } from "react";
 import { useInfiniteQuery } from "react-query";
 import { flattenMoviesQuery, getNextPage } from "../../../helpers";
 import { useScrollEvent } from "../../../hooks";
-import { IManyMoviesQuery, IParams } from "../../../types/movie";
+import { IManyMoviesQuery, IParams } from "../../../types";
 import { MovieListLoadMoreButton, MovieListSpinner } from "../../styles";
 import { MovieList } from "../partials";
 

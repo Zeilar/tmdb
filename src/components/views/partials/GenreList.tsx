@@ -1,9 +1,8 @@
 import { Flex, Box, Button, Spinner, Heading } from "@chakra-ui/react";
-import { useEffect } from "react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useQuery } from "react-query";
 import { getAllGenres } from "../../../services";
-import { IGenre } from "../../../types/genre";
+import { IGenre } from "../../../types";
 
 interface Props {
 	onChange(genres: IGenre[]): void;

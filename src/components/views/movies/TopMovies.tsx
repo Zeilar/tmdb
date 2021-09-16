@@ -1,5 +1,5 @@
 import { getTopMovies } from "../../../services";
-import { IParams } from "../../../types/movie";
+import { IParams } from "../../../types";
 import { Movies } from "./";
 
 export function TopMovies() {

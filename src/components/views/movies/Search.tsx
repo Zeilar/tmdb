@@ -1,6 +1,6 @@
 import { Flex, Heading } from "@chakra-ui/react";
 import { useInfiniteQuery } from "react-query";
-import { RouteComponentProps } from "../../../types/props";
+import { RouteComponentProps } from "../../../types";
 import { getMoviesBySearch } from "../../../services";
 import { MovieList } from "../partials";
 import { flattenMoviesQuery, getNextPage } from "../../../helpers";

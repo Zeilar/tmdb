@@ -4,7 +4,7 @@ import { useInfiniteQuery } from "react-query";
 import { flattenMoviesQuery, getNextPage } from "../../../helpers";
 import { useScrollEvent } from "../../../hooks";
 import { getMoviesByGenres } from "../../../services";
-import { IGenre } from "../../../types/genre";
+import { IGenre } from "../../../types";
 import { MovieListLoadMoreButton, MovieListSpinner } from "../../styles";
 import { GenreList, MovieList } from "../partials";
 

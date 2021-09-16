@@ -1,6 +1,6 @@
 import { useCallback } from "react";
-import { ISingleMovie } from "../types/movie";
-import { useLocalStorage } from "./useLocalStorage";
+import { ISingleMovie } from "../types";
+import { useLocalStorage } from "./";
 
 export function useLastVisitedMovies() {
 	const { data, setData } = useLocalStorage<ISingleMovie[]>("lastVisitedMovies");

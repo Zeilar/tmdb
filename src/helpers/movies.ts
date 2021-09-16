@@ -1,4 +1,4 @@
-import { IManyMoviesQuery, IMovieThumbnail } from "../types/movie";
+import { IManyMoviesQuery, IMovieThumbnail } from "../types";
 import { InfiniteData } from "react-query";
 
 export function flattenMoviesQuery(data?: InfiniteData<IManyMoviesQuery | null> | undefined) {

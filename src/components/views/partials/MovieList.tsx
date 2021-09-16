@@ -1,5 +1,5 @@
 import { Grid } from "@chakra-ui/react";
-import { IMovieThumbnail } from "../../../types/movie";
+import { IMovieThumbnail } from "../../../types";
 import { MovieThumbnail } from "../../movie";
 
 interface Props {

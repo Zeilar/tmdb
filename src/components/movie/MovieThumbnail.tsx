@@ -11,7 +11,7 @@ import {
 import { MouseEvent } from "react";
 import { usePosterViewerContext } from "../../contexts";
 import { getImageUrl } from "../../services";
-import { IMovieThumbnail, ISingleMovie } from "../../types/movie";
+import { IMovieThumbnail, ISingleMovie } from "../../types";
 import { FullscreenIcon } from "../icons";
 import { Link as RouterLink } from "react-router-dom";
 import placeholder from "../../assets/images/placeholder.png";

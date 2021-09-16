@@ -1,10 +1,4 @@
-import {
-	IManyMoviesQuery,
-	IManyMoviesArgs,
-	IParams,
-	ISingleMovie,
-	IMovieCredits,
-} from "../types/movie";
+import { IManyMoviesQuery, IManyMoviesArgs, IParams, ISingleMovie, IMovieCredits } from "../types";
 import axios from "axios";
 
 async function getManyMovies({

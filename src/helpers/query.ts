@@ -1,4 +1,4 @@
-import { IManyMoviesQuery } from "../types/movie";
+import { IManyMoviesQuery } from "../types";
 
 export function getNextPage(query: IManyMoviesQuery | null | undefined) {
 	if (!query) return null;

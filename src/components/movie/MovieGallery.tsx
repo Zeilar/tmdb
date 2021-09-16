@@ -1,5 +1,5 @@
 import { Flex, Heading } from "@chakra-ui/react";
-import { IMovieThumbnail } from "../../types/movie";
+import { IMovieThumbnail } from "../../types";
 import { MovieThumbnail } from "./";
 import PostThumbnailSkeleton from "../skeleton/PostThumbnailSkeleton";
 import { useSwipeScroll } from "../../hooks";

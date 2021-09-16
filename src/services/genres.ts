@@ -1,4 +1,4 @@
-import { IGenresQuery } from "../types/genre";
+import { IGenresQuery } from "../types";
 import axios from "axios";
 
 export async function getAllGenres() {
