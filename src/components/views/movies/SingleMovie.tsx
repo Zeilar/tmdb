@@ -1,4 +1,16 @@
-import { Box, Flex, Grid, Heading, Img, Text, useImage } from "@chakra-ui/react";
+import { StarIcon, TimeIcon } from "@chakra-ui/icons";
+import {
+	Box,
+	Flex,
+	Grid,
+	Heading,
+	Img,
+	Text,
+	useImage,
+	List,
+	ListItem,
+	ListIcon,
+} from "@chakra-ui/react";
 import { useQuery } from "react-query";
 import { useParams } from "react-router-dom";
 import { getImageUrl, getMovieById } from "../../../services";
@@ -10,7 +22,9 @@ interface IParams {
 
 export function SingleMovie() {
 	const { id } = useParams<IParams>();
-	const { data } = useQuery(["movie", Number(id)], () => getMovieById(Number(id)));
+	const { data, isError, isLoading } = useQuery(["movie", Number(id)], () =>
+		getMovieById(Number(id))
+	);
 	const posterUrl = data?.movie.poster_path
 		? getImageUrl(data?.movie.poster_path, "w300")
 		: undefined;
@@ -20,6 +34,32 @@ export function SingleMovie() {
 		: undefined;
 
 	console.log(data);
+
+	if (isError) {
+		return <Heading>Something went wrong!</Heading>;
+	}
+
+	if (!isLoading && !data?.movie) {
+		return <Heading>That movie could not be found.</Heading>;
+	}
+
+	function getMovieYear() {
+		if (!data?.movie) {
+			return null;
+		}
+		return new Date(data.movie.release_date).getFullYear();
+	}
+
+	function formatMovieRuntime() {
+		if (!data?.movie || !data.movie.runtime) {
+			return null;
+		}
+		const hours = Math.floor(data.movie.runtime / 60);
+		const minutes = data.movie.runtime % 60;
+		return `${hours}h ${minutes}min`;
+	}
+
+	formatMovieRuntime();
 
 	return (
 		<Grid
@@ -46,14 +86,53 @@ export function SingleMovie() {
 					: undefined
 			}
 		>
-			<Box height={450} backgroundColor="gray.700">
+			<Box height={450} backgroundColor="gray.700" position="relative">
 				{(posterStatus === "loading" || posterStatus === "pending") && (
 					<PostThumbnailSkeleton width="100%" height="100%" />
 				)}
-				{posterStatus === "loaded" && <Img src={posterUrl} objectFit="cover" />}
+				{posterStatus === "loaded" && (
+					<Img src={posterUrl} objectFit="cover" height="100%" />
+				)}
+				{data?.movie.status !== "Released" && (
+					<Box
+						top="0"
+						left="0"
+						position="absolute"
+						width={115}
+						height={115}
+						overflow="hidden"
+					>
+						<Text
+							paddingY="0.25rem"
+							fontSize="sm"
+							backgroundColor="gray.900"
+							position="absolute"
+							width={210}
+							top="30px"
+							right="-35px"
+							textAlign="center"
+							userSelect="none"
+							transform="rotate(-45deg)"
+						>
+							Post Production
+						</Text>
+					</Box>
+				)}
 			</Box>
 			<Flex flexDirection="column" paddingX="1rem">
-				<Heading>{data?.movie.title}</Heading>
+				<Heading>
+					{data?.movie.title} ({getMovieYear()})
+				</Heading>
+				<List marginTop="1rem" fontSize="xl">
+					<ListItem display="flex" alignItems="center" height="2rem">
+						<ListIcon as={TimeIcon} />
+						{formatMovieRuntime()}
+					</ListItem>
+					<ListItem display="flex" alignItems="center" height="2rem">
+						<ListIcon as={StarIcon} />
+						{data?.movie.vote_average && <Text>{data.movie.vote_average} / 10</Text>}
+					</ListItem>
+				</List>
 				<Text marginTop="auto" fontSize="xl">
 					{data?.movie.overview}
 				</Text>
