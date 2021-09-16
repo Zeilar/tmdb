@@ -1,8 +1,8 @@
 import { Flex, Grid, Img, Text, Heading, useImage, Spinner } from "@chakra-ui/react";
 import { getImageUrl } from "../../../services";
 import { ICast } from "../../../types";
-import placeholder from "../../../assets/images/placeholder.png";
 import { Link } from "react-router-dom";
+import placeholder from "../../../assets/images/placeholder.png";
 
 interface Props {
 	person: ICast;

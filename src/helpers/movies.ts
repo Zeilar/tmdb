@@ -1,4 +1,4 @@
-import { IManyMoviesQuery, IMovieThumbnail } from "../types";
+import { IManyMoviesQuery, IMovieThumbnail, ISingleMovie } from "../types";
 import { InfiniteData } from "react-query";
 
 export function flattenMoviesQuery(data?: InfiniteData<IManyMoviesQuery | null> | undefined) {
@@ -12,4 +12,22 @@ export function flattenMoviesQuery(data?: InfiniteData<IManyMoviesQuery | null> 
 		}
 	});
 	return movies;
+}
+
+export function getMovieYear(movie: IMovieThumbnail | ISingleMovie) {
+	if (!movie) {
+		return null;
+	}
+	return new Date(movie.release_date).getFullYear();
+}
+
+export function formatMovieRuntime(movie: ISingleMovie) {
+	if (!movie || !movie.runtime) {
+		return null;
+	}
+	const hours = Math.floor(movie.runtime / 60);
+	const minutes = movie.runtime % 60;
+	const hoursString = hours > 0 ? `${hours}h` : "";
+	const minutesString = minutes > 0 ? `${minutes}min` : "";
+	return `${hoursString} ${minutesString}`;
 }
