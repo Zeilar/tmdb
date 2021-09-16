@@ -7,8 +7,8 @@ import { useSwipeScroll } from "../../hooks";
 interface Props {
 	movies: IMovieThumbnail[] | ISingleMovie[];
 	header: string;
-	loading: boolean;
-	isError: boolean;
+	loading?: boolean;
+	isError?: boolean;
 }
 
 export function MovieGallery({ movies, header, loading, isError }: Props) {
