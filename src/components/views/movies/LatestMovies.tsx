@@ -1,6 +1,6 @@
 import { getLatestMovies } from "../../../services";
 import { IParams } from "../../../types/movie";
-import { Movies } from "./Movies";
+import { Movies } from "./";
 
 export function LatestMovies() {
 	function callback({ page }: IParams) {

@@ -1,6 +1,6 @@
 import { getTopMovies } from "../../../services";
 import { IParams } from "../../../types/movie";
-import { Movies } from "./Movies";
+import { Movies } from "./";
 
 export function TopMovies() {
 	function callback({ page }: IParams) {

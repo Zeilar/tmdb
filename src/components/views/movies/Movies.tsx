@@ -1,6 +1,5 @@
 import { Flex, Heading } from "@chakra-ui/react";
-import { useRef } from "react";
-import { useEffect } from "react";
+import { useRef, useEffect } from "react";
 import { useInfiniteQuery } from "react-query";
 import { flattenMoviesQuery, getNextPage } from "../../../helpers";
 import { useScrollEvent } from "../../../hooks";

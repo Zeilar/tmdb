@@ -1,6 +1,6 @@
 import { Box } from "@chakra-ui/react";
 import { getPopularMovies, getTrendingMovies } from "../../../services";
-import { Movies } from "./Movies";
+import { Movies } from "./";
 import { IParams, ITrendingWindow } from "../../../types/movie";
 import { useParams } from "react-router-dom";
 import { Navlink } from "../../styles";
