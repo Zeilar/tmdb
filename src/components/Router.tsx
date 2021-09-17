@@ -3,12 +3,13 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 import { usePosterViewerContext } from "../contexts";
 import { MoviePosterViewer } from "./movie";
 import * as Views from "./views";
+import { Footer } from "./views";
 
 export default function Router() {
 	const { activePosterPath } = usePosterViewerContext();
 
 	return (
-		<Flex minHeight="100vh" bgColor="gray.800">
+		<Flex flexDirection="column" minHeight="100vh" bgColor="gray.800">
 			{activePosterPath != null && <MoviePosterViewer path={activePosterPath} />}
 			<Container padding="0" maxWidth="full" width="container.xl" color="white">
 				<BrowserRouter>
@@ -31,6 +32,7 @@ export default function Router() {
 					</Flex>
 				</BrowserRouter>
 			</Container>
+			<Footer />
 		</Flex>
 	);
 }
