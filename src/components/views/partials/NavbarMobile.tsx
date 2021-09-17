@@ -17,7 +17,6 @@ import useRemoveScroll from "../../../hooks/useRemoveScroll";
 export function NavbarMobile() {
 	const [searchInput, setSearchInput] = useState("");
 	const [isOpen, setIsOpen] = useState(false);
-	const [isSearchOpen, setIsSearchOpen] = useState(false);
 	const { push } = useHistory();
 
 	const ref = useOnClickOutside<HTMLDivElement>(close);
@@ -25,7 +24,6 @@ export function NavbarMobile() {
 	useRemoveScroll(isOpen);
 
 	function close() {
-		setIsSearchOpen(false);
 		setIsOpen(false);
 	}
 
@@ -40,7 +38,7 @@ export function NavbarMobile() {
 	}
 
 	return (
-		<Box as="nav" display={{ base: "block", lg: "none" }} ref={ref}>
+		<Box as="nav" display={{ base: "block", lg: "none" }}>
 			<Flex alignItems="center" backgroundColor="gray.900" padding="1rem">
 				<HamburgerIcon
 					width="1.5rem"
@@ -53,6 +51,7 @@ export function NavbarMobile() {
 				</Heading>
 			</Flex>
 			<Flex
+				ref={ref}
 				minWidth="15rem"
 				flexDirection="column"
 				position="fixed"
