@@ -26,11 +26,13 @@ export function MoviePosterViewer({ path }: Props) {
 		>
 			<Box ref={container}>
 				<CloseIcon
+					padding="0.5rem"
+					backgroundColor="blackAlpha.700"
 					zIndex={1000}
 					cursor="pointer"
 					position="absolute"
-					width="1.25rem"
-					height="1.25rem"
+					width="2.5rem"
+					height="2.5rem"
 					right="1.5rem"
 					top="1.5rem"
 					color="gray.100"
