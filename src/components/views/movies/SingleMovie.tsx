@@ -73,7 +73,7 @@ export function SingleMovie() {
 				<Flex flexDirection="column" paddingX={["0", "1rem"]}>
 					<Heading marginTop={["1rem", "0"]}>
 						{movie.title}
-						{movie.release_date && `(${getMovieYear(movie)})`}
+						{movie.release_date && ` (${getMovieYear(movie)})`}
 					</Heading>
 					<Flex
 						justifyContent={["space-between", "normal"]}
