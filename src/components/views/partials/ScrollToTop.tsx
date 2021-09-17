@@ -27,8 +27,8 @@ export function ScrollToTop() {
 			alignItems="center"
 			justifyContent="center"
 			position="fixed"
-			bottom="5rem"
-			right="5rem"
+			bottom={["2rem", "5rem"]}
+			right={["2rem", "5rem"]}
 			backgroundColor="blackAlpha.800"
 			border="2px"
 			borderColor="accent"

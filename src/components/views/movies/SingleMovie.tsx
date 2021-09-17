@@ -143,7 +143,7 @@ export function SingleMovie() {
 				<MovieGallery
 					marginTop="5rem"
 					movies={lastVisitedMovies}
-					header="Last visited movies"
+					header="Recently visited movies"
 				/>
 			)}
 		</Flex>

@@ -16,7 +16,7 @@ export function GenreButton({ active, onClick, children, ...props }: Props) {
 			paddingY="0.5rem"
 			rounded="3xl"
 			as="button"
-			boxShadow="sm"
+			boxShadow="md"
 			onClick={onClick}
 			_hover={{ color: "accent" }}
 			{...props}

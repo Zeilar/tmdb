@@ -1,4 +1,6 @@
 export * from "./Navbar";
+export * from "./NavbarDesktop";
+export * from "./NavbarMobile";
 export * from "./ScrollToTop";
 export * from "./GenreList";
 export * from "./GenreButton";

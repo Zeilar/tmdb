@@ -10,10 +10,10 @@ export default function Router() {
 	return (
 		<Flex minHeight="100vh" bgColor="gray.800">
 			{activePosterPath != null && <MoviePosterViewer path={activePosterPath} />}
-			<Container maxWidth="full" width="container.xl" color="white">
+			<Container padding="0" maxWidth="full" width="container.xl" color="white">
 				<BrowserRouter>
-					<Flex height="100%" flexDirection="column" paddingY="5rem">
-						<Views.Navbar />
+					<Views.Navbar />
+					<Flex height="100%" flexDirection="column" padding="1rem">
 						<Views.ScrollToTop />
 						<Switch>
 							<Route exact path="/" component={Views.Home} />
