@@ -45,7 +45,7 @@ export function Genres() {
 		<Flex flexDirection="column">
 			<GenreList onChange={genres => setGenres(genres)} />
 			<Heading marginBottom="1rem">
-				{genres.length > 0 ? "Showing movies with genres" : "Showing all movies"}
+				{genres.length > 0 ? "Showing movies for" : "Showing all movies"}
 			</Heading>
 			<Flex marginBottom="1.5rem" gridGap="0.5rem">
 				{genres.map(genre => (

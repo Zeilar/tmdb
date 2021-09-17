@@ -101,19 +101,24 @@ export function NavbarMobile() {
 							/>
 						</InputGroup>
 					</Box>
-					<NavItem name="Latest" path="/latest" />
-					<NavItem name="Top" path="/top" />
-					<NavItem name="Popular" path="/popular" />
-					<NavItem name="Genres" path="/genres" />
+					<NavItem onClick={close} name="Latest" path="/latest" />
+					<NavItem onClick={close} name="Top" path="/top" />
+					<NavItem onClick={close} name="Popular" path="/popular" />
+					<NavItem onClick={close} name="Genres" path="/genres" />
 				</Box>
 			</Flex>
 		</Box>
 	);
 }
 
-function NavItem({ name, path }: { name: string; path: string }) {
+function NavItem({ name, path, onClick }: { name: string; path: string; onClick?: () => void }) {
 	return (
-		<Box as="li" listStyleType="none" _hover={{ backgroundColor: "gray.700" }}>
+		<Box
+			as="li"
+			listStyleType="none"
+			_hover={{ backgroundColor: "gray.700" }}
+			onClick={onClick}
+		>
 			<NavLink to={path} exact>
 				<Heading size="md" paddingY="0.75rem" paddingX="1rem">
 					{name}
