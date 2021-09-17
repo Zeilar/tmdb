@@ -7,7 +7,7 @@ interface ISingleModelContainerProps extends GridProps {
 export function SingleModelContainer({ backdropUrl, children }: ISingleModelContainerProps) {
 	return (
 		<Grid
-			gridTemplateColumns="300px 1fr"
+			gridTemplateColumns={["repeat(1, 1fr)", "300px 1fr"]}
 			zIndex={1}
 			position="relative"
 			padding="2rem"

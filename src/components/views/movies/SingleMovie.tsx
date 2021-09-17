@@ -64,18 +64,24 @@ export function SingleMovie() {
 						<PostThumbnailSkeleton width="100%" height="100%" />
 					)}
 					{posterStatus === "loaded" && (
-						<Img src={posterUrl} objectFit="cover" height="100%" />
+						<Img src={posterUrl} objectFit="cover" height="100%" width="100%" />
 					)}
 					{movie.status !== "Released" && (
 						<SingleMoviePosterRibbon status={movie.status} />
 					)}
 				</Box>
-				<Flex flexDirection="column" paddingX="1rem">
-					<Heading>
+				<Flex flexDirection="column" paddingX={["0", "1rem"]}>
+					<Heading marginTop={["1rem", "0"]}>
 						{movie.title}
 						{movie.release_date && `(${getMovieYear(movie)})`}
 					</Heading>
-					<Flex marginTop="1rem" textAlign="center" flexWrap="wrap" gridGap="2rem">
+					<Flex
+						justifyContent={["space-between", "normal"]}
+						marginTop={["2rem", "1rem"]}
+						textAlign="center"
+						flexWrap="wrap"
+						gridGap="2rem"
+					>
 						<Flex flexDirection="column">
 							<Heading marginBottom="0.25rem" size="md">
 								Runtime
@@ -101,7 +107,7 @@ export function SingleMovie() {
 							</Text>
 						</Flex>
 					</Flex>
-					<Heading size="md" marginTop="auto">
+					<Heading size="md" marginTop={["2rem", "auto"]}>
 						Overview
 					</Heading>
 					<Text marginTop="0.5rem" fontSize="xl">

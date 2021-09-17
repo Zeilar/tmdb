@@ -21,6 +21,7 @@ export function ScrollToTop() {
 
 	return (
 		<Flex
+			zIndex={1000}
 			opacity={active ? 1 : 0}
 			as="button"
 			alignItems="center"
@@ -28,14 +29,14 @@ export function ScrollToTop() {
 			position="fixed"
 			bottom="5rem"
 			right="5rem"
-			backgroundColor="blackAlpha.300"
+			backgroundColor="blackAlpha.800"
 			border="2px"
 			borderColor="accent"
 			padding="0.5rem"
 			rounded="full"
 			transition="opacity 0.1s linear"
 			onClick={scrollToTop}
-			_hover={{ backgroundColor: "blackAlpha.500" }}
+			_hover={{ backgroundColor: "black" }}
 		>
 			<ChevronUpIcon fontSize="1.5rem" />
 		</Flex>
