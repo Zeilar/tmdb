@@ -43,9 +43,9 @@ export function MoviePosterViewer({ path }: Props) {
 					</AbsoluteCenter>
 				)}
 				<Image
-					position={{ md: "static", base: "absolute" }}
-					bottom={{ md: undefined, base: "0" }}
-					left={{ md: undefined, base: "0" }}
+					position={["absolute", "static"]}
+					bottom="0"
+					left="0"
 					src={path}
 					maxHeight="100%"
 				/>
