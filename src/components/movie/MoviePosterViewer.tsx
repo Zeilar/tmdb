@@ -42,7 +42,13 @@ export function MoviePosterViewer({ path }: Props) {
 						<Spinner color="accent" size="xl" />
 					</AbsoluteCenter>
 				)}
-				<Image src={path} height="100%" />
+				<Image
+					position={{ md: "static", base: "absolute" }}
+					bottom={{ md: undefined, base: "0" }}
+					left={{ md: undefined, base: "0" }}
+					src={path}
+					maxHeight="100%"
+				/>
 			</Box>
 		</Flex>
 	);

@@ -37,8 +37,8 @@ export function MovieThumbnail({ movie, ...props }: Props) {
 		<Link
 			as={RouterLink}
 			to={`/movie/${movie.id}`}
-			width={200}
-			height={300}
+			maxWidth={200}
+			maxHeight={300}
 			transitionDuration="0.25s"
 			flexShrink={0}
 			title={movie.title}
@@ -68,6 +68,7 @@ export function MovieThumbnail({ movie, ...props }: Props) {
 				{posterStatus !== "failed" && (
 					<Img
 						transitionDuration="0.15s"
+						width="100%"
 						height="100%"
 						src={poster_path ?? placeholder}
 						objectFit="cover"

@@ -1,4 +1,4 @@
-import { Flex, Box, Button, Spinner, Heading } from "@chakra-ui/react";
+import { Flex, Spinner, Heading } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { useQuery } from "react-query";
 import { getAllGenres } from "../../../services";
