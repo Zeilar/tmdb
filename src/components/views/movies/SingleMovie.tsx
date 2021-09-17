@@ -10,6 +10,8 @@ import { MovieGallery } from "../../movie";
 import { StarCard } from "../partials";
 import SingleMoviePosterRibbon from "../partials/SingleMoviePosterRibbon";
 import { formatMovieRuntime, getMovieYear } from "../../../helpers";
+import { SingleModelContainer } from "../../styles";
+import placeholder from "../../../assets/images/placeholder.png";
 
 interface IParams {
 	id?: string | undefined;
@@ -28,7 +30,7 @@ export function SingleMovie() {
 	);
 	const posterUrl = singleMovieQuery.data?.movie.poster_path
 		? getImageUrl(singleMovieQuery.data?.movie.poster_path, "w300")
-		: undefined;
+		: placeholder;
 	const posterStatus = useImage({ src: posterUrl });
 	const backdropUrl = singleMovieQuery.data?.movie.backdrop_path
 		? getImageUrl(singleMovieQuery.data?.movie.backdrop_path, "original")
@@ -52,73 +54,49 @@ export function SingleMovie() {
 		return <Spinner color="accent" margin="auto" size="xl" />;
 	}
 
+	const movie = singleMovieQuery.data.movie;
+
 	return (
 		<Flex flexDirection="column">
-			<Grid
-				gridTemplateColumns="300px 1fr"
-				zIndex={1}
-				position="relative"
-				padding="2rem"
-				backgroundColor="gray.900"
-				backgroundImage={backdropUrl}
-				backgroundSize="cover"
-				backgroundPosition="center"
-				_after={
-					backdropUrl
-						? {
-								content: `""`,
-								position: "absolute",
-								top: 0,
-								left: 0,
-								width: "100%",
-								height: "100%",
-								backgroundColor: "blackAlpha.900",
-								zIndex: -1,
-						  }
-						: undefined
-				}
-			>
+			<SingleModelContainer backdropUrl={backdropUrl}>
 				<Box height={450} backgroundColor="gray.700" position="relative">
-					{(posterStatus === "loading" || posterStatus === "pending") && (
+					{posterStatus === "loading" && (
 						<PostThumbnailSkeleton width="100%" height="100%" />
 					)}
 					{posterStatus === "loaded" && (
 						<Img src={posterUrl} objectFit="cover" height="100%" />
 					)}
-					{singleMovieQuery.data.movie.status !== "Released" && (
-						<SingleMoviePosterRibbon status={singleMovieQuery.data.movie.status} />
+					{movie.status !== "Released" && (
+						<SingleMoviePosterRibbon status={movie.status} />
 					)}
 				</Box>
 				<Flex flexDirection="column" paddingX="1rem">
 					<Heading>
-						{singleMovieQuery.data.movie.title} (
-						{getMovieYear(singleMovieQuery.data.movie)})
+						{movie.title}
+						{movie.release_date && `(${getMovieYear(movie)})`}
 					</Heading>
 					<Flex marginTop="1rem" textAlign="center" flexWrap="wrap" gridGap="2rem">
 						<Flex flexDirection="column">
 							<Heading marginBottom="0.25rem" size="md">
 								Runtime
 							</Heading>
-							<Text>{formatMovieRuntime(singleMovieQuery.data.movie)}</Text>
+							<Text>{formatMovieRuntime(movie)}</Text>
 						</Flex>
 						<Flex flexDirection="column">
 							<Heading marginBottom="0.25rem" size="md">
 								Rating
 							</Heading>
-							<Text>{singleMovieQuery.data.movie.vote_average} / 10</Text>
+							<Text>
+								{movie.vote_count > 0 ? `${movie.vote_average} / 10}` : "N/A"}
+							</Text>
 						</Flex>
 						<Flex flexDirection="column">
 							<Heading marginBottom="0.25rem" size="md">
 								Revenue
 							</Heading>
 							<Text>
-								{singleMovieQuery.data.movie.revenue > 0
-									? `$${abbreviateNumber(singleMovieQuery.data.movie.revenue, 1, [
-											"",
-											"K",
-											"M",
-											"B",
-									  ])}`
+								{movie.revenue > 0
+									? `$${abbreviateNumber(movie.revenue, 1, ["", "K", "M", "B"])}`
 									: "N/A"}
 							</Text>
 						</Flex>
@@ -127,10 +105,10 @@ export function SingleMovie() {
 						Overview
 					</Heading>
 					<Text marginTop="0.5rem" fontSize="xl">
-						{singleMovieQuery.data.movie.overview}
+						{movie.overview}
 					</Text>
 				</Flex>
-			</Grid>
+			</SingleModelContainer>
 			<Flex flexDirection="column" marginTop="5rem">
 				<Heading marginBottom="0.5rem">Stars</Heading>
 				<Grid gridTemplateColumns="repeat(4, 1fr)" gridGap="1rem">
@@ -139,7 +117,6 @@ export function SingleMovie() {
 					))}
 				</Grid>
 			</Flex>
-
 			<MovieGallery
 				loading={relatedMoviesQuery.isLoading}
 				movies={relatedMoviesQuery.data ?? []}
@@ -147,7 +124,6 @@ export function SingleMovie() {
 				marginTop="5rem"
 				header="Related movies"
 			/>
-
 			{lastVisitedMovies && (
 				<MovieGallery
 					marginTop="5rem"

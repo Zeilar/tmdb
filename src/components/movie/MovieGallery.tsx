@@ -23,11 +23,11 @@ export function MovieGallery({ movies, header, loading, isError, ...props }: Pro
 	}
 
 	if (isError) {
-		return <Heading>Something went wrong!</Heading>;
+		return <Heading fontSize="lg">Something went wrong!</Heading>;
 	}
 
 	if (!loading && movies.length === 0) {
-		return <Heading>No movies for this category were found.</Heading>;
+		return <Heading fontSize="lg">No movies for this category were found.</Heading>;
 	}
 
 	return (

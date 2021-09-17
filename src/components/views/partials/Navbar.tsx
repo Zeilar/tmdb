@@ -5,6 +5,7 @@ import {
 	InputGroup,
 	Input,
 	InputRightElement,
+	Box,
 } from "@chakra-ui/react";
 import { SearchIcon, SmallCloseIcon } from "@chakra-ui/icons";
 import { NavLink, useHistory } from "react-router-dom";
@@ -25,7 +26,7 @@ export function Navbar() {
 	}
 
 	return (
-		<nav>
+		<Box as="nav" display={{ base: "none", lg: "block" }}>
 			<Flex as="ul" alignItems="flex-end" marginBottom="3rem">
 				<Heading color="accent" size="2xl" marginRight="2rem" as={NavLink} to="/" exact>
 					TMDB
@@ -73,6 +74,6 @@ export function Navbar() {
 					</InputGroup>
 				</Navitem>
 			</Flex>
-		</nav>
+		</Box>
 	);
 }

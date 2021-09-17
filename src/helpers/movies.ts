@@ -15,10 +15,7 @@ export function flattenMoviesQuery(data?: InfiniteData<IManyMoviesQuery | null> 
 }
 
 export function getMovieYear(movie: IMovieThumbnail | ISingleMovie) {
-	if (!movie) {
-		return null;
-	}
-	return new Date(movie.release_date).getFullYear();
+	return movie.release_date ? new Date(movie.release_date).getFullYear() : null;
 }
 
 export function formatMovieRuntime(movie: ISingleMovie) {
