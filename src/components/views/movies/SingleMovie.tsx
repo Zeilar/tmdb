@@ -93,7 +93,7 @@ export function SingleMovie() {
 								Rating
 							</Heading>
 							<Text>
-								{movie.vote_count > 0 ? `${movie.vote_average} / 10}` : "N/A"}
+								{movie.vote_count > 0 ? `${movie.vote_average} / 10` : "N/A"}
 							</Text>
 						</Flex>
 						<Flex flexDirection="column">
@@ -117,8 +117,17 @@ export function SingleMovie() {
 			</SingleModelContainer>
 			<Flex flexDirection="column" marginTop="5rem">
 				<Heading marginBottom="0.5rem">Stars</Heading>
-				<Grid gridTemplateColumns="repeat(4, 1fr)" gridGap="1rem">
-					{singleMovieQuery.data.credits.cast.slice(0, 16).map(person => (
+				<Grid
+					gridTemplateColumns={[
+						"repeat(1, 1fr)",
+						"repeat(2, 1fr)",
+						"repeat(2, 1fr)",
+						"repeat(3, 1fr)",
+					]}
+					gridGap="1rem"
+					overflowX="auto"
+				>
+					{singleMovieQuery.data.credits.cast.slice(0, 12).map(person => (
 						<StarCard key={person.id} person={person} />
 					))}
 				</Grid>

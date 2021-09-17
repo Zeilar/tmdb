@@ -29,7 +29,8 @@ export const theme = extendTheme({
 				color: colors.accent,
 			},
 			body: {
-				overflow: "overlay",
+				overflowY: "overlay",
+				overflowX: "hidden",
 				"::-webkit-scrollbar-thumb": {
 					backgroundClip: "padding-box",
 					border: "4px solid transparent",
