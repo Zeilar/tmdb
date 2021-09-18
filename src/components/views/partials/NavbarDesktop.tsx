@@ -26,7 +26,7 @@ export function NavbarDesktop() {
 	}
 
 	return (
-		<Box as="nav" display={{ base: "none", lg: "block" }} marginY="3rem">
+		<Box as="nav" display={{ base: "none", lg: "block" }} marginY="3rem" paddingX="1rem">
 			<Flex as="ul" alignItems="flex-end">
 				<Heading color="accent" size="2xl" marginRight="2rem" as={NavLink} to="/" exact>
 					TMDB
