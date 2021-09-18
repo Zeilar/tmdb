@@ -1,4 +1,4 @@
-import { useImage, Image, AbsoluteCenter, Spinner, Flex, Box, Button } from "@chakra-ui/react";
+import { useImage, Image, AbsoluteCenter, Spinner, Flex, Button } from "@chakra-ui/react";
 import { usePosterViewerContext } from "../../contexts";
 import { useOnClickOutside } from "../../hooks";
 import { CloseIcon } from "@chakra-ui/icons";
