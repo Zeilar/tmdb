@@ -58,7 +58,7 @@ export function SingleMovie() {
 	return (
 		<Flex flexDirection="column">
 			<SingleModelContainer backdropUrl={backdropUrl}>
-				<Box height={450} backgroundColor="gray.700" position="relative">
+				<Box maxHeight={450} backgroundColor="gray.700" position="relative">
 					{posterStatus === "loading" && (
 						<PostThumbnailSkeleton width="100%" height="100%" />
 					)}
