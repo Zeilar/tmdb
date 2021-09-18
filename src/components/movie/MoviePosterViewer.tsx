@@ -44,8 +44,7 @@ export function MoviePosterViewer({ path }: Props) {
 				>
 					<CloseIcon backgroundColor="blackAlpha.700" color="gray.100" />
 				</Button>
-
-				<Image src={path} maxHeight="100%" />
+				<Image objectFit="cover" src={path} maxHeight="100%" />
 			</Flex>
 		</Flex>
 	);
