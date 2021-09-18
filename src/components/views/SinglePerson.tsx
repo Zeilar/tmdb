@@ -65,18 +65,22 @@ export function SinglePerson() {
 							</Heading>
 							<Text>{getGender(person.gender)}</Text>
 						</Flex>
-						<Flex flexDirection="column">
-							<Heading marginBottom="0.25rem" size="md">
-								Birthday
-							</Heading>
-							<Text>{person.birthday}</Text>
-						</Flex>
-						<Flex flexDirection="column">
-							<Heading marginBottom="0.25rem" size="md">
-								Birthplace
-							</Heading>
-							<Text>{person.place_of_birth}</Text>
-						</Flex>
+						{person.birthday && (
+							<Flex flexDirection="column">
+								<Heading marginBottom="0.25rem" size="md">
+									Birthday
+								</Heading>
+								<Text>{person.birthday}</Text>
+							</Flex>
+						)}
+						{person.place_of_birth && (
+							<Flex flexDirection="column">
+								<Heading marginBottom="0.25rem" size="md">
+									Birthplace
+								</Heading>
+								<Text>{person.place_of_birth}</Text>
+							</Flex>
+						)}
 					</Flex>
 					<Heading size="md" marginTop={["2rem", "auto"]}>
 						Biography
@@ -86,27 +90,6 @@ export function SinglePerson() {
 					</Text>
 				</Flex>
 			</SingleModelContainer>
-			<Flex flexDirection="column" marginTop="5rem">
-				<Heading marginBottom="0.5rem">Stars</Heading>
-				<Grid
-					gridTemplateColumns={[
-						"repeat(1, 1fr)",
-						"repeat(2, 1fr)",
-						"repeat(2, 1fr)",
-						"repeat(3, 1fr)",
-					]}
-					gridGap="1rem"
-					overflowX="auto"
-				>
-					{/* {data.credits ? (
-						data.credits.cast
-							.slice(0, 12)
-							.map(person => <StarCard key={person.id} person={person} />)
-					) : (
-						<Heading size="md">No stars were found.</Heading>
-					)} */}
-				</Grid>
-			</Flex>
 			<MovieGallery movies={data.movies ?? []} marginTop="5rem" header="Known for" />
 		</Flex>
 	);
