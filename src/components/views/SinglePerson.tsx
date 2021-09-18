@@ -82,12 +82,16 @@ export function SinglePerson() {
 							</Flex>
 						)}
 					</Flex>
-					<Heading size="md" marginTop={["2rem", "auto"]}>
-						Biography
-					</Heading>
-					<Text marginTop="0.5rem" fontSize="xl">
-						{person.biography}
-					</Text>
+					{person.biography && (
+						<>
+							<Heading size="md" marginTop={["2rem", "auto"]}>
+								Biography
+							</Heading>
+							<Text marginTop="0.5rem" fontSize="xl">
+								{person.biography}
+							</Text>
+						</>
+					)}
 				</Flex>
 			</SingleModelContainer>
 			<MovieGallery movies={data.movies ?? []} marginTop="5rem" header="Known for" />
