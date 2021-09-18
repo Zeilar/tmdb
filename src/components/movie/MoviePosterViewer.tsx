@@ -1,4 +1,4 @@
-import { useImage, Image, AbsoluteCenter, Spinner, Flex, Button } from "@chakra-ui/react";
+import { useImage, Image, AbsoluteCenter, Spinner, Flex, Button, Box } from "@chakra-ui/react";
 import { usePosterViewerContext } from "../../contexts";
 import { useOnClickOutside } from "../../hooks";
 import { CloseIcon } from "@chakra-ui/icons";
@@ -29,12 +29,12 @@ export function MoviePosterViewer({ path }: Props) {
 			justifyContent="center"
 			zIndex={2000}
 		>
-			<Flex position="relative" justifyContent="center" ref={ref}>
-				{status === "loading" && (
-					<AbsoluteCenter>
-						<Spinner color="accent" size="xl" />
-					</AbsoluteCenter>
-				)}
+			{status === "loading" && (
+				<AbsoluteCenter>
+					<Spinner color="accent" size="xl" />
+				</AbsoluteCenter>
+			)}
+			<Box position="relative" ref={ref} marginTop={["auto", "0"]}>
 				{status === "loaded" && (
 					<>
 						<Button
@@ -54,7 +54,7 @@ export function MoviePosterViewer({ path }: Props) {
 						<Image objectFit="cover" src={path} maxHeight="100%" />
 					</>
 				)}
-			</Flex>
+			</Box>
 		</Flex>
 	);
 }
