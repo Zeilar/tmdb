@@ -38,7 +38,13 @@ export function NavbarMobile() {
 	}
 
 	return (
-		<Box as="nav" display={{ base: "block", lg: "none" }}>
+		<Box
+			as="nav"
+			display={{ base: "block", lg: "none" }}
+			position="sticky"
+			top="0"
+			zIndex={1000}
+		>
 			<Flex alignItems="center" backgroundColor="gray.900" padding="1rem">
 				<Button variant="unstyled" backgroundColor="gray.800" marginRight="1rem">
 					<HamburgerIcon width="1.5rem" height="1.5rem" onClick={() => setIsOpen(true)} />
