@@ -55,7 +55,7 @@ export function Genres() {
 						paddingX="1rem"
 						paddingY="0.5rem"
 						rounded="3xl"
-						boxShadow="sm"
+						boxShadow="md"
 					>
 						{genre.name}
 					</Box>
