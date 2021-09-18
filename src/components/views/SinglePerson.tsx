@@ -56,6 +56,7 @@ export function SinglePerson() {
 					<Flex
 						justifyContent={["space-between", "normal"]}
 						marginTop={["2rem", "1rem"]}
+						marginBottom="2rem"
 						flexWrap="wrap"
 						gridGap="2rem"
 					>
@@ -84,7 +85,7 @@ export function SinglePerson() {
 					</Flex>
 					{person.biography && (
 						<>
-							<Heading size="md" marginTop={["2rem", "auto"]}>
+							<Heading size="md" marginTop="auto">
 								Biography
 							</Heading>
 							<Text marginTop="0.5rem" fontSize="xl">

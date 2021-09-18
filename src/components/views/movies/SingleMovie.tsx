@@ -77,6 +77,7 @@ export function SingleMovie() {
 					<Flex
 						justifyContent={["space-between", "normal"]}
 						marginTop={["2rem", "1rem"]}
+						marginBottom="2rem"
 						flexWrap="wrap"
 						gridGap="2rem"
 					>
@@ -105,7 +106,7 @@ export function SingleMovie() {
 							</Text>
 						</Flex>
 					</Flex>
-					<Heading size="md" marginTop={["2rem", "auto"]}>
+					<Heading size="md" marginTop="auto">
 						Overview
 					</Heading>
 					<Text marginTop="0.5rem" fontSize="xl">
