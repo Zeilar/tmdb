@@ -43,7 +43,7 @@ export function MovieThumbnail({ movie, ...props }: Props) {
 			flexShrink={0}
 			title={movie.title}
 			overflow="hidden"
-			boxShadow="md"
+			boxShadow="lg"
 			{...props}
 		>
 			<Box
