@@ -11,6 +11,7 @@ export function SingleModelContainer({ backdropUrl, children }: ISingleModelCont
 			zIndex={1}
 			position="relative"
 			padding="2rem"
+			boxShadow="md"
 			backgroundColor="gray.900"
 			backgroundImage={backdropUrl}
 			backgroundSize="cover"

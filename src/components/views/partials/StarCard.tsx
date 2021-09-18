@@ -13,7 +13,7 @@ export function StarCard({ person }: Props) {
 	const avatarStatus = useImage({ src: avatarPath });
 
 	return (
-		<Grid gridTemplateColumns="100px 1fr" backgroundColor="gray.900">
+		<Grid gridTemplateColumns="100px 1fr" backgroundColor="gray.900" boxShadow="md">
 			<Flex height="150px" backgroundColor="gray.700">
 				{(avatarStatus === "pending" || avatarStatus === "loading") && (
 					<Spinner margin="auto" color="accent" />
