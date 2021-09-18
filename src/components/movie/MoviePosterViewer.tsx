@@ -1,4 +1,4 @@
-import { useImage, Image, AbsoluteCenter, Spinner, Flex, Box } from "@chakra-ui/react";
+import { useImage, Image, AbsoluteCenter, Spinner, Flex, Box, Button } from "@chakra-ui/react";
 import { usePosterViewerContext } from "../../contexts";
 import { useOnClickOutside } from "../../hooks";
 import { CloseIcon } from "@chakra-ui/icons";
@@ -13,7 +13,7 @@ export function MoviePosterViewer({ path }: Props) {
 	const { closeViewer, active } = usePosterViewerContext();
 	useRemoveScroll(active);
 
-	const container = useOnClickOutside<HTMLDivElement>(closeViewer);
+	const ref = useOnClickOutside<HTMLDivElement>(closeViewer);
 
 	return (
 		<Flex
@@ -22,36 +22,31 @@ export function MoviePosterViewer({ path }: Props) {
 			height="100%"
 			backgroundColor="blackAlpha.800"
 			justifyContent="center"
-			zIndex={100}
+			zIndex={10000}
 		>
-			<Box ref={container}>
-				<CloseIcon
-					padding="0.5rem"
-					backgroundColor="blackAlpha.700"
-					zIndex={1000}
-					cursor="pointer"
-					position="absolute"
-					width="2.5rem"
-					height="2.5rem"
-					right="1.5rem"
-					top="1.5rem"
-					color="gray.100"
-					_hover={{ color: "accent" }}
-					onClick={closeViewer}
-				/>
+			<Flex position="relative" justifyContent="center" ref={ref}>
 				{status === "loading" && (
 					<AbsoluteCenter>
 						<Spinner color="accent" size="xl" />
 					</AbsoluteCenter>
 				)}
-				<Image
-					position={["absolute", "static"]}
-					bottom="0"
-					left="0"
-					src={path}
-					maxHeight="100%"
-				/>
-			</Box>
+				<Button
+					backgroundColor="gray.800"
+					onClick={closeViewer}
+					position={["absolute", "fixed"]}
+					width="2.5rem"
+					height="2.5rem"
+					right="1.5rem"
+					top="1.5rem"
+					zIndex={1000}
+					_hover={{}}
+					_active={{}}
+				>
+					<CloseIcon backgroundColor="blackAlpha.700" color="gray.100" />
+				</Button>
+
+				<Image src={path} maxHeight="100%" />
+			</Flex>
 		</Flex>
 	);
 }
