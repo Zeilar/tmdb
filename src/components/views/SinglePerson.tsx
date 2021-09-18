@@ -82,6 +82,14 @@ export function SinglePerson() {
 								<Text>{person.place_of_birth}</Text>
 							</Flex>
 						)}
+						{person.deathday && (
+							<Flex flexDirection="column">
+								<Heading marginBottom="0.25rem" size="md">
+									Deathday
+								</Heading>
+								<Text>{person.deathday}</Text>
+							</Flex>
+						)}
 					</Flex>
 					{person.biography && (
 						<>
