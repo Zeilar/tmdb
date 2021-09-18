@@ -69,16 +69,27 @@ export async function getTopMovies(page?: number) {
 	});
 }
 
+export async function getMovieCredits(id: number) {
+	try {
+		const { data } = await axios.get<IMovieCredits>(`/movie/${id}/credits`);
+		return data;
+	} catch (error) {
+		console.error(`Failed fetching movie with id ${id}.`);
+		return null;
+	}
+}
+
 export async function getMovieById(id: number) {
 	try {
 		const movieQuery = await axios.get<ISingleMovie>(`/movie/${id}`);
-		const creditsQuery = await axios.get<IMovieCredits>(`/movie/${id}/credits`);
+		const credits = await getMovieCredits(id);
 		return {
 			movie: movieQuery.data,
-			credits: creditsQuery.data,
+			credits,
 		};
 	} catch (error) {
 		console.error(`Failed fetching movie with id ${id}.`);
+		return null;
 	}
 }
 
@@ -88,5 +99,6 @@ export async function getRelatedMovies(id: number) {
 		return data.results;
 	} catch (error) {
 		console.error(`Failed fetching related movies to id ${id}.`);
+		return null;
 	}
 }

@@ -40,15 +40,26 @@ export function NavbarMobile() {
 	return (
 		<Box as="nav" display={{ base: "block", lg: "none" }}>
 			<Flex alignItems="center" backgroundColor="gray.900" padding="1rem">
-				<HamburgerIcon
-					width="1.5rem"
-					height="1.5rem"
-					marginRight="1rem"
-					onClick={() => setIsOpen(true)}
-				/>
-				<Heading color="accent" size="2xl" marginRight="2rem" as={NavLink} to="/" exact>
-					TMDB
-				</Heading>
+				<Button variant="unstyled" backgroundColor="gray.800" marginRight="1rem">
+					<HamburgerIcon width="1.5rem" height="1.5rem" onClick={() => setIsOpen(true)} />
+				</Button>
+				<Box as="form" onSubmit={search} marginLeft="auto">
+					<InputGroup>
+						<InputLeftElement pointerEvents="none" children={<SearchIcon />} />
+						<Input
+							value={searchInput}
+							onChange={e => setSearchInput(e.target.value)}
+							placeholder="Search..."
+						/>
+						<InputRightElement
+							as="button"
+							type="button"
+							visibility={searchInput !== "" ? "visible" : "hidden"}
+							children={<SmallCloseIcon cursor="pointer" color="gray.100" />}
+							onClick={clearSearch}
+						/>
+					</InputGroup>
+				</Box>
 			</Flex>
 			<Flex
 				ref={ref}
@@ -74,33 +85,16 @@ export function NavbarMobile() {
 					<CloseIcon onClick={close} />
 				</Button>
 				<Box
+					as={NavLink}
 					paddingY="0.75rem"
 					paddingX="1rem"
 					backgroundColor="blackAlpha.400"
-					borderBottom="1px solid"
-					borderBottomColor="gray.700"
+					onClick={close}
+					to="/"
 				>
 					<Heading color="accent">TMDB</Heading>
 				</Box>
 				<Box as="ul">
-					<Box as="form" paddingY="0.75rem" paddingX="1rem" onSubmit={search}>
-						<InputGroup>
-							<InputLeftElement pointerEvents="none" children={<SearchIcon />} />
-							<Input
-								value={searchInput}
-								onChange={e => setSearchInput(e.target.value)}
-								size="md"
-								placeholder="Search..."
-							/>
-							<InputRightElement
-								as="button"
-								type="button"
-								visibility={searchInput !== "" ? "visible" : "hidden"}
-								children={<SmallCloseIcon cursor="pointer" color="gray.100" />}
-								onClick={clearSearch}
-							/>
-						</InputGroup>
-					</Box>
 					<NavItem onClick={close} name="Latest" path="/latest" />
 					<NavItem onClick={close} name="Top" path="/top" />
 					<NavItem onClick={close} name="Popular" path="/popular" />
@@ -119,11 +113,11 @@ function NavItem({ name, path, onClick }: { name: string; path: string; onClick?
 			_hover={{ backgroundColor: "gray.700" }}
 			onClick={onClick}
 		>
-			<NavLink to={path} exact>
+			<Box as={NavLink} to={path} exact sx={{ "&.active": { color: "accent" } }}>
 				<Heading size="md" paddingY="0.75rem" paddingX="1rem">
 					{name}
 				</Heading>
-			</NavLink>
+			</Box>
 		</Box>
 	);
 }

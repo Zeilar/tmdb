@@ -127,9 +127,13 @@ export function SingleMovie() {
 					gridGap="1rem"
 					overflowX="auto"
 				>
-					{singleMovieQuery.data.credits.cast.slice(0, 12).map(person => (
-						<StarCard key={person.id} person={person} />
-					))}
+					{singleMovieQuery.data.credits ? (
+						singleMovieQuery.data.credits.cast
+							.slice(0, 12)
+							.map(person => <StarCard key={person.id} person={person} />)
+					) : (
+						<Heading size="md">No stars were found.</Heading>
+					)}
 				</Grid>
 			</Flex>
 			<MovieGallery
