@@ -44,7 +44,7 @@ export function Genres() {
 	return (
 		<Flex flexDirection="column">
 			<GenreList onChange={genres => setGenres(genres)} />
-			<Heading marginBottom="1rem">
+			<Heading fontSize={["2xl", "4xl"]} marginBottom="1rem">
 				{genres.length > 0 ? "Showing movies for" : "Showing all movies"}
 			</Heading>
 			<Flex marginBottom="1.5rem" gridGap="0.5rem">

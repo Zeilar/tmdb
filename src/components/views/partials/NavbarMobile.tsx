@@ -69,7 +69,7 @@ export function NavbarMobile() {
 			</Flex>
 			<Flex
 				ref={ref}
-				minWidth="15rem"
+				minWidth="12rem"
 				flexDirection="column"
 				position="fixed"
 				top="0"

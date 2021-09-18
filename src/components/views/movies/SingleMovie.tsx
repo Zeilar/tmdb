@@ -70,12 +70,13 @@ export function SingleMovie() {
 					)}
 				</Box>
 				<Flex flexDirection="column" paddingX={["0", "1rem"]}>
-					<Heading marginTop={["1rem", "0"]}>
+					<Heading fontSize={["2xl", "4xl"]} marginTop={["1rem", "0"]}>
 						{movie.title}
 						{movie.release_date && ` (${getMovieYear(movie)})`}
 					</Heading>
 					<Flex
 						justifyContent={["space-between", "normal"]}
+						fontSize="md"
 						marginTop={["2rem", "1rem"]}
 						marginBottom="2rem"
 						flexWrap="wrap"
@@ -109,13 +110,13 @@ export function SingleMovie() {
 					<Heading size="md" marginTop="auto">
 						Overview
 					</Heading>
-					<Text marginTop="0.5rem" fontSize="xl">
-						{movie.overview}
-					</Text>
+					<Text marginTop="0.5rem">{movie.overview}</Text>
 				</Flex>
 			</SingleModelContainer>
 			<Flex flexDirection="column" marginTop="5rem">
-				<Heading marginBottom="0.5rem">Stars</Heading>
+				<Heading fontSize={["2xl", "4xl"]} marginBottom="0.5rem">
+					Stars
+				</Heading>
 				<Grid
 					gridTemplateColumns={[
 						"repeat(1, 1fr)",

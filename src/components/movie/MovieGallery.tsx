@@ -23,16 +23,16 @@ export function MovieGallery({ movies, header, loading, isError, ...props }: Pro
 	}
 
 	if (isError) {
-		return <Heading fontSize="lg">Something went wrong!</Heading>;
+		return <Heading fontSize="md">Something went wrong!</Heading>;
 	}
 
 	if (!loading && movies.length === 0) {
-		return <Heading fontSize="lg">No movies for this category were found.</Heading>;
+		return <Heading fontSize="md">No movies for this category were found.</Heading>;
 	}
 
 	return (
 		<Flex flexDirection="column" {...props}>
-			<Heading fontSize={["3xl", "4xl"]}>{header}</Heading>
+			<Heading fontSize={["2xl", "4xl"]}>{header}</Heading>
 			<Flex ref={ref} overflowX="auto" gridGap="0.25rem" paddingY="0.75rem">
 				{renderMovies()}
 			</Flex>

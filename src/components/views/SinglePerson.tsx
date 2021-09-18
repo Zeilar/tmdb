@@ -52,7 +52,9 @@ export function SinglePerson() {
 					)}
 				</Box>
 				<Flex flexDirection="column" paddingX={["0", "1rem"]}>
-					<Heading marginTop={["1rem", "0"]}>{person.name}</Heading>
+					<Heading fontSize={["2xl", "4xl"]} marginTop={["1rem", "0"]}>
+						{person.name}
+					</Heading>
 					<Flex
 						justifyContent={["space-between", "normal"]}
 						marginTop={["2rem", "1rem"]}
@@ -96,9 +98,7 @@ export function SinglePerson() {
 							<Heading size="md" marginTop="auto">
 								Biography
 							</Heading>
-							<Text marginTop="0.5rem" fontSize="xl">
-								{person.biography}
-							</Text>
+							<Text marginTop="0.5rem">{person.biography}</Text>
 						</>
 					)}
 				</Flex>

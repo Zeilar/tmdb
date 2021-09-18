@@ -17,7 +17,7 @@ export function PopularMovies() {
 
 	return (
 		<Box>
-			<Box as="nav" fontSize="1.5rem" fontWeight="600" marginBottom="1rem">
+			<Box as="nav" fontSize={["2xl", "3xl"]} fontWeight="600" marginBottom="1rem">
 				<Navlink marginRight="1rem" to="/popular" exact>
 					All
 				</Navlink>
