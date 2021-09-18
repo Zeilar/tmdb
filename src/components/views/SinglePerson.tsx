@@ -1,7 +1,7 @@
 import { useQuery } from "react-query";
 import { useParams } from "react-router-dom";
 import { getPersonById } from "../../services";
-import { Box, Flex, Grid, Heading, Img, Text, useImage, Spinner } from "@chakra-ui/react";
+import { Box, Flex, Heading, Img, Text, useImage, Spinner } from "@chakra-ui/react";
 import { getImageUrl } from "../../services";
 import PostThumbnailSkeleton from "../skeleton/PostThumbnailSkeleton";
 import { SingleModelContainer } from "../styles";
