@@ -1,12 +1,12 @@
 import axios from "axios";
-import { ISinglePerson } from "../types";
+import { IManyMoviesQuery, ISinglePerson } from "../types";
 
 export async function getMoviesByPersonId(id: number) {
 	try {
-		const { data } = await axios.get<ISinglePerson>("/discover/movie", {
+		const { data } = await axios.get<IManyMoviesQuery>("/discover/movie", {
 			params: { with_cast: id },
 		});
-		return data;
+		return data.results;
 	} catch (error) {
 		console.error(`Failed fetching movie with id ${id}.`);
 		return null;

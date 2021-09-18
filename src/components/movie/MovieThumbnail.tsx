@@ -77,7 +77,7 @@ export function MovieThumbnail({ movie, ...props }: Props) {
 				)}
 				{(!movie.poster_path || posterStatus === "failed") && (
 					<AbsoluteCenter zIndex={10} padding="0.5rem" width="100%">
-						<Heading size="md" textAlign="center" as="h2">
+						<Heading fontSize={["sm", "md"]} textAlign="center" as="h2">
 							{movie.title}
 						</Heading>
 					</AbsoluteCenter>

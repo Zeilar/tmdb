@@ -5,7 +5,7 @@ interface Props {
 	status: IMovieStatus;
 }
 
-export default function SingleMoviePosterRibbon({ status }: Props) {
+export function SingleMoviePosterRibbon({ status }: Props) {
 	return (
 		<Box top="0" left="0" position="absolute" width={115} height={115} overflow="hidden">
 			<Text

@@ -7,8 +7,7 @@ import { getImageUrl, getMovieById, getRelatedMovies } from "../../../services";
 import PostThumbnailSkeleton from "../../skeleton/PostThumbnailSkeleton";
 import { abbreviateNumber } from "js-abbreviation-number";
 import { MovieGallery } from "../../movie";
-import { StarCard } from "../partials";
-import SingleMoviePosterRibbon from "../partials/SingleMoviePosterRibbon";
+import { StarCard, SingleMoviePosterRibbon } from "../partials";
 import { formatMovieRuntime, getMovieYear } from "../../../helpers";
 import { SingleModelContainer } from "../../styles";
 import placeholder from "../../../assets/images/placeholder.png";
@@ -78,7 +77,6 @@ export function SingleMovie() {
 					<Flex
 						justifyContent={["space-between", "normal"]}
 						marginTop={["2rem", "1rem"]}
-						textAlign="center"
 						flexWrap="wrap"
 						gridGap="2rem"
 					>

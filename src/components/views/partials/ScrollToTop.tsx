@@ -38,7 +38,7 @@ export function ScrollToTop() {
 			onClick={scrollToTop}
 			_hover={{ backgroundColor: "black" }}
 		>
-			<ChevronUpIcon fontSize="1.5rem" />
+			<ChevronUpIcon fontSize="1rem" />
 		</Flex>
 	);
 }
