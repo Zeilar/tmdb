@@ -1,5 +1,6 @@
 import { Flex } from "@chakra-ui/react";
 import { useQuery } from "react-query";
+import { useLastVisitedMovies } from "../../hooks";
 import { getLatestMovies, getPopularMovies, getTopMovies } from "../../services";
 import { MovieGallery } from "../movie";
 
@@ -7,6 +8,7 @@ export function Home() {
 	const latestMovieQuery = useQuery(["movies-latest", 1], () => getLatestMovies());
 	const popularMoviesQuery = useQuery(["movies-popular", 1], () => getPopularMovies());
 	const topRatedMoviesQuery = useQuery(["movies-top", 1], () => getTopMovies());
+	const lastVisitedMovies = useLastVisitedMovies();
 
 	return (
 		<Flex flexDirection="column" gridGap="5rem">
@@ -28,6 +30,9 @@ export function Home() {
 				loading={topRatedMoviesQuery.isLoading}
 				movies={topRatedMoviesQuery.data?.results ?? []}
 			/>
+			{lastVisitedMovies.data && (
+				<MovieGallery header="Recently viewed movies" movies={lastVisitedMovies.data} />
+			)}
 		</Flex>
 	);
 }
