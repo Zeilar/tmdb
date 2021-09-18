@@ -15,6 +15,11 @@ export function MoviePosterViewer({ path }: Props) {
 
 	const ref = useOnClickOutside<HTMLDivElement>(closeViewer);
 
+	if (status === "failed") {
+		closeViewer();
+		return null;
+	}
+
 	return (
 		<Flex
 			position="fixed"
@@ -22,7 +27,7 @@ export function MoviePosterViewer({ path }: Props) {
 			height="100%"
 			backgroundColor="blackAlpha.800"
 			justifyContent="center"
-			zIndex={10000}
+			zIndex={2000}
 		>
 			<Flex position="relative" justifyContent="center" ref={ref}>
 				{status === "loading" && (
@@ -30,21 +35,25 @@ export function MoviePosterViewer({ path }: Props) {
 						<Spinner color="accent" size="xl" />
 					</AbsoluteCenter>
 				)}
-				<Button
-					backgroundColor="gray.800"
-					onClick={closeViewer}
-					position={["absolute", "fixed"]}
-					width="2.5rem"
-					height="2.5rem"
-					right="1.5rem"
-					top="1.5rem"
-					zIndex={1000}
-					_hover={{}}
-					_active={{}}
-				>
-					<CloseIcon backgroundColor="blackAlpha.700" color="gray.100" />
-				</Button>
-				<Image objectFit="cover" src={path} maxHeight="100%" />
+				{status === "loaded" && (
+					<>
+						<Button
+							backgroundColor="gray.800"
+							onClick={closeViewer}
+							position={["absolute", "fixed"]}
+							width="2.5rem"
+							height="2.5rem"
+							right="1.5rem"
+							top="1.5rem"
+							zIndex={1000}
+							_hover={{}}
+							_active={{}}
+						>
+							<CloseIcon backgroundColor="blackAlpha.700" color="gray.100" />
+						</Button>
+						<Image objectFit="cover" src={path} maxHeight="100%" />
+					</>
+				)}
 			</Flex>
 		</Flex>
 	);
