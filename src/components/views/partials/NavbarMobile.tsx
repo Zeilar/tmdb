@@ -71,7 +71,7 @@ export function NavbarMobile() {
 				height="100%"
 				transitionDuration="0.25s"
 				backgroundColor="gray.900"
-				boxShadow="xl"
+				boxShadow={isOpen ? "xl" : undefined}
 				transform={`translateX(${isOpen ? "0" : "-100%"})`}
 				zIndex={100}
 			>
