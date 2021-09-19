@@ -19,8 +19,10 @@ export function getMovieYear(movie: IMovieThumbnail | ISingleMovie) {
 }
 
 export function formatMovieRuntime(movie: ISingleMovie) {
-	if (!movie || !movie.runtime) {
+	if (!movie) {
 		return null;
+	} else if (!movie.runtime) {
+		return "N/A";
 	}
 	const hours = Math.floor(movie.runtime / 60);
 	const minutes = movie.runtime % 60;
