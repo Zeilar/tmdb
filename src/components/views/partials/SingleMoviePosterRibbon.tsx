@@ -11,7 +11,7 @@ export function SingleMoviePosterRibbon({ status }: Props) {
 			<Text
 				paddingY="0.25rem"
 				fontSize="sm"
-				backgroundColor="gray.900"
+				backgroundColor="gray.700"
 				position="absolute"
 				width={210}
 				top="30px"
