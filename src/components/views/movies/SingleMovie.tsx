@@ -9,8 +9,8 @@ import { abbreviateNumber } from "js-abbreviation-number";
 import { MovieGallery } from "../../movie";
 import { StarCard, SingleMoviePosterRibbon } from "../partials";
 import { formatMovieRuntime, getMovieYear } from "../../../helpers";
-import { SingleModelContainer } from "../../styles";
 import placeholder from "../../../assets/images/placeholder.png";
+import { GridContainer } from "../../styles";
 
 interface IParams {
 	id?: string | undefined;
@@ -57,63 +57,95 @@ export function SingleMovie() {
 
 	return (
 		<Flex flexDirection="column">
-			<SingleModelContainer backdropUrl={backdropUrl}>
-				<Box maxHeight={450} backgroundColor="gray.700" position="relative">
-					{posterStatus === "loading" && (
-						<PostThumbnailSkeleton width="100%" height="100%" />
-					)}
-					{posterStatus === "loaded" && (
-						<Img src={posterUrl} objectFit="cover" height="100%" width="100%" />
-					)}
-					{movie.status !== "Released" && (
-						<SingleMoviePosterRibbon status={movie.status} />
-					)}
-				</Box>
-				<Flex flexDirection="column" paddingX={["0", "1rem"]}>
-					<Heading fontSize={["2xl", "4xl"]} marginTop={["1rem", "0"]}>
-						{movie.title}
-						{movie.release_date && ` (${getMovieYear(movie)})`}
-					</Heading>
+			<Grid gridTemplateColumns={["repeat(1, 1fr)", "300px 1fr"]}>
+				<GridContainer>
+					<Box backgroundColor="gray.700" position="relative">
+						{posterStatus === "loading" && (
+							<PostThumbnailSkeleton minHeight={450} width="100%" height="100%" />
+						)}
+						{posterStatus === "loaded" && (
+							<Img src={posterUrl} objectFit="cover" height="100%" width="100%" />
+						)}
+						{movie.status !== "Released" && (
+							<SingleMoviePosterRibbon status={movie.status} />
+						)}
+					</Box>
+				</GridContainer>
+				<GridContainer marginLeft={["0", "0.5rem"]} marginTop={["0.5rem", "0"]}>
 					<Flex
-						justifyContent={["space-between", "normal"]}
-						fontSize="md"
-						marginTop={["2rem", "1rem"]}
-						marginBottom="2rem"
-						flexWrap="wrap"
-						gridGap="2rem"
+						height="100%"
+						flexDirection="column"
+						padding="1rem"
+						zIndex={1}
+						position="relative"
+						backgroundImage={backdropUrl}
+						backgroundSize="cover"
+						backgroundPosition="center"
+						_after={
+							backdropUrl
+								? {
+										content: `""`,
+										position: "absolute",
+										top: 0,
+										left: 0,
+										width: "100%",
+										height: "100%",
+										backgroundColor: "blackAlpha.900",
+										zIndex: -1,
+								  }
+								: undefined
+						}
 					>
-						<Flex flexDirection="column">
-							<Heading marginBottom="0.25rem" size="md">
-								Runtime
-							</Heading>
-							<Text>{formatMovieRuntime(movie)}</Text>
+						<Heading fontSize={["2xl", "4xl"]} marginTop={["1rem", "0"]}>
+							{movie.title}
+							{movie.release_date && ` (${getMovieYear(movie)})`}
+						</Heading>
+						<Flex
+							justifyContent={["space-between", "normal"]}
+							fontSize="md"
+							marginTop={["2rem", "1rem"]}
+							marginBottom="2rem"
+							flexWrap="wrap"
+							gridGap="2rem"
+						>
+							<Flex flexDirection="column">
+								<Heading marginBottom="0.25rem" size="md">
+									Runtime
+								</Heading>
+								<Text>{formatMovieRuntime(movie)}</Text>
+							</Flex>
+							<Flex flexDirection="column">
+								<Heading marginBottom="0.25rem" size="md">
+									Rating
+								</Heading>
+								<Text>
+									{movie.vote_count > 0 ? `${movie.vote_average} / 10` : "N/A"}
+								</Text>
+							</Flex>
+							<Flex flexDirection="column">
+								<Heading marginBottom="0.25rem" size="md">
+									Revenue
+								</Heading>
+								<Text>
+									{movie.revenue > 0
+										? `$${abbreviateNumber(movie.revenue, 1, [
+												"",
+												"K",
+												"M",
+												"B",
+										  ])}`
+										: "N/A"}
+								</Text>
+							</Flex>
 						</Flex>
-						<Flex flexDirection="column">
-							<Heading marginBottom="0.25rem" size="md">
-								Rating
-							</Heading>
-							<Text>
-								{movie.vote_count > 0 ? `${movie.vote_average} / 10` : "N/A"}
-							</Text>
-						</Flex>
-						<Flex flexDirection="column">
-							<Heading marginBottom="0.25rem" size="md">
-								Revenue
-							</Heading>
-							<Text>
-								{movie.revenue > 0
-									? `$${abbreviateNumber(movie.revenue, 1, ["", "K", "M", "B"])}`
-									: "N/A"}
-							</Text>
-						</Flex>
+						<Heading size="md" marginTop="auto">
+							Overview
+						</Heading>
+						<Text marginTop="0.5rem">{movie.overview}</Text>
 					</Flex>
-					<Heading size="md" marginTop="auto">
-						Overview
-					</Heading>
-					<Text marginTop="0.5rem">{movie.overview}</Text>
-				</Flex>
-			</SingleModelContainer>
-			<Flex flexDirection="column" marginTop="5rem">
+				</GridContainer>
+			</Grid>
+			<GridContainer flexDirection="column" marginTop="0.5rem">
 				<Heading fontSize={["2xl", "4xl"]} marginBottom="0.5rem">
 					Stars
 				</Heading>
@@ -124,7 +156,7 @@ export function SingleMovie() {
 						"repeat(2, 1fr)",
 						"repeat(3, 1fr)",
 					]}
-					gridGap="1rem"
+					gridGap="0.5rem"
 					overflowX="auto"
 				>
 					{singleMovieQuery.data.credits ? (
@@ -135,17 +167,17 @@ export function SingleMovie() {
 						<Heading size="md">No stars were found.</Heading>
 					)}
 				</Grid>
-			</Flex>
+			</GridContainer>
 			<MovieGallery
 				loading={relatedMoviesQuery.isLoading}
 				movies={relatedMoviesQuery.data ?? []}
 				isError={relatedMoviesQuery.isError}
-				marginTop="5rem"
+				marginTop="0.5rem"
 				header="Related movies"
 			/>
 			{lastVisitedMovies && (
 				<MovieGallery
-					marginTop="5rem"
+					marginTop="0.5rem"
 					movies={lastVisitedMovies}
 					header="Recently viewed movies"
 				/>

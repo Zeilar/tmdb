@@ -1,13 +1,13 @@
 import { useQuery } from "react-query";
 import { useParams } from "react-router-dom";
 import { getPersonById } from "../../services";
-import { Box, Flex, Heading, Img, Text, useImage, Spinner } from "@chakra-ui/react";
+import { Box, Flex, Heading, Img, Text, useImage, Spinner, Grid } from "@chakra-ui/react";
 import { getImageUrl } from "../../services";
 import PostThumbnailSkeleton from "../skeleton/PostThumbnailSkeleton";
-import { SingleModelContainer } from "../styles";
 import placeholder from "../../assets/images/placeholder.png";
 import { getGender } from "../../helpers";
 import { MovieGallery } from "../movie";
+import { GridContainer } from "../styles";
 
 interface IParams {
 	id?: string | undefined;
@@ -20,7 +20,6 @@ export function SinglePerson() {
 		() => getPersonById(Number(id)),
 		{ enabled: id !== undefined }
 	);
-
 	const posterUrl = data?.person.profile_path
 		? getImageUrl(data.person.profile_path, "w300")
 		: placeholder;
@@ -42,16 +41,22 @@ export function SinglePerson() {
 
 	return (
 		<Flex flexDirection="column">
-			<SingleModelContainer>
-				<Box maxHeight={450} backgroundColor="gray.700" position="relative">
-					{posterStatus === "loading" && (
-						<PostThumbnailSkeleton width="100%" height="100%" />
-					)}
-					{posterStatus === "loaded" && (
-						<Img src={posterUrl} objectFit="cover" height="100%" width="100%" />
-					)}
-				</Box>
-				<Flex flexDirection="column" paddingX={["0", "1rem"]}>
+			<Grid gridTemplateColumns={["repeat(1, 1fr)", "300px 1fr"]}>
+				<GridContainer>
+					<Box backgroundColor="gray.700" position="relative">
+						{posterStatus === "loading" && (
+							<PostThumbnailSkeleton minHeight={450} width="100%" height="100%" />
+						)}
+						{posterStatus === "loaded" && (
+							<Img src={posterUrl} objectFit="cover" height="100%" width="100%" />
+						)}
+					</Box>
+				</GridContainer>
+				<GridContainer
+					marginLeft={["0", "0.5rem"]}
+					marginTop={["0.5rem", "0"]}
+					flexDirection="column"
+				>
 					<Heading fontSize={["2xl", "4xl"]} marginTop={["1rem", "0"]}>
 						{person.name}
 					</Heading>
@@ -101,9 +106,14 @@ export function SinglePerson() {
 							<Text marginTop="0.5rem">{person.biography}</Text>
 						</>
 					)}
-				</Flex>
-			</SingleModelContainer>
-			<MovieGallery movies={data.movies ?? []} marginTop="5rem" header="Known for" />
+				</GridContainer>
+			</Grid>
+			<MovieGallery
+				loading={isLoading}
+				movies={data.movies ?? []}
+				marginTop="0.5rem"
+				header="Known for"
+			/>
 		</Flex>
 	);
 }

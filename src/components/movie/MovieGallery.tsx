@@ -3,6 +3,7 @@ import { IMovieThumbnail, ISingleMovie } from "../../types";
 import { MovieThumbnail } from "./";
 import PostThumbnailSkeleton from "../skeleton/PostThumbnailSkeleton";
 import { useSwipeScroll } from "../../hooks";
+import { GridContainer } from "../styles";
 
 interface Props extends FlexProps {
 	movies: IMovieThumbnail[] | ISingleMovie[];
@@ -31,11 +32,11 @@ export function MovieGallery({ movies, header, loading, isError, ...props }: Pro
 	}
 
 	return (
-		<Flex flexDirection="column" {...props}>
+		<GridContainer flexDirection="column" {...props}>
 			<Heading fontSize={["2xl", "4xl"]}>{header}</Heading>
 			<Flex ref={ref} overflowX="auto" gridGap="0.25rem" paddingY="0.75rem">
 				{renderMovies()}
 			</Flex>
-		</Flex>
+		</GridContainer>
 	);
 }

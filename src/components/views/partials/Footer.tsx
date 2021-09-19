@@ -9,6 +9,7 @@ export function Footer() {
 			textAlign="center"
 			width="100%"
 			marginTop="auto"
+			boxShadow="md"
 		>
 			Developed using The Movie Database API
 		</Box>
