@@ -46,8 +46,13 @@ export function NavbarMobile() {
 			zIndex={1000}
 		>
 			<Flex alignItems="center" backgroundColor="gray.900" padding="1rem">
-				<Button variant="unstyled" backgroundColor="gray.800" marginRight="1rem">
-					<HamburgerIcon width="1.5rem" height="1.5rem" onClick={() => setIsOpen(true)} />
+				<Button
+					variant="unstyled"
+					backgroundColor="gray.800"
+					marginRight="1rem"
+					onClick={() => setIsOpen(true)}
+				>
+					<HamburgerIcon width="1.5rem" height="1.5rem" />
 				</Button>
 				<Box as="form" onSubmit={search} marginLeft="auto">
 					<InputGroup>
