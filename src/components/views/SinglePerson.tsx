@@ -42,7 +42,7 @@ export function SinglePerson() {
 	return (
 		<Flex flexDirection="column">
 			<Grid gridTemplateColumns={["repeat(1, 1fr)", "300px 1fr"]}>
-				<GridContainer>
+				<GridContainer alignSelf="start">
 					<Box backgroundColor="gray.700" position="relative">
 						{posterStatus === "loading" && (
 							<PostThumbnailSkeleton minHeight={450} width="100%" height="100%" />
